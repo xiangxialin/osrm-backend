@@ -145,14 +145,17 @@ void annotatePath(const FacadeT &facade,
         {
             id_vector = facade.GetUncompressedForwardGeometry(geometry_index.id);
             weight_vector = facade.GetUncompressedForwardWeights(geometry_index.id);
-            duration_vector = facade.GetUncompressedForwardDurations(geometry_index.id);
+            duration_vector = facade.GetUncompressedForwardDurations(
+                geometry_index.id); // DO WE WANT TO REMOVE ALL REFERENCES TO DURATION CALCS IN
+                                    // FACADE AS WELL LIKE THIS METHOD? AND USE THE
             datasource_vector = facade.GetUncompressedForwardDatasources(geometry_index.id);
         }
         else
         {
             id_vector = facade.GetUncompressedReverseGeometry(geometry_index.id);
             weight_vector = facade.GetUncompressedReverseWeights(geometry_index.id);
-            duration_vector = facade.GetUncompressedReverseDurations(geometry_index.id);
+            duration_vector =
+                facade.GetUncompressedReverseDurations(geometry_index.id); // AND THIS?
             datasource_vector = facade.GetUncompressedReverseDatasources(geometry_index.id);
         }
     };
