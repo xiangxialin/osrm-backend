@@ -31,6 +31,8 @@
 
 #include "osrm/coordinate.hpp"
 
+#include <boost/range/any_range.hpp>
+
 #include <cstddef>
 
 #include <string>
@@ -50,6 +52,17 @@ class BaseDataFacade
 {
   public:
     using RTreeLeaf = extractor::EdgeBasedNodeSegment;
+    using NodesIDRangeT =
+        boost::any_range<NodeID, boost::random_access_traversal_tag, NodeID, std::ptrdiff_t>;
+    using WeightsRangeT = boost::
+        any_range<SegmentWeight, boost::random_access_traversal_tag, SegmentWeight, std::ptrdiff_t>;
+    using DurationsRangeT = boost::any_range<SegmentDuration,
+                                             boost::random_access_traversal_tag,
+                                             SegmentDuration,
+                                             std::ptrdiff_t>;
+    using DatasourceIDRangeT = boost::
+        any_range<DatasourceID, boost::random_access_traversal_tag, DatasourceID, std::ptrdiff_t>;
+
     BaseDataFacade() {}
     virtual ~BaseDataFacade() {}
 
@@ -64,9 +77,8 @@ class BaseDataFacade
 
     virtual ComponentID GetComponentID(const NodeID id) const = 0;
 
-    virtual std::vector<NodeID> GetUncompressedForwardGeometry(const EdgeID id) const = 0;
-
-    virtual std::vector<NodeID> GetUncompressedReverseGeometry(const EdgeID id) const = 0;
+    virtual NodesIDRangeT GetUncompressedForwardGeometry(const EdgeID id) const = 0;
+    virtual NodesIDRangeT GetUncompressedReverseGeometry(const EdgeID id) const = 0;
 
     virtual TurnPenalty GetWeightPenaltyForEdgeID(const unsigned id) const = 0;
 
@@ -74,18 +86,18 @@ class BaseDataFacade
 
     // Gets the weight values for each segment in an uncompressed geometry.
     // Should always be 1 shorter than GetUncompressedGeometry
-    virtual std::vector<EdgeWeight> GetUncompressedForwardWeights(const EdgeID id) const = 0;
-    virtual std::vector<EdgeWeight> GetUncompressedReverseWeights(const EdgeID id) const = 0;
+    virtual WeightsRangeT GetUncompressedForwardWeights(const EdgeID id) const = 0;
+    virtual WeightsRangeT GetUncompressedReverseWeights(const EdgeID id) const = 0;
 
     // Gets the duration values for each segment in an uncompressed geometry.
     // Should always be 1 shorter than GetUncompressedGeometry
-    virtual std::vector<EdgeWeight> GetUncompressedForwardDurations(const EdgeID id) const = 0;
-    virtual std::vector<EdgeWeight> GetUncompressedReverseDurations(const EdgeID id) const = 0;
+    virtual DurationsRangeT GetUncompressedForwardDurations(const EdgeID id) const = 0;
+    virtual DurationsRangeT GetUncompressedReverseDurations(const EdgeID id) const = 0;
 
     // Returns the data source ids that were used to supply the edge
     // weights.  Will return an empty array when only the base profile is used.
-    virtual std::vector<DatasourceID> GetUncompressedForwardDatasources(const EdgeID id) const = 0;
-    virtual std::vector<DatasourceID> GetUncompressedReverseDatasources(const EdgeID id) const = 0;
+    virtual DatasourceIDRangeT GetUncompressedForwardDatasources(const EdgeID id) const = 0;
+    virtual DatasourceIDRangeT GetUncompressedReverseDatasources(const EdgeID id) const = 0;
 
     // Gets the name of a datasource
     virtual StringView GetDatasourceName(const DatasourceID id) const = 0;

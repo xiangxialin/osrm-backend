@@ -446,35 +446,38 @@ template <typename RTreeT, typename DataFacadeT> class GeospatialQuery
         const auto geometry_id = datafacade.GetGeometryIndex(data.forward_segment_id.id).id;
         const auto component_id = datafacade.GetComponentID(data.forward_segment_id.id);
 
-        const std::vector<EdgeWeight> forward_weight_vector =
-            datafacade.GetUncompressedForwardWeights(geometry_id);
-        const std::vector<EdgeWeight> reverse_weight_vector =
-            datafacade.GetUncompressedReverseWeights(geometry_id);
-        const std::vector<EdgeWeight> forward_duration_vector =
-            datafacade.GetUncompressedForwardDurations(geometry_id);
-        const std::vector<EdgeWeight> reverse_duration_vector =
-            datafacade.GetUncompressedReverseDurations(geometry_id);
+        const auto forward_weight_range = datafacade.GetUncompressedForwardWeights(geometry_id);
+        const auto reverse_weight_range = datafacade.GetUncompressedReverseWeights(geometry_id);
 
-        for (std::size_t i = 0; i < data.fwd_segment_position; i++)
-        {
-            forward_weight_offset += forward_weight_vector[i];
-            forward_duration_offset += forward_duration_vector[i];
-        }
-        forward_weight = forward_weight_vector[data.fwd_segment_position];
-        forward_duration = forward_duration_vector[data.fwd_segment_position];
+        const auto forward_duration_range = datafacade.GetUncompressedForwardDurations(geometry_id);
+        const auto reverse_duration_range = datafacade.GetUncompressedReverseDurations(geometry_id);
 
-        BOOST_ASSERT(data.fwd_segment_position < reverse_weight_vector.size());
+        forward_weight_offset =
+            std::accumulate(forward_weight_range.begin(),
+                            forward_weight_range.begin() + data.fwd_segment_position,
+                            0);
+        forward_weight = *(forward_weight_range.begin() + data.fwd_segment_position);
 
-        for (std::size_t i = 0; i < reverse_weight_vector.size() - data.fwd_segment_position - 1;
-             i++)
-        {
-            reverse_weight_offset += reverse_weight_vector[i];
-            reverse_duration_offset += reverse_duration_vector[i];
-        }
-        reverse_weight =
-            reverse_weight_vector[reverse_weight_vector.size() - data.fwd_segment_position - 1];
-        reverse_duration =
-            reverse_duration_vector[reverse_duration_vector.size() - data.fwd_segment_position - 1];
+        forward_duration_offset =
+            std::accumulate(forward_duration_range.begin(),
+                            forward_duration_range.begin() + data.fwd_segment_position,
+                            0);
+        forward_duration = *(forward_duration_range.begin() + data.fwd_segment_position);
+
+        BOOST_ASSERT(data.fwd_segment_position <
+                     std::distance(forward_duration_range.begin(), forward_duration_range.end()));
+
+        reverse_weight_offset =
+            std::accumulate(reverse_weight_range.begin(),
+                            reverse_weight_range.end() - data.fwd_segment_position - 1,
+                            0);
+        reverse_weight = *(reverse_weight_range.end() - data.fwd_segment_position - 1);
+
+        reverse_duration_offset =
+            std::accumulate(reverse_duration_range.begin(),
+                            reverse_duration_range.end() - data.fwd_segment_position - 1,
+                            0);
+        reverse_duration = *(reverse_duration_range.end() - data.fwd_segment_position - 1);
 
         ratio = std::min(1.0, std::max(0.0, ratio));
         if (data.forward_segment_id.id != SPECIAL_SEGMENTID)
@@ -493,14 +496,14 @@ template <typename RTreeT, typename DataFacadeT> class GeospatialQuery
             return std::find(first, last, INVALID_SEGMENT_WEIGHT) == last;
         };
         bool is_forward_valid_source =
-            areSegmentsValid(forward_weight_vector.begin(), forward_weight_vector.end());
+            areSegmentsValid(forward_weight_range.begin(), forward_weight_range.end());
         bool is_forward_valid_target =
-            areSegmentsValid(forward_weight_vector.begin(),
-                             forward_weight_vector.begin() + data.fwd_segment_position + 1);
+            areSegmentsValid(forward_weight_range.begin(),
+                             forward_weight_range.begin() + data.fwd_segment_position + 1);
         bool is_reverse_valid_source =
-            areSegmentsValid(reverse_weight_vector.begin(), reverse_weight_vector.end());
+            areSegmentsValid(reverse_weight_range.begin(), reverse_weight_range.end());
         bool is_reverse_valid_target = areSegmentsValid(
-            reverse_weight_vector.begin(), reverse_weight_vector.end() - data.fwd_segment_position);
+            reverse_weight_range.begin(), reverse_weight_range.end() - data.fwd_segment_position);
 
         auto transformed = PhantomNodeWithDistance{
             PhantomNode{data,
@@ -605,17 +608,14 @@ template <typename RTreeT, typename DataFacadeT> class GeospatialQuery
         BOOST_ASSERT(data.forward_segment_id.id != SPECIAL_NODEID);
         const auto geometry_id = datafacade.GetGeometryIndex(data.forward_segment_id.id).id;
 
-        const std::vector<EdgeWeight> forward_weight_vector =
-            datafacade.GetUncompressedForwardWeights(geometry_id);
-
-        if (forward_weight_vector[data.fwd_segment_position] != INVALID_SEGMENT_WEIGHT)
+        const auto forward_weight_range = datafacade.GetUncompressedForwardWeights(geometry_id);
+        if (forward_weight_range[data.fwd_segment_position] != INVALID_SEGMENT_WEIGHT)
         {
             forward_edge_valid = data.forward_segment_id.enabled;
         }
 
-        const std::vector<EdgeWeight> reverse_weight_vector =
-            datafacade.GetUncompressedReverseWeights(geometry_id);
-        if (reverse_weight_vector[reverse_weight_vector.size() - data.fwd_segment_position - 1] !=
+        const auto reverse_weight_range = datafacade.GetUncompressedReverseWeights(geometry_id);
+        if (reverse_weight_range[reverse_weight_range.size() - data.fwd_segment_position - 1] !=
             INVALID_SEGMENT_WEIGHT)
         {
             reverse_edge_valid = data.reverse_segment_id.enabled;
