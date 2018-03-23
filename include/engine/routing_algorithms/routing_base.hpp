@@ -137,7 +137,7 @@ void annotatePath(const FacadeT &facade,
     // datastructures to hold extracted data from geometry
     std::vector<NodeID> id_vector;
     std::vector<EdgeWeight> weight_vector;
-    std::vector<EdgeWeight> duration_vector;
+    datafacade::ContiguousInternalMemoryDataFacadeBase::DurationsRangeT durations_range;
     std::vector<DatasourceID> datasource_vector;
 
     const auto get_segment_geometry = [&](const auto geometry_index) {
@@ -145,15 +145,14 @@ void annotatePath(const FacadeT &facade,
         {
             id_vector = facade.GetUncompressedForwardGeometry(geometry_index.id);
             weight_vector = facade.GetUncompressedForwardWeights(geometry_index.id);
-            duration_vector = facade.GetUncompressedForwardDurations(geometry_index.id);
+            durations_range = facade.GetUncompressedForwardDurations(geometry_index.id);
             datasource_vector = facade.GetUncompressedForwardDatasources(geometry_index.id);
         }
         else
         {
             id_vector = facade.GetUncompressedReverseGeometry(geometry_index.id);
             weight_vector = facade.GetUncompressedReverseWeights(geometry_index.id);
-            duration_vector =
-                facade.GetUncompressedReverseDurations(geometry_index.id); // AND THIS?
+            durations_range = facade.GetUncompressedReverseDurations(geometry_index.id);
             datasource_vector = facade.GetUncompressedReverseDatasources(geometry_index.id);
         }
     };
@@ -176,7 +175,8 @@ void annotatePath(const FacadeT &facade,
         BOOST_ASSERT(id_vector.size() > 0);
         BOOST_ASSERT(datasource_vector.size() > 0);
         BOOST_ASSERT(weight_vector.size() == id_vector.size() - 1);
-        BOOST_ASSERT(duration_vector.size() == id_vector.size() - 1);
+        // BOOST_ASSERT(std::distance(durations_range.begin(), durations_range.end()) ==
+        // id_vector.size() - 1);
         const bool is_first_segment = unpacked_path.empty();
 
         const std::size_t start_index =
@@ -193,13 +193,15 @@ void annotatePath(const FacadeT &facade,
         BOOST_ASSERT(start_index < end_index);
         for (std::size_t segment_idx = start_index; segment_idx < end_index; ++segment_idx)
         {
+            auto durations_range_itr = durations_range.begin();
+            std::advance(durations_range_itr, segment_idx);
             unpacked_path.push_back(PathData{*node_from,
                                              id_vector[segment_idx + 1],
                                              name_index,
                                              is_segregated,
                                              weight_vector[segment_idx],
                                              0,
-                                             duration_vector[segment_idx],
+                                             static_cast<EdgeWeight>(*durations_range_itr),
                                              0,
                                              guidance::TurnInstruction::NO_TURN(),
                                              {{0, INVALID_LANEID}, INVALID_LANE_DESCRIPTIONID},
@@ -265,6 +267,8 @@ void annotatePath(const FacadeT &facade,
     for (std::size_t segment_idx = start_index; segment_idx != end_index;
          (start_index < end_index ? ++segment_idx : --segment_idx))
     {
+        auto durations_range_itr = durations_range.begin();
+        std::advance(durations_range_itr, segment_idx);
         BOOST_ASSERT(segment_idx < id_vector.size() - 1);
         BOOST_ASSERT(facade.GetTravelMode(target_node_id) > 0);
         unpacked_path.push_back(
@@ -274,7 +278,7 @@ void annotatePath(const FacadeT &facade,
                      facade.IsSegregated(target_node_id),
                      weight_vector[segment_idx],
                      0,
-                     duration_vector[segment_idx],
+                     static_cast<EdgeWeight>(*durations_range_itr),
                      0,
                      guidance::TurnInstruction::NO_TURN(),
                      {{0, INVALID_LANEID}, INVALID_LANE_DESCRIPTIONID},
@@ -410,12 +414,12 @@ EdgeDuration computeEdgeDuration(const FacadeT &facade, NodeID node_id, NodeID t
 
     if (geometry_index.forward)
     {
-        auto durations_range = facade.GetUncompressedForwardDurations1(geometry_index.id);
+        auto durations_range = facade.GetUncompressedForwardDurations(geometry_index.id);
         total_duration = std::accumulate(durations_range.begin(), durations_range.end(), 0);
     }
     else
     {
-        auto durations_range = facade.GetUncompressedReverseDurations1(geometry_index.id);
+        auto durations_range = facade.GetUncompressedReverseDurations(geometry_index.id);
         total_duration = std::accumulate(durations_range.begin(), durations_range.end(), 0);
     }
 
