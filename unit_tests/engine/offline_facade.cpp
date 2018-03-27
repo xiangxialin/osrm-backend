@@ -186,12 +186,12 @@ class ContiguousInternalMemoryDataFacade<routing_algorithms::offline::Algorithm>
         return {};
     }
 
-    std::vector<EdgeWeight> GetUncompressedForwardDurations(const EdgeID /*geomID*/) const override
+    DurationsRangeT GetUncompressedForwardDurations(const EdgeID /*geomID*/) const override
     {
         return {};
     }
 
-    std::vector<EdgeWeight> GetUncompressedReverseDurations(const EdgeID /*geomID*/) const override
+    DurationsRangeT GetUncompressedReverseDurations(const EdgeID /*geomID*/) const override
     {
         return {};
     }

@@ -460,13 +460,14 @@ template <typename RTreeT, typename DataFacadeT> class GeospatialQuery
             forward_weight_offset += forward_weight_vector[i];
             // forward_duration_offset += forward_duration_vector[i];
         }
-        auto fwd_segment_position_itr = forward_duration_range.begin();
-        std::advance(fwd_segment_position_itr, data.fwd_segment_position);
+
         forward_duration_offset =
-            std::accumulate(forward_duration_range.begin(), fwd_segment_position_itr, 0);
+            std::accumulate(forward_duration_range.begin(),
+                            forward_duration_range.begin() + data.fwd_segment_position,
+                            0);
 
         forward_weight = forward_weight_vector[data.fwd_segment_position];
-        forward_duration = *fwd_segment_position_itr;
+        forward_duration = *(forward_duration_range.begin() + data.fwd_segment_position);
 
         BOOST_ASSERT(data.fwd_segment_position < reverse_weight_vector.size());
 
@@ -476,13 +477,13 @@ template <typename RTreeT, typename DataFacadeT> class GeospatialQuery
             reverse_weight_offset += reverse_weight_vector[i];
             // reverse_duration_offset += reverse_duration_vector[i];
         }
-        auto rvrs_segment_position_itr = reverse_duration_range.end();
-        std::advance(rvrs_segment_position_itr, -data.fwd_segment_position - 1);
         reverse_duration_offset =
-            std::accumulate(reverse_duration_range.begin(), rvrs_segment_position_itr, 0);
+            std::accumulate(reverse_duration_range.begin(),
+                            reverse_duration_range.end() - data.fwd_segment_position - 1,
+                            0);
         reverse_weight =
             reverse_weight_vector[reverse_weight_vector.size() - data.fwd_segment_position - 1];
-        reverse_duration = *rvrs_segment_position_itr;
+        reverse_duration = *(reverse_duration_range.end() - data.fwd_segment_position - 1);
 
         ratio = std::min(1.0, std::max(0.0, ratio));
         if (data.forward_segment_id.id != SPECIAL_SEGMENTID)

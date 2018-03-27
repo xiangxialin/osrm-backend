@@ -73,13 +73,15 @@ class MockBaseDataFacade : public engine::datafacade::BaseDataFacade
     {
         return GetUncompressedForwardWeights(id);
     }
-    std::vector<EdgeWeight> GetUncompressedForwardDurations(const EdgeID id) const override
+    DurationsRangeT GetUncompressedForwardDurations(const EdgeID /*id*/) const override
     {
-        return GetUncompressedForwardWeights(id);
+        static const std::vector<SegmentDuration> data{1, 2, 3};
+        return data;
     }
-    std::vector<EdgeWeight> GetUncompressedReverseDurations(const EdgeID id) const override
+    DurationsRangeT GetUncompressedReverseDurations(const EdgeID /*id*/) const override
     {
-        return GetUncompressedForwardWeights(id);
+        static const std::vector<SegmentDuration> data{1, 2, 3};
+        return data;
     }
     std::vector<DatasourceID> GetUncompressedForwardDatasources(const EdgeID /*id*/) const override
     {

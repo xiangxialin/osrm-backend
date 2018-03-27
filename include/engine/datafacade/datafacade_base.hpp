@@ -82,16 +82,11 @@ class BaseDataFacade
 
     // Gets the duration values for each segment in an uncompressed geometry.
     // Should always be 1 shorter than GetUncompressedGeometry
-    // virtual std::vector<EdgeWeight> GetUncompressedForwardDurations(const EdgeID id) const = 0;
-    // virtual std::vector<EdgeWeight> GetUncompressedReverseDurations(const EdgeID id) const = 0;
-
-    typedef boost::
-        any_range<SegmentDuration, boost::forward_traversal_tag, SegmentDuration, std::ptrdiff_t>
-            DurationsRangeT;
-
-    // virtual std::vector<EdgeWeight> GetUncompressedForwardDurations(const EdgeID id) const = 0;
-    // virtual std::vector<EdgeWeight> GetUncompressedReverseDurations(const EdgeID id) const = 0;
-
+    typedef boost::any_range<SegmentDuration,
+                             boost::random_access_traversal_tag,
+                             SegmentDuration,
+                             std::ptrdiff_t>
+        DurationsRangeT;
     virtual DurationsRangeT GetUncompressedForwardDurations(const EdgeID id) const = 0;
     virtual DurationsRangeT GetUncompressedReverseDurations(const EdgeID id) const = 0;
 

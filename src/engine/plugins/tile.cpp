@@ -476,12 +476,10 @@ void encodeVectorTile(const DataFacadeBase &facade,
                     facade.GetUncompressedForwardDurations(geometry_id);
                 const auto reverse_duration_range =
                     facade.GetUncompressedReverseDurations(geometry_id);
-                auto fwd_segment_position_itr = forward_duration_range.begin();
-                std::advance(fwd_segment_position_itr, edge.fwd_segment_position);
-                const auto forward_duration = *fwd_segment_position_itr;
-                auto rvrs_segment_position_itr = reverse_duration_range.end();
-                std::advance(rvrs_segment_position_itr, -edge.fwd_segment_position - 1);
-                const auto reverse_duration = *rvrs_segment_position_itr;
+                const auto forward_duration =
+                    *(forward_duration_range.begin() + edge.fwd_segment_position);
+                const auto reverse_duration =
+                    *(reverse_duration_range.end() - edge.fwd_segment_position - 1);
                 line_int_index.add(forward_duration);
                 line_int_index.add(reverse_duration);
             }
@@ -518,12 +516,10 @@ void encodeVectorTile(const DataFacadeBase &facade,
                     const auto reverse_weight =
                         reverse_weight_vector[reverse_weight_vector.size() -
                                               edge.fwd_segment_position - 1];
-                    auto fwd_segment_position_itr = forward_duration_range.begin();
-                    std::advance(fwd_segment_position_itr, edge.fwd_segment_position);
-                    const auto forward_duration = *fwd_segment_position_itr;
-                    auto rvrs_segment_position_itr = reverse_duration_range.end();
-                    std::advance(rvrs_segment_position_itr, -edge.fwd_segment_position - 1);
-                    const auto reverse_duration = *rvrs_segment_position_itr;
+                    const auto forward_duration =
+                        *(forward_duration_range.begin() + edge.fwd_segment_position);
+                    const auto reverse_duration =
+                        *(reverse_duration_range.end() - edge.fwd_segment_position - 1);
                     const auto forward_datasource_idx =
                         forward_datasource_vector[edge.fwd_segment_position];
                     const auto reverse_datasource_idx =

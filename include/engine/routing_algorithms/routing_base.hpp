@@ -175,8 +175,7 @@ void annotatePath(const FacadeT &facade,
         BOOST_ASSERT(id_vector.size() > 0);
         BOOST_ASSERT(datasource_vector.size() > 0);
         BOOST_ASSERT(weight_vector.size() == id_vector.size() - 1);
-        // BOOST_ASSERT(std::distance(durations_range.begin(), durations_range.end()) ==
-        // id_vector.size() - 1);
+        BOOST_ASSERT(durations_range.size() == id_vector.size() - 1);
         const bool is_first_segment = unpacked_path.empty();
 
         const std::size_t start_index =
@@ -193,25 +192,24 @@ void annotatePath(const FacadeT &facade,
         BOOST_ASSERT(start_index < end_index);
         for (std::size_t segment_idx = start_index; segment_idx < end_index; ++segment_idx)
         {
-            auto durations_range_itr = durations_range.begin();
-            std::advance(durations_range_itr, segment_idx);
-            unpacked_path.push_back(PathData{*node_from,
-                                             id_vector[segment_idx + 1],
-                                             name_index,
-                                             is_segregated,
-                                             weight_vector[segment_idx],
-                                             0,
-                                             static_cast<EdgeWeight>(*durations_range_itr),
-                                             0,
-                                             guidance::TurnInstruction::NO_TURN(),
-                                             {{0, INVALID_LANEID}, INVALID_LANE_DESCRIPTIONID},
-                                             travel_mode,
-                                             classes,
-                                             EMPTY_ENTRY_CLASS,
-                                             datasource_vector[segment_idx],
-                                             osrm::guidance::TurnBearing(0),
-                                             osrm::guidance::TurnBearing(0),
-                                             is_left_hand_driving});
+            unpacked_path.push_back(
+                PathData{*node_from,
+                         id_vector[segment_idx + 1],
+                         name_index,
+                         is_segregated,
+                         weight_vector[segment_idx],
+                         0,
+                         static_cast<EdgeWeight>(*(durations_range.begin() + segment_idx)),
+                         0,
+                         guidance::TurnInstruction::NO_TURN(),
+                         {{0, INVALID_LANEID}, INVALID_LANE_DESCRIPTIONID},
+                         travel_mode,
+                         classes,
+                         EMPTY_ENTRY_CLASS,
+                         datasource_vector[segment_idx],
+                         osrm::guidance::TurnBearing(0),
+                         osrm::guidance::TurnBearing(0),
+                         is_left_hand_driving});
         }
         BOOST_ASSERT(unpacked_path.size() > 0);
         if (facade.HasLaneData(turn_id))
@@ -267,8 +265,6 @@ void annotatePath(const FacadeT &facade,
     for (std::size_t segment_idx = start_index; segment_idx != end_index;
          (start_index < end_index ? ++segment_idx : --segment_idx))
     {
-        auto durations_range_itr = durations_range.begin();
-        std::advance(durations_range_itr, segment_idx);
         BOOST_ASSERT(segment_idx < id_vector.size() - 1);
         BOOST_ASSERT(facade.GetTravelMode(target_node_id) > 0);
         unpacked_path.push_back(
@@ -278,7 +274,7 @@ void annotatePath(const FacadeT &facade,
                      facade.IsSegregated(target_node_id),
                      weight_vector[segment_idx],
                      0,
-                     static_cast<EdgeWeight>(*durations_range_itr),
+                     static_cast<EdgeWeight>(*(durations_range.begin() + segment_idx)),
                      0,
                      guidance::TurnInstruction::NO_TURN(),
                      {{0, INVALID_LANEID}, INVALID_LANE_DESCRIPTIONID},
