@@ -2,6 +2,7 @@
 #include "util/typedefs.hpp"
 
 #include <boost/range/adaptor/reversed.hpp>
+#include <boost/range/any_range.hpp>
 #include <boost/range/iterator_range.hpp>
 #include <boost/test/test_case_template.hpp>
 #include <boost/test/unit_test.hpp>
@@ -201,6 +202,49 @@ BOOST_AUTO_TEST_CASE(packed_vector_33bit_continious)
         vector.push_back(i);
         BOOST_CHECK_EQUAL(vector.back(), i);
     }
+}
+
+BOOST_AUTO_TEST_CASE(packed_weights_vector)
+{
+    using WeightsRangeT = boost::any_range<
+        SegmentWeight,
+        boost::random_access_traversal_tag,
+        osrm::util::detail::PackedVector<unsigned int, 22, (osrm::storage::Ownership)0>::
+            internal_reference,
+        std::ptrdiff_t>;
+
+    PackedVector<SegmentWeight, SEGMENT_WEIGHT_BITS> vector(32);
+
+    std::iota(vector.begin(), vector.end(), 0);
+
+    auto forward = boost::make_iterator_range(vector.begin() + 2, vector.begin() + 30);
+    auto forward_any = WeightsRangeT(forward.begin(), forward.end());
+
+    auto reverse = boost::adaptors::reverse(forward);
+    auto reverse_any = WeightsRangeT(reverse);
+
+    for (auto x : forward)
+    {
+        std::cout << x << " ";
+    }
+    std::cout << "\n";
+    (void)forward_any;
+    for (auto x : forward_any)
+    {
+        std::cout << x << " ";
+    }
+    std::cout << "\n";
+    for (auto x : reverse)
+    {
+        std::cout << x << " ";
+    }
+    std::cout << "\n";
+    (void)forward_any;
+    for (auto x : reverse_any)
+    {
+        std::cout << x << " ";
+    }
+    std::cout << "\n";
 }
 
 BOOST_AUTO_TEST_SUITE_END()
