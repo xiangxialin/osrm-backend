@@ -23,6 +23,30 @@ Feature: Basic Distance Matrix
             | a | 0  | 10 |
             | b | 10 | 0  |
 
+    Scenario: Testbot - Travel time matrix of minimal network with excludes
+        Given the query options
+            | exclude  | motorway        |
+
+        Given the node map
+            """
+            a b
+            c d
+            """
+
+        And the ways
+            | nodes | #                                        |
+            | ab    | not drivable for exclude=motorway        |
+            | cd    | always drivable                          |
+            | ac    | not drivable for exclude=motorway exclude=toll and exclude=motorway,toll |
+            | bd    | not drivable for exclude=motorway exclude=toll |
+
+        When I request a travel time matrix I should get
+            |   | a  | b  | c  | d  |
+            | a | 0  | 10 | 10 | 20 |
+            | b | 10 | 0  | 20 | 10 |
+            | c | 10 | 20 | 0  | 10 |
+            | d | 20 | 10 | 10 | 0  |
+
     Scenario: Testbot - Travel time matrix with different way speeds
         Given the node map
             """

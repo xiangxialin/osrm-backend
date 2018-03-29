@@ -223,6 +223,8 @@ class ContiguousInternalMemoryDataFacadeBase : public BaseDataFacade
     // allocator that keeps the allocation data
     std::shared_ptr<ContiguousBlockAllocator> allocator;
 
+    std::size_t m_exclude_index;
+
     void InitializeProfilePropertiesPointer(storage::DataLayout &data_layout,
                                             char *memory_block,
                                             const std::size_t exclude_index)
@@ -231,6 +233,7 @@ class ContiguousInternalMemoryDataFacadeBase : public BaseDataFacade
             memory_block, storage::DataLayout::PROPERTIES);
 
         exclude_mask = m_profile_properties->excludable_classes[exclude_index];
+        m_exclude_index = exclude_index;
     }
 
     void InitializeTimestampPointer(storage::DataLayout &data_layout, char *memory_block)
@@ -544,6 +547,8 @@ class ContiguousInternalMemoryDataFacadeBase : public BaseDataFacade
     }
 
   public:
+    std::size_t GetExcludeIndex() const { return m_exclude_index; }
+
     // allows switching between process_memory/shared_memory datafacade, based on the type of
     // allocator
     ContiguousInternalMemoryDataFacadeBase(std::shared_ptr<ContiguousBlockAllocator> allocator_,
