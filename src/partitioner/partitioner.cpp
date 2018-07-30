@@ -1,6 +1,7 @@
 #include "partitioner/partitioner.hpp"
 #include "partitioner/bisection_graph.hpp"
 #include "partitioner/bisection_to_partition.hpp"
+#include "partitioner/cell_statistics.hpp"
 #include "partitioner/cell_storage.hpp"
 #include "partitioner/edge_based_graph_reader.hpp"
 #include "partitioner/files.hpp"
@@ -144,6 +145,16 @@ int Partitioner::Run(const PartitionerConfig &config)
         extractor::files::writeNodeData(config.GetPath(".osrm.ebg_nodes"), node_data);
     }
     {
+        std::vector<EdgeWeight> node_weights;
+        std::vector<EdgeDuration> node_durations;
+        extractor::files::readEdgeBasedNodeWeightsDurations(
+            config.GetPath(".osrm.enw"), node_weights, node_durations);
+        util::inplacePermutation(node_weights.begin(), node_weights.end(), permutation);
+        util::inplacePermutation(node_durations.begin(), node_durations.end(), permutation);
+        extractor::files::writeEdgeBasedNodeWeightsDurations(
+            config.GetPath(".osrm.enw"), node_weights, node_durations);
+    }
+    {
         const auto &filename = config.GetPath(".osrm.maneuver_overrides");
         std::vector<extractor::StorageManeuverOverride> maneuver_overrides;
         std::vector<NodeID> node_sequences;
@@ -180,6 +191,8 @@ int Partitioner::Run(const PartitionerConfig &config)
                                           edge_based_graph.connectivity_checksum);
     TIMER_STOP(writing_mld_data);
     util::Log() << "MLD data writing took " << TIMER_SEC(writing_mld_data) << " seconds";
+
+    printCellStatistics(mlp, storage);
 
     return 0;
 }

@@ -148,6 +148,9 @@ class RouteAPI : public BaseAPI
                 // processing is performed
                 guidance::applyOverrides(BaseAPI::facade, steps, leg_geometry);
 
+                // Collapse segregated steps before others
+                steps = guidance::collapseSegregatedTurnInstructions(std::move(steps));
+
                 /* Perform step-based post-processing.
                  *
                  * Using post-processing on basis of route-steps for a single leg at a time
@@ -320,6 +323,23 @@ class RouteAPI : public BaseAPI
                         nodes.values.push_back(static_cast<std::uint64_t>(node_id));
                     }
                     annotation.values["nodes"] = std::move(nodes);
+                }
+                // Add any supporting metadata, if needed
+                if (requested_annotations & RouteParameters::AnnotationsType::Datasources)
+                {
+                    const auto MAX_DATASOURCE_ID = 255u;
+                    util::json::Object metadata;
+                    util::json::Array datasource_names;
+                    for (auto i = 0u; i < MAX_DATASOURCE_ID; i++)
+                    {
+                        const auto name = facade.GetDatasourceName(i);
+                        // Length of 0 indicates the first empty name, so we can stop here
+                        if (name.size() == 0)
+                            break;
+                        datasource_names.values.push_back(std::string(facade.GetDatasourceName(i)));
+                    }
+                    metadata.values["datasource_names"] = datasource_names;
+                    annotation.values["metadata"] = metadata;
                 }
 
                 annotations.push_back(std::move(annotation));

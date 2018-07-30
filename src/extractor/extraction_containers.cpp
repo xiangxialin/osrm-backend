@@ -430,7 +430,6 @@ void ExtractionContainers::PrepareEdges(ScriptingEnvironment &scripting_environm
         util::UnbufferedLog log;
         log << "Sorting edges by renumbered start ... ";
         TIMER_START(sort_edges_by_renumbered_start);
-        std::mutex name_data_mutex;
         tbb::parallel_sort(all_edges_list.begin(),
                            all_edges_list.end(),
                            CmpEdgeByInternalSourceTargetAndName{
@@ -843,6 +842,10 @@ void ExtractionContainers::PrepareManeuverOverrides()
         else if (direction_string == "right")
         {
             result.second = guidance::DirectionModifier::Right;
+        }
+        else if (direction_string == "straight")
+        {
+            result.second = guidance::DirectionModifier::Straight;
         }
 
         return result;

@@ -1,5 +1,4 @@
 #include "engine/routing_algorithms/direct_shortest_path.hpp"
-
 #include "engine/routing_algorithms/routing_base.hpp"
 #include "engine/routing_algorithms/routing_base_ch.hpp"
 #include "engine/routing_algorithms/routing_base_mld.hpp"
@@ -69,7 +68,8 @@ InternalRouteResult directShortestPathSearch(SearchEngineData<mld::Algorithm> &e
                                              const DataFacade<mld::Algorithm> &facade,
                                              const PhantomNodes &phantom_nodes)
 {
-    engine_working_data.InitializeOrClearFirstThreadLocalStorage(facade.GetNumberOfNodes());
+    engine_working_data.InitializeOrClearFirstThreadLocalStorage(facade.GetNumberOfNodes(),
+                                                                 facade.GetMaxBorderNodeID() + 1);
     auto &forward_heap = *engine_working_data.forward_heap_1;
     auto &reverse_heap = *engine_working_data.reverse_heap_1;
     insertNodesInHeaps(forward_heap, reverse_heap, phantom_nodes);

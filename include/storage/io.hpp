@@ -11,7 +11,9 @@
 #include "util/version.hpp"
 
 #include <boost/filesystem/fstream.hpp>
+#include <boost/iostreams/device/array.hpp>
 #include <boost/iostreams/seek.hpp>
+#include <boost/iostreams/stream.hpp>
 
 #include <cerrno>
 #include <cstring>
@@ -294,7 +296,10 @@ class FileWriter
 class BufferReader
 {
   public:
-    BufferReader(const std::string &buffer) : input_stream(buffer, std::ios::binary)
+    BufferReader(const std::string &buffer) : BufferReader(buffer.data(), buffer.size()) {}
+
+    BufferReader(const char *buffer, const std::size_t size)
+        : input_stream(boost::iostreams::array_source(buffer, size))
     {
         if (!input_stream)
         {
@@ -302,6 +307,8 @@ class BufferReader
                 "<buffer>", ErrorCode::FileOpenError, SOURCE_REF, std::strerror(errno));
         }
     }
+
+    std::size_t GetPosition() { return input_stream.tellg(); }
 
     template <typename T> void ReadInto(T *dest, const std::size_t count)
     {
@@ -338,7 +345,7 @@ class BufferReader
     }
 
   private:
-    std::istringstream input_stream;
+    boost::iostreams::stream<boost::iostreams::array_source> input_stream;
 };
 
 class BufferWriter

@@ -1,27 +1,63 @@
 # UNRELEASED
+  - Changes from 5.18.0:
+    - Bugfixes:
+      - FIXED: collapsing of ExitRoundabout instructions [#5114](https://github.com/Project-OSRM/osrm-backend/issues/5114)
+
+# 5.18.0
+  - Changes from 5.17.0:
+    - Features:
+      - ADDED: `table` plugin now optionally returns `distance` matrix as part of response [#4990](https://github.com/Project-OSRM/osrm-backend/pull/4990)
+      - ADDED: New optional parameter `annotations` for `table` that accepts `distance`, `duration`, or both `distance,duration` as values [#4990](https://github.com/Project-OSRM/osrm-backend/pull/4990)
+    - Infrastructure:
+      - ADDED: Updated libosmium and added protozero and vtzero libraries [#5037](https://github.com/Project-OSRM/osrm-backend/pull/5037)
+      - CHANGED: Use vtzero library in tile plugin [#4686](https://github.com/Project-OSRM/osrm-backend/pull/4686)
+    - Profile:
+      - ADDED: Bicycle profile now returns classes for ferry and tunnel routes. [#5054](https://github.com/Project-OSRM/osrm-backend/pull/5054)
+      - ADDED: Bicycle profile allows to exclude ferry routes (default to not enabled) [#5054](https://github.com/Project-OSRM/osrm-backend/pull/5054)
+
+# 5.17.1
+  - Changes from 5.17.0:
+    - Bugfixes:
+      - FIXED: Do not combine a segregated edge with a roundabout [#5039](https://github.com/Project-OSRM/osrm-backend/issues/5039)
+
+# 5.17.0
   - Changes from 5.16.0:
     - Bugfixes:
-      - fix deduplication of route steps when waypoints are used [#4909](https://github.com/Project-OSRM/osrm-backend/issues/4909)
-      - FIXED #4920: Use smaller range for U-turn angles in map-matching [#4920](https://github.com/Project-OSRM/osrm-backend/pull/4920)
-      - FIXED: Remove the last short annotation segment in `trimShortSegments`
+      - FIXED: deduplication of route steps when waypoints are used [#4909](https://github.com/Project-OSRM/osrm-backend/issues/4909)
+      - FIXED: Use smaller range for U-turn angles in map-matching [#4920](https://github.com/Project-OSRM/osrm-backend/pull/4920)
+      - FIXED: Remove the last short annotation segment in `trimShortSegments` [#4946](https://github.com/Project-OSRM/osrm-backend/pull/4946)
       - FIXED: Properly calculate annotations for speeds, durations and distances when waypoints are used with mapmatching [#4949](https://github.com/Project-OSRM/osrm-backend/pull/4949)
+      - FIXED: Don't apply unimplemented SH and PH conditions in OpeningHours and add inversed date ranges [#4992](https://github.com/Project-OSRM/osrm-backend/issues/4992)
+      - FIXED: integer overflow in `DynamicGraph::Renumber` [#5021](https://github.com/Project-OSRM/osrm-backend/pull/5021)
     - Profile:
-      - CHANGED #4929: Handle oneways in get_forward_backward_by_key [#4929](https://github.com/Project-OSRM/osrm-backend/pull/4929)
-      - FIXED #4943: Do not route against oneway road if there is a cycleway in the wrong direction; also review bike profile [#4943](https://github.com/Project-OSRM/osrm-backend/issues/4943)
+      - CHANGED: Handle oneways in get_forward_backward_by_key [#4929](https://github.com/Project-OSRM/osrm-backend/pull/4929)
+      - FIXED: Do not route against oneway road if there is a cycleway in the wrong direction; also review bike profile [#4943](https://github.com/Project-OSRM/osrm-backend/issues/4943)
+      - CHANGED: Make cyclability weighting of the bike profile prefer safer routes more strongly [#5015](https://github.com/Project-OSRM/osrm-backend/issues/5015)
     - Guidance:
-      - CHANGED #4929: Don't use obviousness for links bifurcations [#4929](https://github.com/Project-OSRM/osrm-backend/pull/4929)
-      - FIXED #4929: Adjust Straight direction modifiers of side roads in driveway handler [#4929](https://github.com/Project-OSRM/osrm-backend/pull/4929)
+      - CHANGED: Don't use obviousness for links bifurcations [#4929](https://github.com/Project-OSRM/osrm-backend/pull/4929)
+      - FIXED: Adjust Straight direction modifiers of side roads in driveway handler [#4929](https://github.com/Project-OSRM/osrm-backend/pull/4929)
+      - CHANGED: Added post process logic to collapse segregated turn instructions [#4925](https://github.com/Project-OSRM/osrm-backend/pull/4925)
+      - ADDED: Maneuver relation now supports `straight` as a direction [#4995](https://github.com/Project-OSRM/osrm-backend/pull/4995)
+      - FIXED: Support spelling maneuver relation with British spelling [#4950](https://github.com/Project-OSRM/osrm-backend/issues/4950)
     - Tools:
-      - `osrm-routed` accepts a new property `--memory_file` to store memory in a file on disk.
+      - ADDED: `osrm-routed` accepts a new property `--memory_file` to store memory in a file on disk. [#4881](https://github.com/Project-OSRM/osrm-backend/pull/4881)
+      - ADDED: `osrm-datastore` accepts a new parameter `--dataset-name` to select the name of the dataset. [#4982](https://github.com/Project-OSRM/osrm-backend/pull/4982)
+      - ADDED: `osrm-datastore` accepts a new parameter `--list` to list all datasets loaded into memory. [#4982](https://github.com/Project-OSRM/osrm-backend/pull/4982)
+      - ADDED: `osrm-datastore` accepts a new parameter `--only-metric` to only reload the data that can be updated by a weight update (reduces memory for traffic updates). [#5002](https://github.com/Project-OSRM/osrm-backend/pull/5002)
+      - ADDED: `osrm-routed` accepts a new parameter `--dataset-name` to select the shared-memory dataset to use. [#4982](https://github.com/Project-OSRM/osrm-backend/pull/4982)
     - NodeJS:
-      - `OSRM` object accepts a new option `memory_file` that stores the memory in a file on disk.
+      - ADDED: `OSRM` object accepts a new option `memory_file` that stores the memory in a file on disk. [#4881](https://github.com/Project-OSRM/osrm-backend/pull/4881)
+      - ADDED: `OSRM` object accepts a new option `dataset_name` to select the shared-memory dataset. [#4982](https://github.com/Project-OSRM/osrm-backend/pull/4982)
     - Internals
-      - CHANGED #4845 #4968: Updated segregated intersection identification
-      - REMOVED: Remove `.timestamp` file since it was unused.
+      - CHANGED: Updated segregated intersection identification [#4845](https://github.com/Project-OSRM/osrm-backend/pull/4845) [#4968](https://github.com/Project-OSRM/osrm-backend/pull/4968)
+      - REMOVED: Remove `.timestamp` file since it was unused [#4960](https://github.com/Project-OSRM/osrm-backend/pull/4960)
     - Documentation:
       - ADDED: Add documentation about OSM node ids in nearest service response [#4436](https://github.com/Project-OSRM/osrm-backend/pull/4436)
     - Performance
       - FIXED: Speed up response time when lots of legs exist and geojson is used with `steps=true` [#4936](https://github.com/Project-OSRM/osrm-backend/pull/4936)
+      - FIXED: Return iterators instead of vectors in datafacade_base functions [#4969](https://github.com/Project-OSRM/osrm-backend/issues/4969)
+    - Misc:
+      - ADDED: expose name for datasource annotations as metadata [#4973](https://github.com/Project-OSRM/osrm-backend/pull/4973)
 
 # 5.16.0
   - Changes from 5.15.2:

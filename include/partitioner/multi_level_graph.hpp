@@ -1,6 +1,7 @@
 #ifndef OSRM_PARTITIONER_MULTI_LEVEL_GRAPH_HPP
 #define OSRM_PARTITIONER_MULTI_LEVEL_GRAPH_HPP
 
+#include "partitioner/edge_based_graph.hpp"
 #include "partitioner/multi_level_partition.hpp"
 
 #include "storage/shared_memory_ownership.hpp"
@@ -26,14 +27,12 @@ namespace serialization
 template <typename EdgeDataT, storage::Ownership Ownership>
 void read(storage::tar::FileReader &reader,
           const std::string &name,
-          MultiLevelGraph<EdgeDataT, Ownership> &graph,
-          std::uint32_t &connectivity_checksum);
+          MultiLevelGraph<EdgeDataT, Ownership> &graph);
 
 template <typename EdgeDataT, storage::Ownership Ownership>
 void write(storage::tar::FileWriter &writer,
            const std::string &name,
-           const MultiLevelGraph<EdgeDataT, Ownership> &graph,
-           const std::uint32_t connectivity_checksum);
+           const MultiLevelGraph<EdgeDataT, Ownership> &graph);
 }
 
 template <typename EdgeDataT, storage::Ownership Ownership>
@@ -44,6 +43,8 @@ class MultiLevelGraph : public util::StaticGraph<EdgeDataT, Ownership>
     template <typename T> using Vector = util::ViewOrVector<T, Ownership>;
 
   public:
+    using SuperT::SuperT;
+
     // We limit each node to have 255 edges
     // this is very generous, we could probably pack this
     using EdgeOffset = std::uint8_t;
@@ -140,6 +141,22 @@ class MultiLevelGraph : public util::StaticGraph<EdgeDataT, Ownership>
     // We save the level as sentinel at the end
     LevelID GetNumberOfLevels() const { return node_to_edge_offset.back(); }
 
+    NodeID GetMaxBorderNodeID() const
+    {
+        auto num_levels = GetNumberOfLevels();
+        BOOST_ASSERT((node_to_edge_offset.size() - 1) % num_levels == 0);
+        auto max_border_node_id = (node_to_edge_offset.size() - 1) / num_levels - 1;
+        return max_border_node_id;
+    }
+
+    auto data() && // rvalue ref-qualifier is a safety-belt
+    {
+        return std::make_tuple(std::move(SuperT::node_array),
+                               std::move(SuperT::edge_array),
+                               std::move(node_to_edge_offset),
+                               connectivity_checksum);
+    }
+
   private:
     template <typename ContainerT>
     auto GetHighestBorderLevel(const MultiLevelPartition &mlp, const ContainerT &edges) const
@@ -206,17 +223,19 @@ class MultiLevelGraph : public util::StaticGraph<EdgeDataT, Ownership>
     friend void
     serialization::read<EdgeDataT, Ownership>(storage::tar::FileReader &reader,
                                               const std::string &name,
-                                              MultiLevelGraph<EdgeDataT, Ownership> &graph,
-                                              std::uint32_t &connectivity_checksum);
+                                              MultiLevelGraph<EdgeDataT, Ownership> &graph);
     friend void
     serialization::write<EdgeDataT, Ownership>(storage::tar::FileWriter &writer,
                                                const std::string &name,
-                                               const MultiLevelGraph<EdgeDataT, Ownership> &graph,
-                                               const std::uint32_t connectivity_checksum);
+                                               const MultiLevelGraph<EdgeDataT, Ownership> &graph);
 
+  protected:
     Vector<EdgeOffset> node_to_edge_offset;
     std::uint32_t connectivity_checksum;
 };
+
+using MultiLevelEdgeBasedGraph =
+    MultiLevelGraph<EdgeBasedGraphEdgeData, storage::Ownership::Container>;
 }
 }
 

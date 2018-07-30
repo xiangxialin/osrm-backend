@@ -75,10 +75,17 @@ int Contractor::Run()
     EdgeID number_of_edge_based_nodes = updater.LoadAndUpdateEdgeExpandedGraph(
         edge_based_edge_list, node_weights, connectivity_checksum);
 
+    // Convert node weights for oneway streets to INVALID_EDGE_WEIGHT
+    for (auto &weight : node_weights)
+    {
+        weight = (weight & 0x80000000) ? INVALID_EDGE_WEIGHT : weight;
+    }
+
     // Contracting the edge-expanded graph
 
     TIMER_START(contraction);
 
+    std::string metric_name;
     std::vector<std::vector<bool>> node_filters;
     {
         extractor::EdgeBasedNodeDataContainer node_data;
@@ -86,13 +93,11 @@ int Contractor::Run()
 
         extractor::ProfileProperties properties;
         extractor::files::readProfileProperties(config.GetPath(".osrm.properties"), properties);
+        metric_name = properties.GetWeightName();
 
         node_filters =
             util::excludeFlagsToNodeFilter(number_of_edge_based_nodes, node_data, properties);
     }
-
-    RangebasedCRC32 crc32_calculator;
-    const unsigned checksum = crc32_calculator(edge_based_edge_list);
 
     QueryGraph query_graph;
     std::vector<std::vector<bool>> edge_filters;
@@ -105,8 +110,10 @@ int Contractor::Run()
     util::Log() << "Contracted graph has " << query_graph.GetNumberOfEdges() << " edges.";
     util::Log() << "Contraction took " << TIMER_SEC(contraction) << " sec";
 
-    files::writeGraph(
-        config.GetPath(".osrm.hsgr"), checksum, query_graph, edge_filters, connectivity_checksum);
+    std::unordered_map<std::string, ContractedMetric> metrics = {
+        {metric_name, {std::move(query_graph), std::move(edge_filters)}}};
+
+    files::writeGraph(config.GetPath(".osrm.hsgr"), metrics, connectivity_checksum);
 
     TIMER_STOP(preparing);
 

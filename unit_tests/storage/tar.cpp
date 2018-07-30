@@ -3,6 +3,8 @@
 #include "../common/range_tools.hpp"
 #include "../common/temporary_file.hpp"
 
+#include <boost/function_output_iterator.hpp>
+#include <boost/iterator/function_input_iterator.hpp>
 #include <boost/test/unit_test.hpp>
 
 BOOST_AUTO_TEST_SUITE(tar)
@@ -186,5 +188,40 @@ BOOST_AUTO_TEST_CASE(continue_write_tar_file)
 
     CHECK_EQUAL_COLLECTIONS(result_64bit_vector, vector_64bit);
 }
+
+// Boost test only supports disabling was only introduced in 1.59
+#if BOOST_VERSION >= 105900
+// This test case is disabled by default because it needs 10 GiB of storage
+// Enable with ./storage-tests --run_test=tar/write_huge_tar_file
+BOOST_AUTO_TEST_CASE(write_huge_tar_file, *boost::unit_test::disabled())
+{
+    TemporaryFile tmp{TEST_DATA_DIR "/tar_huge_write_test.tar"};
+
+    std::uint64_t reference_checksum = 0;
+    {
+        storage::tar::FileWriter writer(tmp.path, storage::tar::FileWriter::GenerateFingerprint);
+        std::uint64_t value = 0;
+        const std::function<std::uint64_t()> encode_function = [&]() -> std::uint64_t {
+            reference_checksum += value;
+            return value++;
+        };
+        std::uint64_t num_elements = (10ULL * 1024ULL * 1024ULL * 1024ULL) / sizeof(std::uint64_t);
+        writer.WriteStreaming<std::uint64_t>(
+            "huge_data",
+            boost::make_function_input_iterator(encode_function, boost::infinite()),
+            num_elements);
+    }
+
+    std::uint64_t checksum = 0;
+    {
+        storage::tar::FileReader reader(tmp.path, storage::tar::FileReader::VerifyFingerprint);
+        reader.ReadStreaming<std::uint64_t>(
+            "huge_data",
+            boost::make_function_output_iterator([&](const auto &value) { checksum += value; }));
+    }
+
+    BOOST_CHECK_EQUAL(checksum, reference_checksum);
+}
+#endif
 
 BOOST_AUTO_TEST_SUITE_END()
