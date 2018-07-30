@@ -8,6 +8,7 @@
 #include "extractor/serialization.hpp"
 #include "extractor/turn_lane_types.hpp"
 
+#include "protobuf/turn-penalty.pb.h"
 #include "util/coordinate.hpp"
 #include "util/guidance/bearing_class.hpp"
 #include "util/guidance/entry_class.hpp"
@@ -348,6 +349,21 @@ inline void writeTurnWeightPenalty(const boost::filesystem::path &path,
     storage::serialization::write(writer, "/common/turn_penalty/weight", turn_penalty);
 }
 
+// writes .osrm.turn_weight_penalties pb
+template <typename TurnPenaltyType>
+inline void writeTurnWeightPenaltyPB(const boost::filesystem::path &path,
+                                     const TurnPenaltyType &turn_penalty)
+{
+    pbtp::TurnPenalty pb_turn_penalty;
+    for (auto index : util::irange<std::size_t>(0, turn_penalty.size()))
+    {
+        pb_turn_penalty.add_penalty(turn_penalty[index]);
+    }
+
+    std::fstream pb_output(path.string() + ".pb", std::ios::out | std::ios::binary);
+    pb_turn_penalty.SerializeToOstream(&pb_output);
+}
+
 // read .osrm.turn_weight_penalties
 template <typename TurnPenaltyT>
 inline void readTurnWeightPenalty(const boost::filesystem::path &path, TurnPenaltyT &turn_penalty)
@@ -520,8 +536,8 @@ void readCompressedNodeBasedGraph(const boost::filesystem::path &path, EdgeListT
 
     storage::serialization::read(reader, "/extractor/cnbg", edge_list);
 }
-}
-}
-}
+} // namespace files
+} // namespace extractor
+} // namespace osrm
 
 #endif

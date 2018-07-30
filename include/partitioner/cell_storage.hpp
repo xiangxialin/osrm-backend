@@ -45,7 +45,9 @@ template <storage::Ownership Ownership>
 inline void write(storage::tar::FileWriter &writer,
                   const std::string &name,
                   const detail::CellStorageImpl<Ownership> &storage);
-}
+template <storage::Ownership Ownership>
+inline void writePB(const std::string &name, const detail::CellStorageImpl<Ownership> &storage);
+} // namespace serialization
 
 namespace detail
 {
@@ -95,10 +97,9 @@ template <storage::Ownership Ownership> class CellStorageImpl
                                                              WeightValueT,
                                                              boost::random_access_traversal_tag>
         {
-            typedef boost::iterator_facade<ColumnIterator,
-                                           WeightValueT,
-                                           boost::random_access_traversal_tag>
-                base_t;
+            typedef boost::
+                iterator_facade<ColumnIterator, WeightValueT, boost::random_access_traversal_tag>
+                    base_t;
 
           public:
             typedef typename base_t::value_type value_type;
@@ -183,8 +184,8 @@ template <storage::Ownership Ownership> class CellStorageImpl
                  const NodeID *const all_destinations)
             : num_source_nodes{data.num_source_nodes},
               num_destination_nodes{data.num_destination_nodes},
-              weights{all_weights + data.value_offset},
-              durations{all_durations + data.value_offset},
+              weights{all_weights + data.value_offset}, durations{all_durations +
+                                                                  data.value_offset},
               source_boundary{all_sources + data.source_boundary_offset},
               destination_boundary{all_destinations + data.destination_boundary_offset}
         {
@@ -425,6 +426,9 @@ template <storage::Ownership Ownership> class CellStorageImpl
     friend void serialization::write<Ownership>(storage::tar::FileWriter &writer,
                                                 const std::string &name,
                                                 const detail::CellStorageImpl<Ownership> &storage);
+    friend void
+    serialization::writePB<Ownership>(const std::string &name,
+                                      const detail::CellStorageImpl<Ownership> &storage);
 
   private:
     Vector<NodeID> source_boundary;
@@ -432,8 +436,8 @@ template <storage::Ownership Ownership> class CellStorageImpl
     Vector<CellData> cells;
     Vector<std::uint64_t> level_to_cell_offset;
 };
-}
-}
-}
+} // namespace detail
+} // namespace partitioner
+} // namespace osrm
 
 #endif // OSRM_PARTITIONER_CUSTOMIZE_CELL_STORAGE_HPP

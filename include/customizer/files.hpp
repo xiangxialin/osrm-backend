@@ -70,6 +70,7 @@ writeCellMetrics(const boost::filesystem::path &path,
         for (auto &exclude_metric : metric_exclude_classes)
         {
             serialization::write(writer, prefix + "/" + std::to_string(id++), exclude_metric);
+            serialization::writePB(path.string(), exclude_metric);
         }
     }
 }
@@ -90,7 +91,7 @@ inline void readGraph(const boost::filesystem::path &path,
     serialization::read(reader, "/mld/multilevelgraph", graph);
 }
 
-// writes .osrm.mldgr file
+// writes .osrm.mldgr  file
 template <typename MultiLevelGraphT>
 inline void writeGraph(const boost::filesystem::path &path,
                        const MultiLevelGraphT &graph,
@@ -105,9 +106,10 @@ inline void writeGraph(const boost::filesystem::path &path,
     writer.WriteElementCount64("/mld/connectivity_checksum", 1);
     writer.WriteFrom("/mld/connectivity_checksum", connectivity_checksum);
     serialization::write(writer, "/mld/multilevelgraph", graph);
+    serialization::writePB(path.filename().string(), graph);
 }
-}
-}
-}
+} // namespace files
+} // namespace customizer
+} // namespace osrm
 
 #endif

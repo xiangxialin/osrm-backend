@@ -41,7 +41,10 @@ template <storage::Ownership Ownership>
 void write(storage::tar::FileWriter &writer,
            const std::string &name,
            const detail::MultiLevelPartitionImpl<Ownership> &mlp);
-}
+
+template <storage::Ownership Ownership>
+void writePB(const std::string &name, const detail::MultiLevelPartitionImpl<Ownership> &mlp);
+} // namespace serialization
 
 namespace detail
 {
@@ -146,6 +149,8 @@ template <storage::Ownership Ownership> class MultiLevelPartitionImpl final
     friend void serialization::write<Ownership>(storage::tar::FileWriter &writer,
                                                 const std::string &name,
                                                 const MultiLevelPartitionImpl &mlp);
+     friend void serialization::writePB<Ownership>(const std::string &name,
+                                                const MultiLevelPartitionImpl &mlp);                                         
 
   private:
     auto MakeLevelData(const std::vector<std::uint32_t> &lidx_to_num_cells)
@@ -338,8 +343,8 @@ inline MultiLevelPartitionImpl<storage::Ownership::View>::MultiLevelPartitionImp
     : level_data(nullptr)
 {
 }
-}
-}
-}
+} // namespace detail
+} // namespace partitioner
+} // namespace osrm
 
 #endif
