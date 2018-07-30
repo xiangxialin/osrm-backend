@@ -34,7 +34,10 @@ template <typename EdgeDataT, storage::Ownership Ownership>
 void write(storage::tar::FileWriter &writer,
            const std::string &name,
            const MultiLevelGraph<EdgeDataT, Ownership> &graph);
-}
+
+template <typename EdgeDataT, storage::Ownership Ownership>
+void writePB(const std::string &name, const MultiLevelGraph<EdgeDataT, Ownership> &graph);
+} // namespace serialization
 
 template <typename EdgeDataT, storage::Ownership Ownership>
 class MultiLevelGraph : public partitioner::MultiLevelGraph<EdgeDataT, Ownership>
@@ -107,6 +110,8 @@ class MultiLevelGraph : public partitioner::MultiLevelGraph<EdgeDataT, Ownership
     serialization::write<EdgeDataT, Ownership>(storage::tar::FileWriter &writer,
                                                const std::string &name,
                                                const MultiLevelGraph<EdgeDataT, Ownership> &graph);
+    friend void serialization::writePB<EdgeDataT, Ownership>(
+        const std::string &name, const MultiLevelGraph<EdgeDataT, Ownership> &graph);
 
   protected:
     Vector<EdgeWeight> node_weights;
@@ -119,7 +124,7 @@ using MultiLevelEdgeBasedGraph =
     MultiLevelGraph<EdgeBasedGraphEdgeData, storage::Ownership::Container>;
 using MultiLevelEdgeBasedGraphView =
     MultiLevelGraph<EdgeBasedGraphEdgeData, storage::Ownership::View>;
-}
-}
+} // namespace customizer
+} // namespace osrm
 
 #endif
