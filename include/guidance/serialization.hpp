@@ -1,6 +1,7 @@
 #ifndef OSRM_GUIDANCE_IO_HPP
 #define OSRM_GUIDANCE_IO_HPP
 
+#include "../../src/protobuf/edges.pb.h"
 #include "guidance/turn_data_container.hpp"
 
 #include "storage/serialization.hpp"
@@ -49,8 +50,24 @@ inline void write(storage::tar::FileWriter &writer,
     storage::serialization::write(
         writer, name + "/post_turn_bearings", turn_data_container.post_turn_bearings);
 }
+
+template <storage::Ownership Ownership>
+inline void writePB(const std::string &name,
+                    const guidance::detail::TurnDataContainerImpl<Ownership> &turn_data_container)
+{
+    pbmlde::Edges pb_edges;
+    for (auto index : util::irange<std::size_t>(0, turn_data_container.turn_instructions.size()))
+    {
+        pb_edges.add_turntype(turn_data_container.turn_instructions[index].type);
+        pb_edges.add_directionmodifier(
+            turn_data_container.turn_instructions[index].direction_modifier);
+    }
+
+    std::fstream pb_output(name + ".pb", std::ios::out | std::ios::binary);
+    pb_edges.SerializeToOstream(&pb_output);
 }
-}
-}
+} // namespace serialization
+} // namespace guidance
+} // namespace osrm
 
 #endif

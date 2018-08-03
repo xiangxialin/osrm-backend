@@ -1,0 +1,8 @@
+syntax = "proto2"; 
+
+package pbmldnames;
+
+message Name {
+    repeated uint32 offset = 1;
+    optional string names_packed = 2;
+}

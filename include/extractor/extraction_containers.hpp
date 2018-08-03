@@ -31,6 +31,9 @@ class ExtractionContainers
     void WriteEdges(storage::tar::FileWriter &file_out) const;
     void WriteMetadata(storage::tar::FileWriter &file_out) const;
     void WriteCharData(const std::string &file_name);
+    void writeNamesPB(const std::string &name,
+                      const std::vector<unsigned> name_offsets,
+                      const std::vector<unsigned char> &name_char_data);
 
   public:
     using NodeIDVector = std::vector<OSMNodeID>;
@@ -73,7 +76,7 @@ class ExtractionContainers
                      const std::string &osrm_path,
                      const std::string &names_data_path);
 };
-}
-}
+} // namespace extractor
+} // namespace osrm
 
 #endif /* EXTRACTION_CONTAINERS_HPP */

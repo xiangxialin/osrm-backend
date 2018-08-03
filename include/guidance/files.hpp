@@ -50,9 +50,10 @@ inline void writeTurnData(const boost::filesystem::path &path,
     writer.WriteElementCount64("/common/connectivity_checksum", 1);
     writer.WriteFrom("/common/connectivity_checksum", connectivity_checksum);
     serialization::write(writer, "/common/turn_data", turn_data);
+    serialization::writePB(path.string(), turn_data);
 }
-}
-}
-}
+} // namespace files
+} // namespace guidance
+} // namespace osrm
 
 #endif

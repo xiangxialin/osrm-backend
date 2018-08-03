@@ -1,0 +1,20 @@
+syntax = "proto2"; 
+
+package pbmldg;
+
+// EdgeData is edge data used in mld query graph
+message EdgeData {
+    optional uint32 Target = 1;
+    optional uint32 TurnID = 2;
+}
+
+// MLDQueryGraph is mld query graph
+message MLDQueryGraph {
+    repeated uint32 nodes= 1;
+	repeated EdgeData edges = 2;
+  	repeated bool IsForward = 3;
+    repeated bool IsBackward = 4;
+	repeated uint32 nodeLevelOffset = 5;
+	repeated int32 nodeWeights = 6;
+}
+

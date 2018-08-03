@@ -37,7 +37,11 @@ template <storage::Ownership Ownership>
 void write(storage::tar::FileWriter &writer,
            const std::string &name,
            const detail::EdgeBasedNodeDataContainerImpl<Ownership> &ebn_data);
-}
+
+template <storage::Ownership Ownership>
+void writeEBGPB(const std::string &name,
+                const detail::EdgeBasedNodeDataContainerImpl<Ownership> &ebn_data);
+} // namespace serialization
 
 namespace detail
 {
@@ -99,6 +103,10 @@ template <storage::Ownership Ownership> class EdgeBasedNodeDataContainerImpl
                                     const std::string &name,
                                     const EdgeBasedNodeDataContainerImpl &ebn_data_container);
 
+    friend void
+    serialization::writeEBGPB<Ownership>(const std::string &name,
+                                         const EdgeBasedNodeDataContainerImpl &ebn_data_container);
+
     template <typename = std::enable_if<Ownership == storage::Ownership::Container>>
     void Renumber(const std::vector<std::uint32_t> &permutation)
     {
@@ -122,7 +130,7 @@ template <storage::Ownership Ownership> class EdgeBasedNodeDataContainerImpl
     Vector<EdgeBasedNode> nodes;
     Vector<NodeBasedEdgeAnnotation> annotation_data;
 };
-}
+} // namespace detail
 
 using EdgeBasedNodeDataExternalContainer =
     detail::EdgeBasedNodeDataContainerImpl<storage::Ownership::External>;

@@ -1,6 +1,6 @@
 #!/bin/bash
-
-cd build-test
+mkdir _build-test
+cd _build-test
 cp ../build/berlin-latest.osm.pbf .
 echo
 echo "start osrm-extract"

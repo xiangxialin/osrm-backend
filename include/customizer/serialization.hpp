@@ -4,8 +4,8 @@
 #include "customizer/edge_based_graph.hpp"
 
 #include "partitioner/cell_storage.hpp"
-#include "protobuf/graph.pb.h"
-#include "protobuf/metric.pb.h"
+#include "../../src/protobuf/graph.pb.h"
+#include "../../src/protobuf/metric.pb.h"
 #include "storage/serialization.hpp"
 #include "storage/shared_memory_ownership.hpp"
 #include "storage/tar.hpp"

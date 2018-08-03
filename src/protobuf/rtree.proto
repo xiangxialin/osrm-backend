@@ -1,0 +1,30 @@
+syntax = "proto2"; 
+
+package pbmldrtree;
+
+message EdgeBasedNodeSegment{
+    optional uint32 u = 1;
+    optional uint32 v = 2;
+    optional uint32 forward_segment_id = 3;
+    optional uint32 reverse_segment_id = 4;
+    optional uint32 fwd_segment_position = 5;
+    optional uint32 forwardEnabled = 6;
+    optional uint32 reverseEnabled = 7;
+}
+
+message Rectangle{
+   optional sint64 min_lat = 1;
+   optional sint64 min_lon = 2;
+   optional sint64 max_lat = 3;
+   optional sint64 max_lon = 4;
+}
+
+message RTreeNode {
+    optional uint64 itemCount = 1;
+    optional Rectangle rect = 2;
+    repeated EdgeBasedNodeSegment segments = 3;
+}
+
+message RTree{
+    repeated RTreeNode node = 1;
+}

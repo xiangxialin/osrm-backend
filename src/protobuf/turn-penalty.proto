@@ -1,0 +1,9 @@
+syntax = "proto2"; 
+
+package pbtp;
+
+// TurnPenalty is turn penalty
+message TurnPenalty {
+    repeated int32 penalty = 1;
+}
+

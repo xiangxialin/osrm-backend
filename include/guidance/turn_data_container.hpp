@@ -32,6 +32,10 @@ template <storage::Ownership Ownership>
 void write(storage::tar::FileWriter &writer,
            const std::string &name,
            const detail::TurnDataContainerImpl<Ownership> &turn_data);
+
+template <storage::Ownership Ownership>
+void writePB(const std::string &name,
+           const detail::TurnDataContainerImpl<Ownership> &turn_data);
 }
 
 struct TurnData
@@ -102,6 +106,8 @@ template <storage::Ownership Ownership> class TurnDataContainerImpl
                                                TurnDataContainerImpl &turn_data_container);
     friend void serialization::write<Ownership>(storage::tar::FileWriter &writer,
                                                 const std::string &name,
+                                                const TurnDataContainerImpl &turn_data_container);
+    friend void serialization::writePB<Ownership>(const std::string &name,
                                                 const TurnDataContainerImpl &turn_data_container);
 
   private:

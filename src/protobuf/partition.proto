@@ -1,0 +1,15 @@
+syntax = "proto2"; 
+
+package pbmldp;
+
+message LevelData {
+    optional uint32   numberLevel  =1;
+    repeated uint32 lidxToOffset   =2;
+    repeated uint64 lidxToMask     =3;
+    repeated uint32 bitToLevel     =4;
+}
+
+message Partitions{
+    optional LevelData levelData = 1;
+    repeated uint64 partition = 2;
+}

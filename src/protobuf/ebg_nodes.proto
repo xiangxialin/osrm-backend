@@ -1,0 +1,20 @@
+syntax = "proto2"; 
+
+package pbmldebg;
+
+message NodeData {
+    optional uint32 geometryID = 1;
+    optional uint32 componentID = 2;
+    optional uint32 annotationID = 3;
+    optional bool segregated = 4;
+    optional bool isTiny = 5;
+}
+
+message AnnotationData{
+    optional uint32 nameID = 1;
+}
+
+message EBG{
+    repeated NodeData nodes = 1;
+    repeated AnnotationData annotations = 2;
+}

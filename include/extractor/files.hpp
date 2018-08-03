@@ -8,7 +8,8 @@
 #include "extractor/serialization.hpp"
 #include "extractor/turn_lane_types.hpp"
 
-#include "protobuf/turn-penalty.pb.h"
+#include "../../src/protobuf/nbg_nodes.pb.h"
+#include "../../src/protobuf/turn-penalty.pb.h"
 #include "util/coordinate.hpp"
 #include "util/guidance/bearing_class.hpp"
 #include "util/guidance/entry_class.hpp"
@@ -139,6 +140,25 @@ inline void readNodeCoordinates(const boost::filesystem::path &path, Coordinates
     storage::serialization::read(reader, "/common/nbn_data/coordinates", coordinates);
 }
 
+// writes .osrm.nbg_nodes pb
+template <typename CoordinatesT, typename PackedOSMIDsT>
+inline void writeNbg_nodesPB(const boost::filesystem::path &path,
+                             const CoordinatesT &coordinates,
+                             const PackedOSMIDsT &osm_node_ids)
+{
+    pbmldnbg::MLDNBG pb_nbg;
+    for (auto index : util::irange<std::size_t>(0, coordinates.size()))
+    {
+        pbmldnbg::Coordinates *coord = pb_nbg.add_coord();
+        coord->set_lon(coordinates[index].lon.__value);
+        coord->set_lon(coordinates[index].lat.__value);
+    }
+    util::serialization::writePB(pb_nbg, osm_node_ids);
+
+    std::fstream pb_output(path.string() + ".pb", std::ios::out | std::ios::binary);
+    pb_nbg.SerializeToOstream(&pb_output);
+}
+
 // writes .osrm.nbg_nodes
 template <typename CoordinatesT, typename PackedOSMIDsT>
 inline void writeNodes(const boost::filesystem::path &path,
@@ -151,6 +171,7 @@ inline void writeNodes(const boost::filesystem::path &path,
     const auto fingerprint = storage::tar::FileWriter::GenerateFingerprint;
     storage::tar::FileWriter writer{path, fingerprint};
 
+    writeNbg_nodesPB(path, coordinates, osm_node_ids);
     storage::serialization::write(writer, "/common/nbn_data/coordinates", coordinates);
     util::serialization::write(writer, "/common/nbn_data/osm_node_ids", osm_node_ids);
 }
@@ -216,6 +237,7 @@ inline void writeSegmentData(const boost::filesystem::path &path, const SegmentD
     storage::tar::FileWriter writer{path, fingerprint};
 
     serialization::write(writer, "/common/segment_data", segment_data);
+    serialization::writeGeometryPB(path.string(), segment_data);
 }
 
 // reads .osrm.ebg_nodes
@@ -244,6 +266,7 @@ inline void writeNodeData(const boost::filesystem::path &path, const NodeDataT &
     storage::tar::FileWriter writer{path, fingerprint};
 
     serialization::write(writer, "/common/ebg_node_data", node_data);
+    serialization::writeEBGPB(path.string(), node_data);
 }
 
 // reads .osrm.tls

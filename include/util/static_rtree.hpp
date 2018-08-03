@@ -1,6 +1,8 @@
 #ifndef STATIC_RTREE_HPP
 #define STATIC_RTREE_HPP
 
+#include "../../src/protobuf/rtree.pb.h"
+#include "../extractor/edge_based_node_segment.hpp"
 #include "storage/tar_fwd.hpp"
 
 #include "util/bearing.hpp"
@@ -64,7 +66,7 @@ inline void
 write(storage::tar::FileWriter &writer,
       const std::string &name,
       const util::StaticRTree<EdgeDataT, Ownership, BRANCHING_FACTOR, LEAF_PAGE_SIZE> &rtree);
-}
+} // namespace serialization
 
 /***
  * Static RTree for serving nearest neighbour queries
@@ -307,6 +309,7 @@ class StaticRTree
                 }
             });
 
+        pbmldrtree::RTree pb_rtree;
         // sort the hilbert-value representatives
         tbb::parallel_sort(input_wrapper_vector.begin(), input_wrapper_vector.end());
         {
@@ -329,7 +332,8 @@ class StaticRTree
             while (wrapped_element_index < element_count)
             {
                 TreeNode current_node;
-
+                pbmldrtree::RTreeNode *pb_node = pb_rtree.add_node();
+                uint64_t itemCount = 0;
                 // Loop over the next block of EdgeDataT, calculate the bounding box
                 // for the block, and save the data to write to disk in the correct
                 // order.
@@ -342,6 +346,18 @@ class StaticRTree
                     const EdgeDataT &object = input_data_vector[input_object_index];
 
                     *objects_iter++ = object;
+                    pb_node->set_itemcount(++itemCount);
+                    osrm::extractor::EdgeBasedNodeSegment _n =
+                        (osrm::extractor::EdgeBasedNodeSegment)(object);
+
+                    pbmldrtree::EdgeBasedNodeSegment *pb_seg = pb_node->add_segments();
+                    pb_seg->set_u(_n.u);
+                    pb_seg->set_v(_n.v);
+                    pb_seg->set_forward_segment_id(_n.forward_segment_id.id);
+                    pb_seg->set_reverse_segment_id(_n.reverse_segment_id.id);
+                    pb_seg->set_fwd_segment_position(_n.fwd_segment_position);
+                    pb_seg->set_forwardenabled(_n.forward_segment_id.enabled);
+                    pb_seg->set_reverseenabled(_n.reverse_segment_id.enabled);
 
                     Coordinate projected_u{
                         web_mercator::fromWGS84(Coordinate{m_coordinate_list[object.u]})};
@@ -364,6 +380,12 @@ class StaticRTree
                     rectangle.max_lat =
                         std::max(rectangle.max_lat, std::max(projected_u.lat, projected_v.lat));
 
+                    pbmldrtree::Rectangle *pb_rect = pb_node->mutable_rect();
+                    pb_rect->set_max_lat(rectangle.max_lat.__value);
+                    pb_rect->set_min_lat(rectangle.min_lat.__value);
+                    pb_rect->set_max_lon(rectangle.max_lon.__value);
+                    pb_rect->set_min_lon(rectangle.min_lon.__value);
+
                     BOOST_ASSERT(rectangle.IsValid());
                     current_node.minimum_bounding_rectangle.MergeBoundingBoxes(rectangle);
                 }
@@ -374,6 +396,9 @@ class StaticRTree
         // mmap as read-only now
         m_objects = mmapFile<EdgeDataT>(on_disk_file_name, m_objects_region);
 
+        std::fstream pb_rtree_out(on_disk_file_name.string() + ".pb",
+                                  std::ios::out | std::ios::binary);
+        pb_rtree.SerializeToOstream(&pb_rtree_out);
         // Should hold the number of nodes at the lowest level of the graph (closest
         // to the data)
         std::uint32_t nodes_in_previous_level = m_search_tree.size();
@@ -773,7 +798,7 @@ class StaticRTree
 //[2] "Nearest Neighbor Queries", N. Roussopulos et al; 1995; DOI: 10.1145/223784.223794
 //[3] "Distance Browsing in Spatial Databases"; G. Hjaltason, H. Samet; 1999; ACM Trans. DB Sys
 // Vol.24 No.2, pp.265-318
-}
-}
+} // namespace util
+} // namespace osrm
 
 #endif // STATIC_RTREE_HPP

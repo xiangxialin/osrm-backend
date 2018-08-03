@@ -1,0 +1,19 @@
+syntax = "proto2"; 
+
+package pbmldc;
+
+message CellData {
+    optional uint32 valueOffset = 1;
+    optional uint32 sourceBoundaryOffset = 2;
+    optional uint32 destinationBoundaryOffset = 3;
+    optional uint32 sourceNodesNumber = 4;
+    optional uint32 destinationNodesNumber = 5;
+}
+
+// Cells includes all cells data for all levels
+message Cells{
+    repeated uint32 sourceBoundary = 1;
+    repeated uint32 destinationBoundary = 2;
+    repeated CellData cells = 3;
+    repeated uint64 levelOffset = 4;
+}

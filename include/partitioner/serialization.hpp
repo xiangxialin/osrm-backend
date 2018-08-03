@@ -6,8 +6,8 @@
 #include "partitioner/multi_level_graph.hpp"
 #include "partitioner/multi_level_partition.hpp"
 
-#include "protobuf/cells.pb.h"
-#include "protobuf/partition.pb.h"
+#include "../../src/protobuf/cells.pb.h"
+#include "../../src/protobuf/partition.pb.h"
 #include "storage/block.hpp"
 #include "storage/io.hpp"
 #include "storage/serialization.hpp"

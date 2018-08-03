@@ -1,0 +1,13 @@
+syntax = "proto2"; 
+
+package pbmldnbg;
+
+message Coordinates{
+    optional double lon = 1;
+    optional double lat = 2;
+}
+
+message MLDNBG{
+    repeated Coordinates coord = 1;
+    repeated uint64 osmid = 2;
+}

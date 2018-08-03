@@ -1,0 +1,8 @@
+syntax = "proto2"; 
+
+package pbmldm;
+
+message Metric {
+    repeated int32 weights = 1;
+}
+

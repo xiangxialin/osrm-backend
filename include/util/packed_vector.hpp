@@ -1,6 +1,7 @@
 #ifndef PACKED_VECTOR_HPP
 #define PACKED_VECTOR_HPP
 
+#include "../../src/protobuf/nbg_nodes.pb.h"
 #include "util/integer_range.hpp"
 #include "util/typedefs.hpp"
 #include "util/vector_view.hpp"
@@ -37,7 +38,10 @@ template <typename T, std::size_t Bits, storage::Ownership Ownership>
 inline void write(storage::tar::FileWriter &writer,
                   const std::string &name,
                   const detail::PackedVector<T, Bits, Ownership> &vec);
-}
+
+template <typename T, std::size_t Bits, storage::Ownership Ownership>
+inline void writePB(pbmldnbg::MLDNBG &pb_nbg, const detail::PackedVector<T, Bits, Ownership> &vec);
+} // namespace serialization
 
 namespace detail
 {
@@ -457,7 +461,8 @@ template <typename T, std::size_t Bits, storage::Ownership Ownership> class Pack
     friend void serialization::write<T, Bits, Ownership>(storage::tar::FileWriter &writer,
                                                          const std::string &name,
                                                          const PackedVector &vec);
-
+    friend void serialization::writePB<T, Bits, Ownership>(pbmldnbg::MLDNBG &pb_nbg,
+                                                           const PackedVector &vec);
     inline void swap(PackedVector &other) noexcept
     {
         std::swap(vec, other.vec);
@@ -546,13 +551,13 @@ template <typename T, std::size_t Bits, storage::Ownership Ownership> class Pack
     util::ViewOrVector<WordT, Ownership> vec;
     std::uint64_t num_elements = 0;
 };
-}
+} // namespace detail
 
 template <typename T, std::size_t Bits>
 using PackedVector = detail::PackedVector<T, Bits, storage::Ownership::Container>;
 template <typename T, std::size_t Bits>
 using PackedVectorView = detail::PackedVector<T, Bits, storage::Ownership::View>;
-}
-}
+} // namespace util
+} // namespace osrm
 
 #endif /* PACKED_VECTOR_HPP */

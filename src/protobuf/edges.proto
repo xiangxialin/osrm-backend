@@ -1,0 +1,8 @@
+syntax = "proto2"; 
+
+package pbmlde;
+
+message Edges{
+    repeated uint32 TurnType = 1;
+    repeated uint32 DirectionModifier = 2;
+}
