@@ -151,8 +151,9 @@ inline void writeNbg_nodesPB(const boost::filesystem::path &path,
     {
         pbmldnbg::Coordinates *coord = pb_nbg.add_coord();
         coord->set_lon(coordinates[index].lon.__value);
-        coord->set_lon(coordinates[index].lat.__value);
+        coord->set_lat(coordinates[index].lat.__value);
     }
+
     util::serialization::writePB(pb_nbg, osm_node_ids);
 
     std::fstream pb_output(path.string() + ".pb", std::ios::out | std::ios::binary);

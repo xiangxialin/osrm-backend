@@ -60,9 +60,9 @@ inline void write(storage::tar::FileWriter &writer,
 template <typename T, std::size_t Bits, storage::Ownership Ownership>
 inline void writePB(pbmldnbg::MLDNBG &pb_nbg, const detail::PackedVector<T, Bits, Ownership> &vec)
 {
-    for (auto index : util::irange<std::size_t>(0, vec.vec.size()))
+    for (auto index : util::irange<std::size_t>(0, vec.num_elements))
     {
-        pb_nbg.add_osmid(vec.vec[index]);
+        pb_nbg.add_osmid(std::uint64_t(vec[index]));
     }
 }
 

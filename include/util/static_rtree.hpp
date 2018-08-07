@@ -334,6 +334,7 @@ class StaticRTree
                 TreeNode current_node;
                 pbmldrtree::RTreeNode *pb_node = pb_rtree.add_node();
                 uint64_t itemCount = 0;
+                util::Log() << "add node" << std::endl;
                 // Loop over the next block of EdgeDataT, calculate the bounding box
                 // for the block, and save the data to write to disk in the correct
                 // order.
@@ -380,15 +381,16 @@ class StaticRTree
                     rectangle.max_lat =
                         std::max(rectangle.max_lat, std::max(projected_u.lat, projected_v.lat));
 
-                    pbmldrtree::Rectangle *pb_rect = pb_node->mutable_rect();
-                    pb_rect->set_max_lat(rectangle.max_lat.__value);
-                    pb_rect->set_min_lat(rectangle.min_lat.__value);
-                    pb_rect->set_max_lon(rectangle.max_lon.__value);
-                    pb_rect->set_min_lon(rectangle.min_lon.__value);
-
                     BOOST_ASSERT(rectangle.IsValid());
                     current_node.minimum_bounding_rectangle.MergeBoundingBoxes(rectangle);
+
+                    pbmldrtree::Rectangle *pb_rect = pb_node->mutable_rect();
+                    pb_rect->set_max_lat(current_node.minimum_bounding_rectangle.max_lat.__value);
+                    pb_rect->set_min_lat(current_node.minimum_bounding_rectangle.min_lat.__value);
+                    pb_rect->set_max_lon(current_node.minimum_bounding_rectangle.max_lon.__value);
+                    pb_rect->set_min_lon(current_node.minimum_bounding_rectangle.min_lon.__value);
                 }
+                util::Log() << "rtree node count:" << itemCount << std::endl;
 
                 m_search_tree.emplace_back(current_node);
             }
