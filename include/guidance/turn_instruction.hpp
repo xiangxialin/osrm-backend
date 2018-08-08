@@ -76,6 +76,10 @@ struct TurnInstruction
     TurnType::Enum type : 5;
     DirectionModifier::Enum direction_modifier : 3;
 
+    uint32_t pack_to_uint32() const {
+        return uint32_t(direction_modifier) << 5 | uint32_t(type);
+    }
+
     bool IsUTurn() const
     {
         return type != TurnType::NoTurn && direction_modifier == DirectionModifier::UTurn;

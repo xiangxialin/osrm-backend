@@ -40,6 +40,9 @@ extern EdgeBasedNodeContainerDefaultTypeInternal _EdgeBasedNodeContainer_default
 class NodeBasedAnnotation;
 class NodeBasedAnnotationDefaultTypeInternal;
 extern NodeBasedAnnotationDefaultTypeInternal _NodeBasedAnnotation_default_instance_;
+class TurnInstructions;
+class TurnInstructionsDefaultTypeInternal;
+extern TurnInstructionsDefaultTypeInternal _TurnInstructions_default_instance_;
 }  // namespace pbebg
 
 namespace pbebg {
@@ -397,6 +400,110 @@ class EdgeBasedNodeContainer : public ::google::protobuf::Message /* @@protoc_in
   mutable int _cached_size_;
   friend struct protobuf_edge_2dbased_2dgraph_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class TurnInstructions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbebg.TurnInstructions) */ {
+ public:
+  TurnInstructions();
+  virtual ~TurnInstructions();
+
+  TurnInstructions(const TurnInstructions& from);
+
+  inline TurnInstructions& operator=(const TurnInstructions& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  TurnInstructions(TurnInstructions&& from) noexcept
+    : TurnInstructions() {
+    *this = ::std::move(from);
+  }
+
+  inline TurnInstructions& operator=(TurnInstructions&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TurnInstructions& default_instance();
+
+  static inline const TurnInstructions* internal_default_instance() {
+    return reinterpret_cast<const TurnInstructions*>(
+               &_TurnInstructions_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    3;
+
+  void Swap(TurnInstructions* other);
+  friend void swap(TurnInstructions& a, TurnInstructions& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TurnInstructions* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  TurnInstructions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const TurnInstructions& from);
+  void MergeFrom(const TurnInstructions& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(TurnInstructions* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 turn_instruction = 1;
+  int turn_instruction_size() const;
+  void clear_turn_instruction();
+  static const int kTurnInstructionFieldNumber = 1;
+  ::google::protobuf::uint32 turn_instruction(int index) const;
+  void set_turn_instruction(int index, ::google::protobuf::uint32 value);
+  void add_turn_instruction(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      turn_instruction() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_turn_instruction();
+
+  // @@protoc_insertion_point(class_scope:pbebg.TurnInstructions)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > turn_instruction_;
+  mutable int _turn_instruction_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_edge_2dbased_2dgraph_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -561,10 +668,46 @@ EdgeBasedNodeContainer::annotation_data() const {
   return annotation_data_;
 }
 
+// -------------------------------------------------------------------
+
+// TurnInstructions
+
+// repeated uint32 turn_instruction = 1;
+inline int TurnInstructions::turn_instruction_size() const {
+  return turn_instruction_.size();
+}
+inline void TurnInstructions::clear_turn_instruction() {
+  turn_instruction_.Clear();
+}
+inline ::google::protobuf::uint32 TurnInstructions::turn_instruction(int index) const {
+  // @@protoc_insertion_point(field_get:pbebg.TurnInstructions.turn_instruction)
+  return turn_instruction_.Get(index);
+}
+inline void TurnInstructions::set_turn_instruction(int index, ::google::protobuf::uint32 value) {
+  turn_instruction_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbebg.TurnInstructions.turn_instruction)
+}
+inline void TurnInstructions::add_turn_instruction(::google::protobuf::uint32 value) {
+  turn_instruction_.Add(value);
+  // @@protoc_insertion_point(field_add:pbebg.TurnInstructions.turn_instruction)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+TurnInstructions::turn_instruction() const {
+  // @@protoc_insertion_point(field_list:pbebg.TurnInstructions.turn_instruction)
+  return turn_instruction_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+TurnInstructions::mutable_turn_instruction() {
+  // @@protoc_insertion_point(field_mutable_list:pbebg.TurnInstructions.turn_instruction)
+  return &turn_instruction_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

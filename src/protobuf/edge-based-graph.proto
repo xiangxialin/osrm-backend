@@ -19,4 +19,9 @@ message EdgeBasedNodeContainer {
     repeated NodeBasedAnnotation annotation_data = 2;
 }
 
+message TurnInstructions {
+    repeated uint32 turn_instruction = 1;
+}
+
+
 

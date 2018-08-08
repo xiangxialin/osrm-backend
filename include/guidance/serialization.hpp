@@ -8,6 +8,9 @@
 
 #include <boost/assert.hpp>
 
+#include "../../../src/protobuf/edge-based-graph.pb.h"
+
+
 namespace osrm
 {
 namespace guidance
@@ -48,6 +51,14 @@ inline void write(storage::tar::FileWriter &writer,
         writer, name + "/pre_turn_bearings", turn_data_container.pre_turn_bearings);
     storage::serialization::write(
         writer, name + "/post_turn_bearings", turn_data_container.post_turn_bearings);
+
+    std::cout << "#### turn instruction: " << turn_data_container.turn_instructions.size() << std::endl;
+    pbebg::TurnInstructions pb_instructions;
+    for (auto i : turn_data_container.turn_instructions){
+        pb_instructions.add_turn_instruction(i.pack_to_uint32());
+    }
+    std::fstream pb_out("1.ebg.turn.instruction.pb", std::ios::out | std::ios::binary);
+    pb_instructions.SerializeToOstream(&pb_out);
 }
 }
 }
