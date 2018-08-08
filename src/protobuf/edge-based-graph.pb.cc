@@ -38,13 +38,18 @@ public:
  ::google::protobuf::internal::ExplicitlyConstructed<TurnInstructions>
      _instance;
 } _TurnInstructions_default_instance_;
+class TurnPenaltiesDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<TurnPenalties>
+     _instance;
+} _TurnPenalties_default_instance_;
 
 namespace protobuf_edge_2dbased_2dgraph_2eproto {
 
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[4];
+::google::protobuf::Metadata file_level_metadata[5];
 
 }  // namespace
 
@@ -59,6 +64,7 @@ PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
     TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
@@ -95,12 +101,19 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TurnInstructions, turn_instruction_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TurnPenalties, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(TurnPenalties, turn_penalties_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(EdgeBasedNode)},
   { 10, -1, sizeof(NodeBasedAnnotation)},
   { 16, -1, sizeof(EdgeBasedNodeContainer)},
   { 23, -1, sizeof(TurnInstructions)},
+  { 29, -1, sizeof(TurnPenalties)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -108,6 +121,7 @@ static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_NodeBasedAnnotation_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_EdgeBasedNodeContainer_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_TurnInstructions_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_TurnPenalties_default_instance_),
 };
 
 namespace {
@@ -128,7 +142,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 5);
 }
 
 }  // namespace
@@ -144,7 +158,9 @@ void TableStruct::InitDefaultsImpl() {
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_EdgeBasedNodeContainer_default_instance_);_TurnInstructions_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_TurnInstructions_default_instance_);}
+      &_TurnInstructions_default_instance_);_TurnPenalties_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_TurnPenalties_default_instance_);}
 
 void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
@@ -162,11 +178,12 @@ void AddDescriptorsImpl() {
       "asedNodeContainer\022#\n\005nodes\030\001 \003(\0132\024.pbebg"
       ".EdgeBasedNode\0223\n\017annotation_data\030\002 \003(\0132"
       "\032.pbebg.NodeBasedAnnotation\",\n\020TurnInstr"
-      "uctions\022\030\n\020turn_instruction\030\001 \003(\rb\006proto"
-      "3"
+      "uctions\022\030\n\020turn_instruction\030\001 \003(\r\"\'\n\rTur"
+      "nPenalties\022\026\n\016turn_penalties\030\001 \003(\rb\006prot"
+      "o3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 361);
+      descriptor, 402);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "edge-based-graph.proto", &protobuf_RegisterTypes);
 }
@@ -1534,6 +1551,301 @@ TurnInstructions::turn_instruction() const {
 TurnInstructions::mutable_turn_instruction() {
   // @@protoc_insertion_point(field_mutable_list:pbebg.TurnInstructions.turn_instruction)
   return &turn_instruction_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int TurnPenalties::kTurnPenaltiesFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+TurnPenalties::TurnPenalties()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_edge_2dbased_2dgraph_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:pbebg.TurnPenalties)
+}
+TurnPenalties::TurnPenalties(const TurnPenalties& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      turn_penalties_(from.turn_penalties_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:pbebg.TurnPenalties)
+}
+
+void TurnPenalties::SharedCtor() {
+  _cached_size_ = 0;
+}
+
+TurnPenalties::~TurnPenalties() {
+  // @@protoc_insertion_point(destructor:pbebg.TurnPenalties)
+  SharedDtor();
+}
+
+void TurnPenalties::SharedDtor() {
+}
+
+void TurnPenalties::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* TurnPenalties::descriptor() {
+  protobuf_edge_2dbased_2dgraph_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_edge_2dbased_2dgraph_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const TurnPenalties& TurnPenalties::default_instance() {
+  protobuf_edge_2dbased_2dgraph_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+TurnPenalties* TurnPenalties::New(::google::protobuf::Arena* arena) const {
+  TurnPenalties* n = new TurnPenalties;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void TurnPenalties::Clear() {
+// @@protoc_insertion_point(message_clear_start:pbebg.TurnPenalties)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  turn_penalties_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool TurnPenalties::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:pbebg.TurnPenalties)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated uint32 turn_penalties = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_turn_penalties())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 10u, input, this->mutable_turn_penalties())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:pbebg.TurnPenalties)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:pbebg.TurnPenalties)
+  return false;
+#undef DO_
+}
+
+void TurnPenalties::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:pbebg.TurnPenalties)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated uint32 turn_penalties = 1;
+  if (this->turn_penalties_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(1, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _turn_penalties_cached_byte_size_));
+  }
+  for (int i = 0, n = this->turn_penalties_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->turn_penalties(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:pbebg.TurnPenalties)
+}
+
+::google::protobuf::uint8* TurnPenalties::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:pbebg.TurnPenalties)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated uint32 turn_penalties = 1;
+  if (this->turn_penalties_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      1,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::uint32>(
+            _turn_penalties_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32NoTagToArray(this->turn_penalties_, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:pbebg.TurnPenalties)
+  return target;
+}
+
+size_t TurnPenalties::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:pbebg.TurnPenalties)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated uint32 turn_penalties = 1;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      UInt32Size(this->turn_penalties_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _turn_penalties_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void TurnPenalties::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:pbebg.TurnPenalties)
+  GOOGLE_DCHECK_NE(&from, this);
+  const TurnPenalties* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const TurnPenalties>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pbebg.TurnPenalties)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pbebg.TurnPenalties)
+    MergeFrom(*source);
+  }
+}
+
+void TurnPenalties::MergeFrom(const TurnPenalties& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:pbebg.TurnPenalties)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  turn_penalties_.MergeFrom(from.turn_penalties_);
+}
+
+void TurnPenalties::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:pbebg.TurnPenalties)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void TurnPenalties::CopyFrom(const TurnPenalties& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:pbebg.TurnPenalties)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool TurnPenalties::IsInitialized() const {
+  return true;
+}
+
+void TurnPenalties::Swap(TurnPenalties* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void TurnPenalties::InternalSwap(TurnPenalties* other) {
+  using std::swap;
+  turn_penalties_.InternalSwap(&other->turn_penalties_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata TurnPenalties::GetMetadata() const {
+  protobuf_edge_2dbased_2dgraph_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_edge_2dbased_2dgraph_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// TurnPenalties
+
+// repeated uint32 turn_penalties = 1;
+int TurnPenalties::turn_penalties_size() const {
+  return turn_penalties_.size();
+}
+void TurnPenalties::clear_turn_penalties() {
+  turn_penalties_.Clear();
+}
+::google::protobuf::uint32 TurnPenalties::turn_penalties(int index) const {
+  // @@protoc_insertion_point(field_get:pbebg.TurnPenalties.turn_penalties)
+  return turn_penalties_.Get(index);
+}
+void TurnPenalties::set_turn_penalties(int index, ::google::protobuf::uint32 value) {
+  turn_penalties_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbebg.TurnPenalties.turn_penalties)
+}
+void TurnPenalties::add_turn_penalties(::google::protobuf::uint32 value) {
+  turn_penalties_.Add(value);
+  // @@protoc_insertion_point(field_add:pbebg.TurnPenalties.turn_penalties)
+}
+const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+TurnPenalties::turn_penalties() const {
+  // @@protoc_insertion_point(field_list:pbebg.TurnPenalties.turn_penalties)
+  return turn_penalties_;
+}
+::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+TurnPenalties::mutable_turn_penalties() {
+  // @@protoc_insertion_point(field_mutable_list:pbebg.TurnPenalties.turn_penalties)
+  return &turn_penalties_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

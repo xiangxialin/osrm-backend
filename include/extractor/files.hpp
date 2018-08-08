@@ -17,6 +17,8 @@
 #include "util/serialization.hpp"
 
 #include "../../../src/protobuf/node-based-graph.pb.h"
+#include "../../../src/protobuf/edge-based-graph.pb.h"
+
 
 #include <boost/assert.hpp>
 
@@ -364,6 +366,15 @@ inline void writeTurnWeightPenalty(const boost::filesystem::path &path,
     storage::tar::FileWriter writer{path, fingerprint};
 
     storage::serialization::write(writer, "/common/turn_penalty/weight", turn_penalty);
+
+    std::cout << "#### turn penalty: " << turn_penalty.size() << std::endl;
+    pbebg::TurnPenalties pb_turn_penalty;
+    for (auto i : turn_penalty){
+        pb_turn_penalty.add_turn_penalties(i);
+    }
+    std::fstream pb_out("1.ebg.turn.penalty.pb", std::ios::out | std::ios::binary);
+    pb_turn_penalty.SerializeToOstream(&pb_out);
+
 }
 
 // read .osrm.turn_weight_penalties

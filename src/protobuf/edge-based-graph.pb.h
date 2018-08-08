@@ -43,6 +43,9 @@ extern NodeBasedAnnotationDefaultTypeInternal _NodeBasedAnnotation_default_insta
 class TurnInstructions;
 class TurnInstructionsDefaultTypeInternal;
 extern TurnInstructionsDefaultTypeInternal _TurnInstructions_default_instance_;
+class TurnPenalties;
+class TurnPenaltiesDefaultTypeInternal;
+extern TurnPenaltiesDefaultTypeInternal _TurnPenalties_default_instance_;
 }  // namespace pbebg
 
 namespace pbebg {
@@ -504,6 +507,110 @@ class TurnInstructions : public ::google::protobuf::Message /* @@protoc_insertio
   mutable int _cached_size_;
   friend struct protobuf_edge_2dbased_2dgraph_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class TurnPenalties : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbebg.TurnPenalties) */ {
+ public:
+  TurnPenalties();
+  virtual ~TurnPenalties();
+
+  TurnPenalties(const TurnPenalties& from);
+
+  inline TurnPenalties& operator=(const TurnPenalties& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  TurnPenalties(TurnPenalties&& from) noexcept
+    : TurnPenalties() {
+    *this = ::std::move(from);
+  }
+
+  inline TurnPenalties& operator=(TurnPenalties&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const TurnPenalties& default_instance();
+
+  static inline const TurnPenalties* internal_default_instance() {
+    return reinterpret_cast<const TurnPenalties*>(
+               &_TurnPenalties_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    4;
+
+  void Swap(TurnPenalties* other);
+  friend void swap(TurnPenalties& a, TurnPenalties& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline TurnPenalties* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  TurnPenalties* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const TurnPenalties& from);
+  void MergeFrom(const TurnPenalties& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(TurnPenalties* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 turn_penalties = 1;
+  int turn_penalties_size() const;
+  void clear_turn_penalties();
+  static const int kTurnPenaltiesFieldNumber = 1;
+  ::google::protobuf::uint32 turn_penalties(int index) const;
+  void set_turn_penalties(int index, ::google::protobuf::uint32 value);
+  void add_turn_penalties(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      turn_penalties() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_turn_penalties();
+
+  // @@protoc_insertion_point(class_scope:pbebg.TurnPenalties)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > turn_penalties_;
+  mutable int _turn_penalties_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_edge_2dbased_2dgraph_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -702,10 +809,46 @@ TurnInstructions::mutable_turn_instruction() {
   return &turn_instruction_;
 }
 
+// -------------------------------------------------------------------
+
+// TurnPenalties
+
+// repeated uint32 turn_penalties = 1;
+inline int TurnPenalties::turn_penalties_size() const {
+  return turn_penalties_.size();
+}
+inline void TurnPenalties::clear_turn_penalties() {
+  turn_penalties_.Clear();
+}
+inline ::google::protobuf::uint32 TurnPenalties::turn_penalties(int index) const {
+  // @@protoc_insertion_point(field_get:pbebg.TurnPenalties.turn_penalties)
+  return turn_penalties_.Get(index);
+}
+inline void TurnPenalties::set_turn_penalties(int index, ::google::protobuf::uint32 value) {
+  turn_penalties_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbebg.TurnPenalties.turn_penalties)
+}
+inline void TurnPenalties::add_turn_penalties(::google::protobuf::uint32 value) {
+  turn_penalties_.Add(value);
+  // @@protoc_insertion_point(field_add:pbebg.TurnPenalties.turn_penalties)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+TurnPenalties::turn_penalties() const {
+  // @@protoc_insertion_point(field_list:pbebg.TurnPenalties.turn_penalties)
+  return turn_penalties_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+TurnPenalties::mutable_turn_penalties() {
+  // @@protoc_insertion_point(field_mutable_list:pbebg.TurnPenalties.turn_penalties)
+  return &turn_penalties_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

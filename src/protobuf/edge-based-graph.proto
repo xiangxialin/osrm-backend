@@ -23,5 +23,8 @@ message TurnInstructions {
     repeated uint32 turn_instruction = 1;
 }
 
+message TurnPenalties {
+    repeated uint32 turn_penalties = 1;
+}
 
 
