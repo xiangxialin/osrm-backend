@@ -33,13 +33,18 @@ public:
  ::google::protobuf::internal::ExplicitlyConstructed<CompressedNbg>
      _instance;
 } _CompressedNbg_default_instance_;
+class StreetNamesDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<StreetNames>
+     _instance;
+} _StreetNames_default_instance_;
 
 namespace protobuf_node_2dbased_2dgraph_2eproto {
 
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[3];
+::google::protobuf::Metadata file_level_metadata[4];
 
 }  // namespace
 
@@ -54,6 +59,7 @@ PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
     TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
@@ -83,17 +89,26 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, nodes_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, forward_weights_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, reverse_weights_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StreetNames, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StreetNames, names_packed_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(StreetNames, name_offsets_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(Coordinate)},
   { 7, -1, sizeof(Nodes)},
   { 14, -1, sizeof(CompressedNbg)},
+  { 23, -1, sizeof(StreetNames)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_Coordinate_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_Nodes_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_CompressedNbg_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_StreetNames_default_instance_),
 };
 
 namespace {
@@ -114,7 +129,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 3);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 4);
 }
 
 }  // namespace
@@ -128,7 +143,9 @@ void TableStruct::InitDefaultsImpl() {
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_Nodes_default_instance_);_CompressedNbg_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_CompressedNbg_default_instance_);}
+      &_CompressedNbg_default_instance_);_StreetNames_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_StreetNames_default_instance_);}
 
 void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
@@ -143,10 +160,12 @@ void AddDescriptorsImpl() {
       "\022!\n\006latLon\030\001 \003(\0132\021.pbnbg.Coordinate\022\r\n\005o"
       "smid\030\002 \003(\004\"_\n\rCompressedNbg\022\r\n\005index\030\001 \003"
       "(\r\022\r\n\005nodes\030\002 \003(\r\022\027\n\017forward_weights\030\003 \003"
-      "(\r\022\027\n\017reverse_weights\030\004 \003(\rb\006proto3"
+      "(\r\022\027\n\017reverse_weights\030\004 \003(\r\"9\n\013StreetNam"
+      "es\022\024\n\014names_packed\030\001 \001(\t\022\024\n\014name_offsets"
+      "\030\002 \003(\rb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 235);
+      descriptor, 294);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "node-based-graph.proto", &protobuf_RegisterTypes);
 }
@@ -1417,6 +1436,411 @@ CompressedNbg::reverse_weights() const {
 CompressedNbg::mutable_reverse_weights() {
   // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.reverse_weights)
   return &reverse_weights_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int StreetNames::kNamesPackedFieldNumber;
+const int StreetNames::kNameOffsetsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+StreetNames::StreetNames()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_node_2dbased_2dgraph_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:pbnbg.StreetNames)
+}
+StreetNames::StreetNames(const StreetNames& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      name_offsets_(from.name_offsets_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  names_packed_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.names_packed().size() > 0) {
+    names_packed_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.names_packed_);
+  }
+  // @@protoc_insertion_point(copy_constructor:pbnbg.StreetNames)
+}
+
+void StreetNames::SharedCtor() {
+  names_packed_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _cached_size_ = 0;
+}
+
+StreetNames::~StreetNames() {
+  // @@protoc_insertion_point(destructor:pbnbg.StreetNames)
+  SharedDtor();
+}
+
+void StreetNames::SharedDtor() {
+  names_packed_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+
+void StreetNames::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* StreetNames::descriptor() {
+  protobuf_node_2dbased_2dgraph_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_node_2dbased_2dgraph_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const StreetNames& StreetNames::default_instance() {
+  protobuf_node_2dbased_2dgraph_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+StreetNames* StreetNames::New(::google::protobuf::Arena* arena) const {
+  StreetNames* n = new StreetNames;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void StreetNames::Clear() {
+// @@protoc_insertion_point(message_clear_start:pbnbg.StreetNames)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  name_offsets_.Clear();
+  names_packed_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  _internal_metadata_.Clear();
+}
+
+bool StreetNames::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:pbnbg.StreetNames)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // string names_packed = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_names_packed()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->names_packed().data(), static_cast<int>(this->names_packed().length()),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "pbnbg.StreetNames.names_packed"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated uint32 name_offsets = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_name_offsets())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 18u, input, this->mutable_name_offsets())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:pbnbg.StreetNames)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:pbnbg.StreetNames)
+  return false;
+#undef DO_
+}
+
+void StreetNames::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:pbnbg.StreetNames)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string names_packed = 1;
+  if (this->names_packed().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->names_packed().data(), static_cast<int>(this->names_packed().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "pbnbg.StreetNames.names_packed");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      1, this->names_packed(), output);
+  }
+
+  // repeated uint32 name_offsets = 2;
+  if (this->name_offsets_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(2, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _name_offsets_cached_byte_size_));
+  }
+  for (int i = 0, n = this->name_offsets_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->name_offsets(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:pbnbg.StreetNames)
+}
+
+::google::protobuf::uint8* StreetNames::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:pbnbg.StreetNames)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // string names_packed = 1;
+  if (this->names_packed().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->names_packed().data(), static_cast<int>(this->names_packed().length()),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "pbnbg.StreetNames.names_packed");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        1, this->names_packed(), target);
+  }
+
+  // repeated uint32 name_offsets = 2;
+  if (this->name_offsets_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      2,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::uint32>(
+            _name_offsets_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32NoTagToArray(this->name_offsets_, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:pbnbg.StreetNames)
+  return target;
+}
+
+size_t StreetNames::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:pbnbg.StreetNames)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated uint32 name_offsets = 2;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      UInt32Size(this->name_offsets_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _name_offsets_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // string names_packed = 1;
+  if (this->names_packed().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->names_packed());
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void StreetNames::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:pbnbg.StreetNames)
+  GOOGLE_DCHECK_NE(&from, this);
+  const StreetNames* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const StreetNames>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pbnbg.StreetNames)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pbnbg.StreetNames)
+    MergeFrom(*source);
+  }
+}
+
+void StreetNames::MergeFrom(const StreetNames& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:pbnbg.StreetNames)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  name_offsets_.MergeFrom(from.name_offsets_);
+  if (from.names_packed().size() > 0) {
+
+    names_packed_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.names_packed_);
+  }
+}
+
+void StreetNames::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:pbnbg.StreetNames)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void StreetNames::CopyFrom(const StreetNames& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:pbnbg.StreetNames)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool StreetNames::IsInitialized() const {
+  return true;
+}
+
+void StreetNames::Swap(StreetNames* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void StreetNames::InternalSwap(StreetNames* other) {
+  using std::swap;
+  name_offsets_.InternalSwap(&other->name_offsets_);
+  names_packed_.Swap(&other->names_packed_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata StreetNames::GetMetadata() const {
+  protobuf_node_2dbased_2dgraph_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_node_2dbased_2dgraph_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// StreetNames
+
+// string names_packed = 1;
+void StreetNames::clear_names_packed() {
+  names_packed_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& StreetNames::names_packed() const {
+  // @@protoc_insertion_point(field_get:pbnbg.StreetNames.names_packed)
+  return names_packed_.GetNoArena();
+}
+void StreetNames::set_names_packed(const ::std::string& value) {
+  
+  names_packed_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:pbnbg.StreetNames.names_packed)
+}
+#if LANG_CXX11
+void StreetNames::set_names_packed(::std::string&& value) {
+  
+  names_packed_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:pbnbg.StreetNames.names_packed)
+}
+#endif
+void StreetNames::set_names_packed(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  names_packed_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:pbnbg.StreetNames.names_packed)
+}
+void StreetNames::set_names_packed(const char* value, size_t size) {
+  
+  names_packed_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:pbnbg.StreetNames.names_packed)
+}
+::std::string* StreetNames::mutable_names_packed() {
+  
+  // @@protoc_insertion_point(field_mutable:pbnbg.StreetNames.names_packed)
+  return names_packed_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* StreetNames::release_names_packed() {
+  // @@protoc_insertion_point(field_release:pbnbg.StreetNames.names_packed)
+  
+  return names_packed_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void StreetNames::set_allocated_names_packed(::std::string* names_packed) {
+  if (names_packed != NULL) {
+    
+  } else {
+    
+  }
+  names_packed_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), names_packed);
+  // @@protoc_insertion_point(field_set_allocated:pbnbg.StreetNames.names_packed)
+}
+
+// repeated uint32 name_offsets = 2;
+int StreetNames::name_offsets_size() const {
+  return name_offsets_.size();
+}
+void StreetNames::clear_name_offsets() {
+  name_offsets_.Clear();
+}
+::google::protobuf::uint32 StreetNames::name_offsets(int index) const {
+  // @@protoc_insertion_point(field_get:pbnbg.StreetNames.name_offsets)
+  return name_offsets_.Get(index);
+}
+void StreetNames::set_name_offsets(int index, ::google::protobuf::uint32 value) {
+  name_offsets_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbnbg.StreetNames.name_offsets)
+}
+void StreetNames::add_name_offsets(::google::protobuf::uint32 value) {
+  name_offsets_.Add(value);
+  // @@protoc_insertion_point(field_add:pbnbg.StreetNames.name_offsets)
+}
+const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+StreetNames::name_offsets() const {
+  // @@protoc_insertion_point(field_list:pbnbg.StreetNames.name_offsets)
+  return name_offsets_;
+}
+::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+StreetNames::mutable_name_offsets() {
+  // @@protoc_insertion_point(field_mutable_list:pbnbg.StreetNames.name_offsets)
+  return &name_offsets_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

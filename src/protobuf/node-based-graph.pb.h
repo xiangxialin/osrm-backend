@@ -40,6 +40,9 @@ extern CoordinateDefaultTypeInternal _Coordinate_default_instance_;
 class Nodes;
 class NodesDefaultTypeInternal;
 extern NodesDefaultTypeInternal _Nodes_default_instance_;
+class StreetNames;
+class StreetNamesDefaultTypeInternal;
+extern StreetNamesDefaultTypeInternal _StreetNames_default_instance_;
 }  // namespace pbnbg
 
 namespace pbnbg {
@@ -426,6 +429,125 @@ class CompressedNbg : public ::google::protobuf::Message /* @@protoc_insertion_p
   mutable int _cached_size_;
   friend struct protobuf_node_2dbased_2dgraph_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class StreetNames : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbnbg.StreetNames) */ {
+ public:
+  StreetNames();
+  virtual ~StreetNames();
+
+  StreetNames(const StreetNames& from);
+
+  inline StreetNames& operator=(const StreetNames& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  StreetNames(StreetNames&& from) noexcept
+    : StreetNames() {
+    *this = ::std::move(from);
+  }
+
+  inline StreetNames& operator=(StreetNames&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const StreetNames& default_instance();
+
+  static inline const StreetNames* internal_default_instance() {
+    return reinterpret_cast<const StreetNames*>(
+               &_StreetNames_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    3;
+
+  void Swap(StreetNames* other);
+  friend void swap(StreetNames& a, StreetNames& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline StreetNames* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  StreetNames* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const StreetNames& from);
+  void MergeFrom(const StreetNames& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(StreetNames* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 name_offsets = 2;
+  int name_offsets_size() const;
+  void clear_name_offsets();
+  static const int kNameOffsetsFieldNumber = 2;
+  ::google::protobuf::uint32 name_offsets(int index) const;
+  void set_name_offsets(int index, ::google::protobuf::uint32 value);
+  void add_name_offsets(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      name_offsets() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_name_offsets();
+
+  // string names_packed = 1;
+  void clear_names_packed();
+  static const int kNamesPackedFieldNumber = 1;
+  const ::std::string& names_packed() const;
+  void set_names_packed(const ::std::string& value);
+  #if LANG_CXX11
+  void set_names_packed(::std::string&& value);
+  #endif
+  void set_names_packed(const char* value);
+  void set_names_packed(const char* value, size_t size);
+  ::std::string* mutable_names_packed();
+  ::std::string* release_names_packed();
+  void set_allocated_names_packed(::std::string* names_packed);
+
+  // @@protoc_insertion_point(class_scope:pbnbg.StreetNames)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > name_offsets_;
+  mutable int _name_offsets_cached_byte_size_;
+  ::google::protobuf::internal::ArenaStringPtr names_packed_;
+  mutable int _cached_size_;
+  friend struct protobuf_node_2dbased_2dgraph_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -654,10 +776,99 @@ CompressedNbg::mutable_reverse_weights() {
   return &reverse_weights_;
 }
 
+// -------------------------------------------------------------------
+
+// StreetNames
+
+// string names_packed = 1;
+inline void StreetNames::clear_names_packed() {
+  names_packed_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& StreetNames::names_packed() const {
+  // @@protoc_insertion_point(field_get:pbnbg.StreetNames.names_packed)
+  return names_packed_.GetNoArena();
+}
+inline void StreetNames::set_names_packed(const ::std::string& value) {
+  
+  names_packed_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:pbnbg.StreetNames.names_packed)
+}
+#if LANG_CXX11
+inline void StreetNames::set_names_packed(::std::string&& value) {
+  
+  names_packed_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:pbnbg.StreetNames.names_packed)
+}
+#endif
+inline void StreetNames::set_names_packed(const char* value) {
+  GOOGLE_DCHECK(value != NULL);
+  
+  names_packed_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:pbnbg.StreetNames.names_packed)
+}
+inline void StreetNames::set_names_packed(const char* value, size_t size) {
+  
+  names_packed_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:pbnbg.StreetNames.names_packed)
+}
+inline ::std::string* StreetNames::mutable_names_packed() {
+  
+  // @@protoc_insertion_point(field_mutable:pbnbg.StreetNames.names_packed)
+  return names_packed_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* StreetNames::release_names_packed() {
+  // @@protoc_insertion_point(field_release:pbnbg.StreetNames.names_packed)
+  
+  return names_packed_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void StreetNames::set_allocated_names_packed(::std::string* names_packed) {
+  if (names_packed != NULL) {
+    
+  } else {
+    
+  }
+  names_packed_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), names_packed);
+  // @@protoc_insertion_point(field_set_allocated:pbnbg.StreetNames.names_packed)
+}
+
+// repeated uint32 name_offsets = 2;
+inline int StreetNames::name_offsets_size() const {
+  return name_offsets_.size();
+}
+inline void StreetNames::clear_name_offsets() {
+  name_offsets_.Clear();
+}
+inline ::google::protobuf::uint32 StreetNames::name_offsets(int index) const {
+  // @@protoc_insertion_point(field_get:pbnbg.StreetNames.name_offsets)
+  return name_offsets_.Get(index);
+}
+inline void StreetNames::set_name_offsets(int index, ::google::protobuf::uint32 value) {
+  name_offsets_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbnbg.StreetNames.name_offsets)
+}
+inline void StreetNames::add_name_offsets(::google::protobuf::uint32 value) {
+  name_offsets_.Add(value);
+  // @@protoc_insertion_point(field_add:pbnbg.StreetNames.name_offsets)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+StreetNames::name_offsets() const {
+  // @@protoc_insertion_point(field_list:pbnbg.StreetNames.name_offsets)
+  return name_offsets_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+StreetNames::mutable_name_offsets() {
+  // @@protoc_insertion_point(field_mutable_list:pbnbg.StreetNames.name_offsets)
+  return &name_offsets_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

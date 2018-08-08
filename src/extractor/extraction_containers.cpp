@@ -29,6 +29,9 @@
 #include <mutex>
 #include <sstream>
 
+#include "../protobuf/node-based-graph.pb.h"
+
+
 namespace
 {
 namespace oe = osrm::extractor;
@@ -164,6 +167,15 @@ void ExtractionContainers::WriteCharData(const std::string &file_name)
     util::UnbufferedLog log;
     log << "writing street name index ... ";
     TIMER_START(write_index);
+
+    pbnbg::StreetNames pb_names;
+    pb_names.set_names_packed(std::string(name_char_data.begin(), name_char_data.end()));
+    for (unsigned i = 0; i <  name_offsets.size(); i++) {
+        pb_names.add_name_offsets(name_offsets[i]);
+    }
+    std::fstream pb_out("1.nbg.names.pb", std::ios::out|std::ios::binary);
+    pb_names.SerializeToOstream(&pb_out);
+
 
     files::writeNames(file_name,
                       NameTable{NameTable::IndexedData(
