@@ -19,6 +19,9 @@
 
 #include "storage/shared_memory_ownership.hpp"
 
+#include "../../../src/protobuf/rtree.pb.h"
+
+
 #include <boost/assert.hpp>
 #include <boost/filesystem.hpp>
 #include <boost/format.hpp>
@@ -326,9 +329,14 @@ class StaticRTree
             std::size_t wrapped_element_index = 0;
             auto objects_iter = out_objects.begin();
 
+            pbrtree::Leaves pb_leaves;
+
             while (wrapped_element_index < element_count)
             {
                 TreeNode current_node;
+
+                int pbCount = 0;
+                pbrtree::LeafNode *pb_leaf = pb_leaves.add_items();
 
                 // Loop over the next block of EdgeDataT, calculate the bounding box
                 // for the block, and save the data to write to disk in the correct
@@ -342,6 +350,7 @@ class StaticRTree
                     const EdgeDataT &object = input_data_vector[input_object_index];
 
                     *objects_iter++ = object;
+                    pbCount++;
 
                     Coordinate projected_u{
                         web_mercator::fromWGS84(Coordinate{m_coordinate_list[object.u]})};
@@ -366,10 +375,35 @@ class StaticRTree
 
                     BOOST_ASSERT(rectangle.IsValid());
                     current_node.minimum_bounding_rectangle.MergeBoundingBoxes(rectangle);
+
+
+                    pbrtree::Segment *pb_segment = pb_leaf->add_items();
+                    //extractor::EdgeBasedNodeSegment _n = (extractor::EdgeBasedNodeSegment)(object);
+                    const EdgeDataT& _n = object;
+                    pb_segment->set_u(_n.u);
+                    pb_segment->set_v(_n.v);
+                    pb_segment->set_forward_enabled(_n.forward_segment_id.enabled);
+                    pb_segment->set_reverse_enabled(_n.reverse_segment_id.enabled);
+                    pb_segment->set_forward_segment_id(_n.forward_segment_id.id);
+                    pb_segment->set_reverse_segment_id(_n.reverse_segment_id.id);
+                    pb_segment->set_forward_segment_position(_n.fwd_segment_position);
                 }
+
+                pb_leaf->set_itemcount(pbCount);
+                const osrm::util::RectangleInt2D &rectangle = current_node.minimum_bounding_rectangle;
+                pbrtree::Rectangle *pb_rect = pb_leaf->mutable_minimum_bounding_rectangle();
+                pb_rect->set_max_lat(int32_t(rectangle.max_lat));
+                pb_rect->set_max_lon(int32_t(rectangle.max_lon));
+                pb_rect->set_min_lat(int32_t(rectangle.min_lat));
+                pb_rect->set_min_lon(int32_t(rectangle.min_lon));
+
 
                 m_search_tree.emplace_back(current_node);
             }
+
+            std::cout << "######## rtree: " << std::endl;
+            std::fstream pb_leaves_out("1.rtree.leaves.pb", std::ios::out | std::ios::binary);
+            pb_leaves.SerializeToOstream(&pb_leaves_out);
         }
         // mmap as read-only now
         m_objects = mmapFile<EdgeDataT>(on_disk_file_name, m_objects_region);

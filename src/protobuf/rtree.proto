@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package pbrtree;
+
+message Segment {
+    uint32 u = 1;
+    uint32 v = 2;
+    uint32 forward_segment_id = 3;
+    uint32 reverse_segment_id = 4;
+    uint32 forward_segment_position = 5;
+    bool forward_enabled = 6;
+    bool reverse_enabled = 7;
+}
+
+message Rectangle {
+    uint64 min_lat = 1;
+    uint64 min_lon = 2;
+    uint64 max_lat = 3;
+    uint64 max_lon = 4;
+}
+
+message LeafNode {
+    uint64 itemCount = 1;
+    Rectangle minimum_bounding_rectangle = 2;
+    repeated Segment items = 3;
+}
+
+message Leaves {
+    repeated LeafNode items = 1;
+}
