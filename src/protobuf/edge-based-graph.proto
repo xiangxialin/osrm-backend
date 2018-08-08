@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package pbebg;
+
+message EdgeBasedNode {
+    uint32 geometry_id = 1;
+    uint32 component_id = 2;
+    uint32 annotation_id = 3;
+    bool is_tiny = 4;
+    bool segregated = 5;
+}
+
+message NodeBasedAnnotation {
+    uint32 name_id = 1;
+}
+
+message EdgeBasedNodeContainer {
+    repeated EdgeBasedNode nodes = 1;
+    repeated NodeBasedAnnotation annotation_data = 2;
+}
+
+

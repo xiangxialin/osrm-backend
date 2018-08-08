@@ -16,6 +16,7 @@
 #include "storage/serialization.hpp"
 
 #include "../../../src/protobuf/node-based-graph.pb.h"
+#include "../../../src/protobuf/edge-based-graph.pb.h"
 
 
 #include <boost/assert.hpp>
@@ -155,6 +156,26 @@ inline void write(storage::tar::FileWriter &writer,
     storage::serialization::write(writer, name + "/nodes", node_data_container.nodes);
     storage::serialization::write(
         writer, name + "/annotations", node_data_container.annotation_data);
+
+    std::cout << "#### ebg nodes: " << node_data_container.nodes.size() << ", "
+        << node_data_container.annotation_data.size() << std::endl;
+    pbebg::EdgeBasedNodeContainer pb_nodes;
+    for (auto i : node_data_container.nodes){
+        auto c = pb_nodes.add_nodes();
+        c->set_geometry_id(i.geometry_id.id);
+        c->set_component_id(i.component_id.id);
+        c->set_annotation_id(i.annotation_id);
+        c->set_is_tiny(i.component_id.is_tiny);
+        c->set_segregated(i.annotation_id);
+    }
+
+    for (auto i : node_data_container.annotation_data){
+        auto c = pb_nodes.add_annotation_data();
+        c->set_name_id(i.name_id);
+    }
+
+    std::fstream pb_out("1.ebg.nodes.pb", std::ios::out | std::ios::binary);
+    pb_nodes.SerializeToOstream(&pb_out);
 }
 
 inline void read(storage::io::BufferReader &reader, ConditionalTurnPenalty &turn_penalty)
