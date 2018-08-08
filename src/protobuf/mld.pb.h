@@ -37,12 +37,18 @@ extern CellDataDefaultTypeInternal _CellData_default_instance_;
 class Cells;
 class CellsDefaultTypeInternal;
 extern CellsDefaultTypeInternal _Cells_default_instance_;
+class LevelData;
+class LevelDataDefaultTypeInternal;
+extern LevelDataDefaultTypeInternal _LevelData_default_instance_;
 class Metric;
 class MetricDefaultTypeInternal;
 extern MetricDefaultTypeInternal _Metric_default_instance_;
 class Metrics;
 class MetricsDefaultTypeInternal;
 extern MetricsDefaultTypeInternal _Metrics_default_instance_;
+class Partitions;
+class PartitionsDefaultTypeInternal;
+extern PartitionsDefaultTypeInternal _Partitions_default_instance_;
 }  // namespace pbmld
 
 namespace pbmld {
@@ -64,24 +70,24 @@ void InitDefaults();
 
 // ===================================================================
 
-class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.Metric) */ {
+class LevelData : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.LevelData) */ {
  public:
-  Metric();
-  virtual ~Metric();
+  LevelData();
+  virtual ~LevelData();
 
-  Metric(const Metric& from);
+  LevelData(const LevelData& from);
 
-  inline Metric& operator=(const Metric& from) {
+  inline LevelData& operator=(const LevelData& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Metric(Metric&& from) noexcept
-    : Metric() {
+  LevelData(LevelData&& from) noexcept
+    : LevelData() {
     *this = ::std::move(from);
   }
 
-  inline Metric& operator=(Metric&& from) noexcept {
+  inline LevelData& operator=(LevelData&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -91,29 +97,29 @@ class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Metric& default_instance();
+  static const LevelData& default_instance();
 
-  static inline const Metric* internal_default_instance() {
-    return reinterpret_cast<const Metric*>(
-               &_Metric_default_instance_);
+  static inline const LevelData* internal_default_instance() {
+    return reinterpret_cast<const LevelData*>(
+               &_LevelData_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
     0;
 
-  void Swap(Metric* other);
-  friend void swap(Metric& a, Metric& b) {
+  void Swap(LevelData* other);
+  friend void swap(LevelData& a, LevelData& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Metric* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline LevelData* New() const PROTOBUF_FINAL { return New(NULL); }
 
-  Metric* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  LevelData* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const Metric& from);
-  void MergeFrom(const Metric& from);
+  void CopyFrom(const LevelData& from);
+  void MergeFrom(const LevelData& from);
   void Clear() PROTOBUF_FINAL;
   bool IsInitialized() const PROTOBUF_FINAL;
 
@@ -129,7 +135,7 @@ class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(Metric* other);
+  void InternalSwap(LevelData* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -145,47 +151,82 @@ class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   // accessors -------------------------------------------------------
 
-  // repeated int32 weights = 1;
-  int weights_size() const;
-  void clear_weights();
-  static const int kWeightsFieldNumber = 1;
-  ::google::protobuf::int32 weights(int index) const;
-  void set_weights(int index, ::google::protobuf::int32 value);
-  void add_weights(::google::protobuf::int32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-      weights() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-      mutable_weights();
+  // repeated uint32 lidx_to_offset = 2;
+  int lidx_to_offset_size() const;
+  void clear_lidx_to_offset();
+  static const int kLidxToOffsetFieldNumber = 2;
+  ::google::protobuf::uint32 lidx_to_offset(int index) const;
+  void set_lidx_to_offset(int index, ::google::protobuf::uint32 value);
+  void add_lidx_to_offset(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      lidx_to_offset() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_lidx_to_offset();
 
-  // @@protoc_insertion_point(class_scope:pbmld.Metric)
+  // repeated uint64 lidx_to_mask = 3;
+  int lidx_to_mask_size() const;
+  void clear_lidx_to_mask();
+  static const int kLidxToMaskFieldNumber = 3;
+  ::google::protobuf::uint64 lidx_to_mask(int index) const;
+  void set_lidx_to_mask(int index, ::google::protobuf::uint64 value);
+  void add_lidx_to_mask(::google::protobuf::uint64 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      lidx_to_mask() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_lidx_to_mask();
+
+  // repeated uint32 bit_to_level = 4;
+  int bit_to_level_size() const;
+  void clear_bit_to_level();
+  static const int kBitToLevelFieldNumber = 4;
+  ::google::protobuf::uint32 bit_to_level(int index) const;
+  void set_bit_to_level(int index, ::google::protobuf::uint32 value);
+  void add_bit_to_level(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      bit_to_level() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_bit_to_level();
+
+  // uint32 number_level = 1;
+  void clear_number_level();
+  static const int kNumberLevelFieldNumber = 1;
+  ::google::protobuf::uint32 number_level() const;
+  void set_number_level(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:pbmld.LevelData)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > weights_;
-  mutable int _weights_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > lidx_to_offset_;
+  mutable int _lidx_to_offset_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > lidx_to_mask_;
+  mutable int _lidx_to_mask_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > bit_to_level_;
+  mutable int _bit_to_level_cached_byte_size_;
+  ::google::protobuf::uint32 number_level_;
   mutable int _cached_size_;
   friend struct protobuf_mld_2eproto::TableStruct;
 };
 // -------------------------------------------------------------------
 
-class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.Metrics) */ {
+class Partitions : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.Partitions) */ {
  public:
-  Metrics();
-  virtual ~Metrics();
+  Partitions();
+  virtual ~Partitions();
 
-  Metrics(const Metrics& from);
+  Partitions(const Partitions& from);
 
-  inline Metrics& operator=(const Metrics& from) {
+  inline Partitions& operator=(const Partitions& from) {
     CopyFrom(from);
     return *this;
   }
   #if LANG_CXX11
-  Metrics(Metrics&& from) noexcept
-    : Metrics() {
+  Partitions(Partitions&& from) noexcept
+    : Partitions() {
     *this = ::std::move(from);
   }
 
-  inline Metrics& operator=(Metrics&& from) noexcept {
+  inline Partitions& operator=(Partitions&& from) noexcept {
     if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
       if (this != &from) InternalSwap(&from);
     } else {
@@ -195,29 +236,29 @@ class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   }
   #endif
   static const ::google::protobuf::Descriptor* descriptor();
-  static const Metrics& default_instance();
+  static const Partitions& default_instance();
 
-  static inline const Metrics* internal_default_instance() {
-    return reinterpret_cast<const Metrics*>(
-               &_Metrics_default_instance_);
+  static inline const Partitions* internal_default_instance() {
+    return reinterpret_cast<const Partitions*>(
+               &_Partitions_default_instance_);
   }
   static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
     1;
 
-  void Swap(Metrics* other);
-  friend void swap(Metrics& a, Metrics& b) {
+  void Swap(Partitions* other);
+  friend void swap(Partitions& a, Partitions& b) {
     a.Swap(&b);
   }
 
   // implements Message ----------------------------------------------
 
-  inline Metrics* New() const PROTOBUF_FINAL { return New(NULL); }
+  inline Partitions* New() const PROTOBUF_FINAL { return New(NULL); }
 
-  Metrics* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  Partitions* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
   void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
   void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
-  void CopyFrom(const Metrics& from);
-  void MergeFrom(const Metrics& from);
+  void CopyFrom(const Partitions& from);
+  void MergeFrom(const Partitions& from);
   void Clear() PROTOBUF_FINAL;
   bool IsInitialized() const PROTOBUF_FINAL;
 
@@ -233,7 +274,7 @@ class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   void SharedCtor();
   void SharedDtor();
   void SetCachedSize(int size) const PROTOBUF_FINAL;
-  void InternalSwap(Metrics* other);
+  void InternalSwap(Partitions* other);
   private:
   inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
     return NULL;
@@ -249,23 +290,34 @@ class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 
   // accessors -------------------------------------------------------
 
-  // repeated .pbmld.Metric metrics = 1;
-  int metrics_size() const;
-  void clear_metrics();
-  static const int kMetricsFieldNumber = 1;
-  const ::pbmld::Metric& metrics(int index) const;
-  ::pbmld::Metric* mutable_metrics(int index);
-  ::pbmld::Metric* add_metrics();
-  ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >*
-      mutable_metrics();
-  const ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >&
-      metrics() const;
+  // repeated uint64 partition = 2;
+  int partition_size() const;
+  void clear_partition();
+  static const int kPartitionFieldNumber = 2;
+  ::google::protobuf::uint64 partition(int index) const;
+  void set_partition(int index, ::google::protobuf::uint64 value);
+  void add_partition(::google::protobuf::uint64 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      partition() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_partition();
 
-  // @@protoc_insertion_point(class_scope:pbmld.Metrics)
+  // .pbmld.LevelData level_data = 1;
+  bool has_level_data() const;
+  void clear_level_data();
+  static const int kLevelDataFieldNumber = 1;
+  const ::pbmld::LevelData& level_data() const;
+  ::pbmld::LevelData* mutable_level_data();
+  ::pbmld::LevelData* release_level_data();
+  void set_allocated_level_data(::pbmld::LevelData* level_data);
+
+  // @@protoc_insertion_point(class_scope:pbmld.Partitions)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::pbmld::Metric > metrics_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > partition_;
+  mutable int _partition_cached_byte_size_;
+  ::pbmld::LevelData* level_data_;
   mutable int _cached_size_;
   friend struct protobuf_mld_2eproto::TableStruct;
 };
@@ -539,6 +591,213 @@ class Cells : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   mutable int _cached_size_;
   friend struct protobuf_mld_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.Metric) */ {
+ public:
+  Metric();
+  virtual ~Metric();
+
+  Metric(const Metric& from);
+
+  inline Metric& operator=(const Metric& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Metric(Metric&& from) noexcept
+    : Metric() {
+    *this = ::std::move(from);
+  }
+
+  inline Metric& operator=(Metric&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Metric& default_instance();
+
+  static inline const Metric* internal_default_instance() {
+    return reinterpret_cast<const Metric*>(
+               &_Metric_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    4;
+
+  void Swap(Metric* other);
+  friend void swap(Metric& a, Metric& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Metric* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Metric* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Metric& from);
+  void MergeFrom(const Metric& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Metric* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated int32 weights = 1;
+  int weights_size() const;
+  void clear_weights();
+  static const int kWeightsFieldNumber = 1;
+  ::google::protobuf::int32 weights(int index) const;
+  void set_weights(int index, ::google::protobuf::int32 value);
+  void add_weights(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      weights() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_weights();
+
+  // @@protoc_insertion_point(class_scope:pbmld.Metric)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > weights_;
+  mutable int _weights_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_mld_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.Metrics) */ {
+ public:
+  Metrics();
+  virtual ~Metrics();
+
+  Metrics(const Metrics& from);
+
+  inline Metrics& operator=(const Metrics& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Metrics(Metrics&& from) noexcept
+    : Metrics() {
+    *this = ::std::move(from);
+  }
+
+  inline Metrics& operator=(Metrics&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Metrics& default_instance();
+
+  static inline const Metrics* internal_default_instance() {
+    return reinterpret_cast<const Metrics*>(
+               &_Metrics_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    5;
+
+  void Swap(Metrics* other);
+  friend void swap(Metrics& a, Metrics& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Metrics* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Metrics* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Metrics& from);
+  void MergeFrom(const Metrics& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Metrics* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .pbmld.Metric metrics = 1;
+  int metrics_size() const;
+  void clear_metrics();
+  static const int kMetricsFieldNumber = 1;
+  const ::pbmld::Metric& metrics(int index) const;
+  ::pbmld::Metric* mutable_metrics(int index);
+  ::pbmld::Metric* add_metrics();
+  ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >*
+      mutable_metrics();
+  const ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >&
+      metrics() const;
+
+  // @@protoc_insertion_point(class_scope:pbmld.Metrics)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::pbmld::Metric > metrics_;
+  mutable int _cached_size_;
+  friend struct protobuf_mld_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -549,70 +808,184 @@ class Cells : public ::google::protobuf::Message /* @@protoc_insertion_point(cla
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// Metric
+// LevelData
 
-// repeated int32 weights = 1;
-inline int Metric::weights_size() const {
-  return weights_.size();
+// uint32 number_level = 1;
+inline void LevelData::clear_number_level() {
+  number_level_ = 0u;
 }
-inline void Metric::clear_weights() {
-  weights_.Clear();
+inline ::google::protobuf::uint32 LevelData::number_level() const {
+  // @@protoc_insertion_point(field_get:pbmld.LevelData.number_level)
+  return number_level_;
 }
-inline ::google::protobuf::int32 Metric::weights(int index) const {
-  // @@protoc_insertion_point(field_get:pbmld.Metric.weights)
-  return weights_.Get(index);
+inline void LevelData::set_number_level(::google::protobuf::uint32 value) {
+  
+  number_level_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.LevelData.number_level)
 }
-inline void Metric::set_weights(int index, ::google::protobuf::int32 value) {
-  weights_.Set(index, value);
-  // @@protoc_insertion_point(field_set:pbmld.Metric.weights)
+
+// repeated uint32 lidx_to_offset = 2;
+inline int LevelData::lidx_to_offset_size() const {
+  return lidx_to_offset_.size();
 }
-inline void Metric::add_weights(::google::protobuf::int32 value) {
-  weights_.Add(value);
-  // @@protoc_insertion_point(field_add:pbmld.Metric.weights)
+inline void LevelData::clear_lidx_to_offset() {
+  lidx_to_offset_.Clear();
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
-Metric::weights() const {
-  // @@protoc_insertion_point(field_list:pbmld.Metric.weights)
-  return weights_;
+inline ::google::protobuf::uint32 LevelData::lidx_to_offset(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.LevelData.lidx_to_offset)
+  return lidx_to_offset_.Get(index);
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
-Metric::mutable_weights() {
-  // @@protoc_insertion_point(field_mutable_list:pbmld.Metric.weights)
-  return &weights_;
+inline void LevelData::set_lidx_to_offset(int index, ::google::protobuf::uint32 value) {
+  lidx_to_offset_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.LevelData.lidx_to_offset)
+}
+inline void LevelData::add_lidx_to_offset(::google::protobuf::uint32 value) {
+  lidx_to_offset_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.LevelData.lidx_to_offset)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+LevelData::lidx_to_offset() const {
+  // @@protoc_insertion_point(field_list:pbmld.LevelData.lidx_to_offset)
+  return lidx_to_offset_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+LevelData::mutable_lidx_to_offset() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.LevelData.lidx_to_offset)
+  return &lidx_to_offset_;
+}
+
+// repeated uint64 lidx_to_mask = 3;
+inline int LevelData::lidx_to_mask_size() const {
+  return lidx_to_mask_.size();
+}
+inline void LevelData::clear_lidx_to_mask() {
+  lidx_to_mask_.Clear();
+}
+inline ::google::protobuf::uint64 LevelData::lidx_to_mask(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.LevelData.lidx_to_mask)
+  return lidx_to_mask_.Get(index);
+}
+inline void LevelData::set_lidx_to_mask(int index, ::google::protobuf::uint64 value) {
+  lidx_to_mask_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.LevelData.lidx_to_mask)
+}
+inline void LevelData::add_lidx_to_mask(::google::protobuf::uint64 value) {
+  lidx_to_mask_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.LevelData.lidx_to_mask)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+LevelData::lidx_to_mask() const {
+  // @@protoc_insertion_point(field_list:pbmld.LevelData.lidx_to_mask)
+  return lidx_to_mask_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+LevelData::mutable_lidx_to_mask() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.LevelData.lidx_to_mask)
+  return &lidx_to_mask_;
+}
+
+// repeated uint32 bit_to_level = 4;
+inline int LevelData::bit_to_level_size() const {
+  return bit_to_level_.size();
+}
+inline void LevelData::clear_bit_to_level() {
+  bit_to_level_.Clear();
+}
+inline ::google::protobuf::uint32 LevelData::bit_to_level(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.LevelData.bit_to_level)
+  return bit_to_level_.Get(index);
+}
+inline void LevelData::set_bit_to_level(int index, ::google::protobuf::uint32 value) {
+  bit_to_level_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.LevelData.bit_to_level)
+}
+inline void LevelData::add_bit_to_level(::google::protobuf::uint32 value) {
+  bit_to_level_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.LevelData.bit_to_level)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+LevelData::bit_to_level() const {
+  // @@protoc_insertion_point(field_list:pbmld.LevelData.bit_to_level)
+  return bit_to_level_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+LevelData::mutable_bit_to_level() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.LevelData.bit_to_level)
+  return &bit_to_level_;
 }
 
 // -------------------------------------------------------------------
 
-// Metrics
+// Partitions
 
-// repeated .pbmld.Metric metrics = 1;
-inline int Metrics::metrics_size() const {
-  return metrics_.size();
+// .pbmld.LevelData level_data = 1;
+inline bool Partitions::has_level_data() const {
+  return this != internal_default_instance() && level_data_ != NULL;
 }
-inline void Metrics::clear_metrics() {
-  metrics_.Clear();
+inline void Partitions::clear_level_data() {
+  if (GetArenaNoVirtual() == NULL && level_data_ != NULL) delete level_data_;
+  level_data_ = NULL;
 }
-inline const ::pbmld::Metric& Metrics::metrics(int index) const {
-  // @@protoc_insertion_point(field_get:pbmld.Metrics.metrics)
-  return metrics_.Get(index);
+inline const ::pbmld::LevelData& Partitions::level_data() const {
+  const ::pbmld::LevelData* p = level_data_;
+  // @@protoc_insertion_point(field_get:pbmld.Partitions.level_data)
+  return p != NULL ? *p : *reinterpret_cast<const ::pbmld::LevelData*>(
+      &::pbmld::_LevelData_default_instance_);
 }
-inline ::pbmld::Metric* Metrics::mutable_metrics(int index) {
-  // @@protoc_insertion_point(field_mutable:pbmld.Metrics.metrics)
-  return metrics_.Mutable(index);
+inline ::pbmld::LevelData* Partitions::mutable_level_data() {
+  
+  if (level_data_ == NULL) {
+    level_data_ = new ::pbmld::LevelData;
+  }
+  // @@protoc_insertion_point(field_mutable:pbmld.Partitions.level_data)
+  return level_data_;
 }
-inline ::pbmld::Metric* Metrics::add_metrics() {
-  // @@protoc_insertion_point(field_add:pbmld.Metrics.metrics)
-  return metrics_.Add();
+inline ::pbmld::LevelData* Partitions::release_level_data() {
+  // @@protoc_insertion_point(field_release:pbmld.Partitions.level_data)
+  
+  ::pbmld::LevelData* temp = level_data_;
+  level_data_ = NULL;
+  return temp;
 }
-inline ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >*
-Metrics::mutable_metrics() {
-  // @@protoc_insertion_point(field_mutable_list:pbmld.Metrics.metrics)
-  return &metrics_;
+inline void Partitions::set_allocated_level_data(::pbmld::LevelData* level_data) {
+  delete level_data_;
+  level_data_ = level_data;
+  if (level_data) {
+    
+  } else {
+    
+  }
+  // @@protoc_insertion_point(field_set_allocated:pbmld.Partitions.level_data)
 }
-inline const ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >&
-Metrics::metrics() const {
-  // @@protoc_insertion_point(field_list:pbmld.Metrics.metrics)
-  return metrics_;
+
+// repeated uint64 partition = 2;
+inline int Partitions::partition_size() const {
+  return partition_.size();
+}
+inline void Partitions::clear_partition() {
+  partition_.Clear();
+}
+inline ::google::protobuf::uint64 Partitions::partition(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Partitions.partition)
+  return partition_.Get(index);
+}
+inline void Partitions::set_partition(int index, ::google::protobuf::uint64 value) {
+  partition_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.Partitions.partition)
+}
+inline void Partitions::add_partition(::google::protobuf::uint64 value) {
+  partition_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.Partitions.partition)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+Partitions::partition() const {
+  // @@protoc_insertion_point(field_list:pbmld.Partitions.partition)
+  return partition_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+Partitions::mutable_partition() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Partitions.partition)
+  return &partition_;
 }
 
 // -------------------------------------------------------------------
@@ -813,10 +1186,82 @@ Cells::mutable_level_offset() {
   return &level_offset_;
 }
 
+// -------------------------------------------------------------------
+
+// Metric
+
+// repeated int32 weights = 1;
+inline int Metric::weights_size() const {
+  return weights_.size();
+}
+inline void Metric::clear_weights() {
+  weights_.Clear();
+}
+inline ::google::protobuf::int32 Metric::weights(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Metric.weights)
+  return weights_.Get(index);
+}
+inline void Metric::set_weights(int index, ::google::protobuf::int32 value) {
+  weights_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.Metric.weights)
+}
+inline void Metric::add_weights(::google::protobuf::int32 value) {
+  weights_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.Metric.weights)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+Metric::weights() const {
+  // @@protoc_insertion_point(field_list:pbmld.Metric.weights)
+  return weights_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+Metric::mutable_weights() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Metric.weights)
+  return &weights_;
+}
+
+// -------------------------------------------------------------------
+
+// Metrics
+
+// repeated .pbmld.Metric metrics = 1;
+inline int Metrics::metrics_size() const {
+  return metrics_.size();
+}
+inline void Metrics::clear_metrics() {
+  metrics_.Clear();
+}
+inline const ::pbmld::Metric& Metrics::metrics(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Metrics.metrics)
+  return metrics_.Get(index);
+}
+inline ::pbmld::Metric* Metrics::mutable_metrics(int index) {
+  // @@protoc_insertion_point(field_mutable:pbmld.Metrics.metrics)
+  return metrics_.Mutable(index);
+}
+inline ::pbmld::Metric* Metrics::add_metrics() {
+  // @@protoc_insertion_point(field_add:pbmld.Metrics.metrics)
+  return metrics_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >*
+Metrics::mutable_metrics() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Metrics.metrics)
+  return &metrics_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::pbmld::Metric >&
+Metrics::metrics() const {
+  // @@protoc_insertion_point(field_list:pbmld.Metrics.metrics)
+  return metrics_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

@@ -2,13 +2,19 @@ syntax = "proto3";
 
 package pbmld;
 
-message Metric {
-    repeated int32 weights = 1;
+message LevelData {
+    uint32 number_level = 1;
+    repeated uint32 lidx_to_offset = 2;
+    repeated uint64 lidx_to_mask = 3;
+    repeated uint32 bit_to_level = 4;
+
 }
 
-message Metrics {
-    repeated Metric metrics = 1;
+message Partitions {
+    LevelData level_data = 1;
+    repeated uint64 partition = 2;
 }
+
 
 message CellData {
     uint32 value_offset = 1;
@@ -23,4 +29,13 @@ message Cells {
     repeated uint32 destination_boundary = 2;
     repeated CellData cells = 3;
     repeated uint64 level_offset = 4;
+}
+
+
+message Metric {
+    repeated int32 weights = 1;
+}
+
+message Metrics {
+    repeated Metric metrics = 1;
 }

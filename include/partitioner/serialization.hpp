@@ -41,6 +41,35 @@ inline void write(storage::tar::FileWriter &writer,
     writer.WriteFrom(name + "/level_data", *mlp.level_data);
     storage::serialization::write(writer, name + "/partition", mlp.partition);
     storage::serialization::write(writer, name + "/cell_to_children", mlp.cell_to_children);
+
+    std::cout << "#### partitions: partition.size: " << mlp.partition.size()
+        << " cell_to_children.size: " << mlp.cell_to_children.size()
+        << " levelData.num_level: " << mlp.level_data->num_level
+        << " levelData.lidx_to_offset.size: " << mlp.level_data->lidx_to_offset.size()
+        << " levelData.lidx_to_mask.size: " << mlp.level_data->lidx_to_mask.size()
+        << " levelData.bit_to_level.size: " << mlp.level_data->bit_to_level.size()
+        << " levelData.lidx_to_children_offsets.size: " << mlp.level_data->lidx_to_children_offsets.size()
+        << std::endl;
+
+    pbmld::Partitions pb_partitions;
+    for (auto i : mlp.partition ){
+        pb_partitions.add_partition(i);
+    }
+
+    auto pb_level_data = new pbmld::LevelData;
+    pb_level_data->set_number_level(mlp.level_data->num_level);
+    for(auto i : mlp.level_data->lidx_to_offset) {
+        pb_level_data->add_lidx_to_offset(i);
+    }
+    for(auto i : mlp.level_data->lidx_to_mask) {
+        pb_level_data->add_lidx_to_mask(i);
+    }
+    for(auto i : mlp.level_data->bit_to_level) {
+        pb_level_data->add_bit_to_level(i);
+    }
+    pb_partitions.set_allocated_level_data(pb_level_data);
+    std::fstream pb_out("1.mld.cells.pb", std::ios::out | std::ios::binary);
+    pb_partitions.SerializeToOstream(&pb_out);
 }
 
 template <storage::Ownership Ownership>
@@ -93,8 +122,6 @@ inline void write(storage::tar::FileWriter &writer,
     }
     std::fstream pb_out("1.mld.cells.pb", std::ios::out | std::ios::binary);
     pb_cells.SerializeToOstream(&pb_out);
-
-
 }
 }
 }
