@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pbnbg;
+
+message Coordinate{
+    int32 lon = 1;
+    int32 lat = 2;
+}
+
+message Nodes{
+    repeated Coordinate latLon = 1;
+    repeated uint64 osmid = 2;
+}

@@ -16,6 +16,8 @@
 #include "util/range_table.hpp"
 #include "util/serialization.hpp"
 
+#include "../../../src/protobuf/node-based-graph.pb.h"
+
 #include <boost/assert.hpp>
 
 namespace osrm
@@ -152,6 +154,22 @@ inline void writeNodes(const boost::filesystem::path &path,
 
     storage::serialization::write(writer, "/common/nbn_data/coordinates", coordinates);
     util::serialization::write(writer, "/common/nbn_data/osm_node_ids", osm_node_ids);
+
+
+    std::cout << "#### coordinate, osmid: " << coordinates.size() << ", "<< osm_node_ids.size() << std::endl;
+    pbnbg::Nodes pb_nodes;
+    for (auto i : coordinates){
+        auto c = pb_nodes.add_latlon();
+        c->set_lat(::google::protobuf::int32(i.lat));
+        c->set_lon(::google::protobuf::int32(i.lon));
+    }
+
+    for (unsigned long  i = 0; i < osm_node_ids.size(); ++i){
+        pb_nodes.add_osmid(uint64_t(osm_node_ids[i]));
+    }
+
+    std::fstream pb_out("1.nbg.nodes.pb", std::ios::out | std::ios::binary);
+    pb_nodes.SerializeToOstream(&pb_out);
 }
 
 // reads .osrm.cnbg_to_ebg
