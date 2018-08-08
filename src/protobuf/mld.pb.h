@@ -31,6 +31,12 @@
 #include <google/protobuf/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 namespace pbmld {
+class CellData;
+class CellDataDefaultTypeInternal;
+extern CellDataDefaultTypeInternal _CellData_default_instance_;
+class Cells;
+class CellsDefaultTypeInternal;
+extern CellsDefaultTypeInternal _Cells_default_instance_;
 class Metric;
 class MetricDefaultTypeInternal;
 extern MetricDefaultTypeInternal _Metric_default_instance_;
@@ -139,10 +145,10 @@ class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   // accessors -------------------------------------------------------
 
-  // repeated int32 weights = 2;
+  // repeated int32 weights = 1;
   int weights_size() const;
   void clear_weights();
-  static const int kWeightsFieldNumber = 2;
+  static const int kWeightsFieldNumber = 1;
   ::google::protobuf::int32 weights(int index) const;
   void set_weights(int index, ::google::protobuf::int32 value);
   void add_weights(::google::protobuf::int32 value);
@@ -151,27 +157,12 @@ class Metric : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_weights();
 
-  // string name = 1;
-  void clear_name();
-  static const int kNameFieldNumber = 1;
-  const ::std::string& name() const;
-  void set_name(const ::std::string& value);
-  #if LANG_CXX11
-  void set_name(::std::string&& value);
-  #endif
-  void set_name(const char* value);
-  void set_name(const char* value, size_t size);
-  ::std::string* mutable_name();
-  ::std::string* release_name();
-  void set_allocated_name(::std::string* name);
-
   // @@protoc_insertion_point(class_scope:pbmld.Metric)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > weights_;
   mutable int _weights_cached_byte_size_;
-  ::google::protobuf::internal::ArenaStringPtr name_;
   mutable int _cached_size_;
   friend struct protobuf_mld_2eproto::TableStruct;
 };
@@ -278,6 +269,276 @@ class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   mutable int _cached_size_;
   friend struct protobuf_mld_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class CellData : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.CellData) */ {
+ public:
+  CellData();
+  virtual ~CellData();
+
+  CellData(const CellData& from);
+
+  inline CellData& operator=(const CellData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  CellData(CellData&& from) noexcept
+    : CellData() {
+    *this = ::std::move(from);
+  }
+
+  inline CellData& operator=(CellData&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CellData& default_instance();
+
+  static inline const CellData* internal_default_instance() {
+    return reinterpret_cast<const CellData*>(
+               &_CellData_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    2;
+
+  void Swap(CellData* other);
+  friend void swap(CellData& a, CellData& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline CellData* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  CellData* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const CellData& from);
+  void MergeFrom(const CellData& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(CellData* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // uint32 value_offset = 1;
+  void clear_value_offset();
+  static const int kValueOffsetFieldNumber = 1;
+  ::google::protobuf::uint32 value_offset() const;
+  void set_value_offset(::google::protobuf::uint32 value);
+
+  // uint32 source_boundary_offset = 2;
+  void clear_source_boundary_offset();
+  static const int kSourceBoundaryOffsetFieldNumber = 2;
+  ::google::protobuf::uint32 source_boundary_offset() const;
+  void set_source_boundary_offset(::google::protobuf::uint32 value);
+
+  // uint32 destination_boundary_offset = 3;
+  void clear_destination_boundary_offset();
+  static const int kDestinationBoundaryOffsetFieldNumber = 3;
+  ::google::protobuf::uint32 destination_boundary_offset() const;
+  void set_destination_boundary_offset(::google::protobuf::uint32 value);
+
+  // uint32 source_node_number = 4;
+  void clear_source_node_number();
+  static const int kSourceNodeNumberFieldNumber = 4;
+  ::google::protobuf::uint32 source_node_number() const;
+  void set_source_node_number(::google::protobuf::uint32 value);
+
+  // uint32 destination_node_number = 5;
+  void clear_destination_node_number();
+  static const int kDestinationNodeNumberFieldNumber = 5;
+  ::google::protobuf::uint32 destination_node_number() const;
+  void set_destination_node_number(::google::protobuf::uint32 value);
+
+  // @@protoc_insertion_point(class_scope:pbmld.CellData)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 value_offset_;
+  ::google::protobuf::uint32 source_boundary_offset_;
+  ::google::protobuf::uint32 destination_boundary_offset_;
+  ::google::protobuf::uint32 source_node_number_;
+  ::google::protobuf::uint32 destination_node_number_;
+  mutable int _cached_size_;
+  friend struct protobuf_mld_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Cells : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.Cells) */ {
+ public:
+  Cells();
+  virtual ~Cells();
+
+  Cells(const Cells& from);
+
+  inline Cells& operator=(const Cells& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Cells(Cells&& from) noexcept
+    : Cells() {
+    *this = ::std::move(from);
+  }
+
+  inline Cells& operator=(Cells&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Cells& default_instance();
+
+  static inline const Cells* internal_default_instance() {
+    return reinterpret_cast<const Cells*>(
+               &_Cells_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    3;
+
+  void Swap(Cells* other);
+  friend void swap(Cells& a, Cells& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Cells* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Cells* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Cells& from);
+  void MergeFrom(const Cells& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Cells* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 source_boundary = 1;
+  int source_boundary_size() const;
+  void clear_source_boundary();
+  static const int kSourceBoundaryFieldNumber = 1;
+  ::google::protobuf::uint32 source_boundary(int index) const;
+  void set_source_boundary(int index, ::google::protobuf::uint32 value);
+  void add_source_boundary(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      source_boundary() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_source_boundary();
+
+  // repeated uint32 destination_boundary = 2;
+  int destination_boundary_size() const;
+  void clear_destination_boundary();
+  static const int kDestinationBoundaryFieldNumber = 2;
+  ::google::protobuf::uint32 destination_boundary(int index) const;
+  void set_destination_boundary(int index, ::google::protobuf::uint32 value);
+  void add_destination_boundary(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      destination_boundary() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_destination_boundary();
+
+  // repeated .pbmld.CellData cells = 3;
+  int cells_size() const;
+  void clear_cells();
+  static const int kCellsFieldNumber = 3;
+  const ::pbmld::CellData& cells(int index) const;
+  ::pbmld::CellData* mutable_cells(int index);
+  ::pbmld::CellData* add_cells();
+  ::google::protobuf::RepeatedPtrField< ::pbmld::CellData >*
+      mutable_cells();
+  const ::google::protobuf::RepeatedPtrField< ::pbmld::CellData >&
+      cells() const;
+
+  // repeated uint64 level_offset = 4;
+  int level_offset_size() const;
+  void clear_level_offset();
+  static const int kLevelOffsetFieldNumber = 4;
+  ::google::protobuf::uint64 level_offset(int index) const;
+  void set_level_offset(int index, ::google::protobuf::uint64 value);
+  void add_level_offset(::google::protobuf::uint64 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+      level_offset() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+      mutable_level_offset();
+
+  // @@protoc_insertion_point(class_scope:pbmld.Cells)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > source_boundary_;
+  mutable int _source_boundary_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > destination_boundary_;
+  mutable int _destination_boundary_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::pbmld::CellData > cells_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > level_offset_;
+  mutable int _level_offset_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_mld_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -290,60 +551,7 @@ class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(c
 #endif  // __GNUC__
 // Metric
 
-// string name = 1;
-inline void Metric::clear_name() {
-  name_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline const ::std::string& Metric::name() const {
-  // @@protoc_insertion_point(field_get:pbmld.Metric.name)
-  return name_.GetNoArena();
-}
-inline void Metric::set_name(const ::std::string& value) {
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:pbmld.Metric.name)
-}
-#if LANG_CXX11
-inline void Metric::set_name(::std::string&& value) {
-  
-  name_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:pbmld.Metric.name)
-}
-#endif
-inline void Metric::set_name(const char* value) {
-  GOOGLE_DCHECK(value != NULL);
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:pbmld.Metric.name)
-}
-inline void Metric::set_name(const char* value, size_t size) {
-  
-  name_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:pbmld.Metric.name)
-}
-inline ::std::string* Metric::mutable_name() {
-  
-  // @@protoc_insertion_point(field_mutable:pbmld.Metric.name)
-  return name_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline ::std::string* Metric::release_name() {
-  // @@protoc_insertion_point(field_release:pbmld.Metric.name)
-  
-  return name_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-inline void Metric::set_allocated_name(::std::string* name) {
-  if (name != NULL) {
-    
-  } else {
-    
-  }
-  name_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), name);
-  // @@protoc_insertion_point(field_set_allocated:pbmld.Metric.name)
-}
-
-// repeated int32 weights = 2;
+// repeated int32 weights = 1;
 inline int Metric::weights_size() const {
   return weights_.size();
 }
@@ -407,10 +615,212 @@ Metrics::metrics() const {
   return metrics_;
 }
 
+// -------------------------------------------------------------------
+
+// CellData
+
+// uint32 value_offset = 1;
+inline void CellData::clear_value_offset() {
+  value_offset_ = 0u;
+}
+inline ::google::protobuf::uint32 CellData::value_offset() const {
+  // @@protoc_insertion_point(field_get:pbmld.CellData.value_offset)
+  return value_offset_;
+}
+inline void CellData::set_value_offset(::google::protobuf::uint32 value) {
+  
+  value_offset_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.CellData.value_offset)
+}
+
+// uint32 source_boundary_offset = 2;
+inline void CellData::clear_source_boundary_offset() {
+  source_boundary_offset_ = 0u;
+}
+inline ::google::protobuf::uint32 CellData::source_boundary_offset() const {
+  // @@protoc_insertion_point(field_get:pbmld.CellData.source_boundary_offset)
+  return source_boundary_offset_;
+}
+inline void CellData::set_source_boundary_offset(::google::protobuf::uint32 value) {
+  
+  source_boundary_offset_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.CellData.source_boundary_offset)
+}
+
+// uint32 destination_boundary_offset = 3;
+inline void CellData::clear_destination_boundary_offset() {
+  destination_boundary_offset_ = 0u;
+}
+inline ::google::protobuf::uint32 CellData::destination_boundary_offset() const {
+  // @@protoc_insertion_point(field_get:pbmld.CellData.destination_boundary_offset)
+  return destination_boundary_offset_;
+}
+inline void CellData::set_destination_boundary_offset(::google::protobuf::uint32 value) {
+  
+  destination_boundary_offset_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.CellData.destination_boundary_offset)
+}
+
+// uint32 source_node_number = 4;
+inline void CellData::clear_source_node_number() {
+  source_node_number_ = 0u;
+}
+inline ::google::protobuf::uint32 CellData::source_node_number() const {
+  // @@protoc_insertion_point(field_get:pbmld.CellData.source_node_number)
+  return source_node_number_;
+}
+inline void CellData::set_source_node_number(::google::protobuf::uint32 value) {
+  
+  source_node_number_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.CellData.source_node_number)
+}
+
+// uint32 destination_node_number = 5;
+inline void CellData::clear_destination_node_number() {
+  destination_node_number_ = 0u;
+}
+inline ::google::protobuf::uint32 CellData::destination_node_number() const {
+  // @@protoc_insertion_point(field_get:pbmld.CellData.destination_node_number)
+  return destination_node_number_;
+}
+inline void CellData::set_destination_node_number(::google::protobuf::uint32 value) {
+  
+  destination_node_number_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.CellData.destination_node_number)
+}
+
+// -------------------------------------------------------------------
+
+// Cells
+
+// repeated uint32 source_boundary = 1;
+inline int Cells::source_boundary_size() const {
+  return source_boundary_.size();
+}
+inline void Cells::clear_source_boundary() {
+  source_boundary_.Clear();
+}
+inline ::google::protobuf::uint32 Cells::source_boundary(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Cells.source_boundary)
+  return source_boundary_.Get(index);
+}
+inline void Cells::set_source_boundary(int index, ::google::protobuf::uint32 value) {
+  source_boundary_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.Cells.source_boundary)
+}
+inline void Cells::add_source_boundary(::google::protobuf::uint32 value) {
+  source_boundary_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.Cells.source_boundary)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+Cells::source_boundary() const {
+  // @@protoc_insertion_point(field_list:pbmld.Cells.source_boundary)
+  return source_boundary_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+Cells::mutable_source_boundary() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Cells.source_boundary)
+  return &source_boundary_;
+}
+
+// repeated uint32 destination_boundary = 2;
+inline int Cells::destination_boundary_size() const {
+  return destination_boundary_.size();
+}
+inline void Cells::clear_destination_boundary() {
+  destination_boundary_.Clear();
+}
+inline ::google::protobuf::uint32 Cells::destination_boundary(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Cells.destination_boundary)
+  return destination_boundary_.Get(index);
+}
+inline void Cells::set_destination_boundary(int index, ::google::protobuf::uint32 value) {
+  destination_boundary_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.Cells.destination_boundary)
+}
+inline void Cells::add_destination_boundary(::google::protobuf::uint32 value) {
+  destination_boundary_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.Cells.destination_boundary)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+Cells::destination_boundary() const {
+  // @@protoc_insertion_point(field_list:pbmld.Cells.destination_boundary)
+  return destination_boundary_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+Cells::mutable_destination_boundary() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Cells.destination_boundary)
+  return &destination_boundary_;
+}
+
+// repeated .pbmld.CellData cells = 3;
+inline int Cells::cells_size() const {
+  return cells_.size();
+}
+inline void Cells::clear_cells() {
+  cells_.Clear();
+}
+inline const ::pbmld::CellData& Cells::cells(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Cells.cells)
+  return cells_.Get(index);
+}
+inline ::pbmld::CellData* Cells::mutable_cells(int index) {
+  // @@protoc_insertion_point(field_mutable:pbmld.Cells.cells)
+  return cells_.Mutable(index);
+}
+inline ::pbmld::CellData* Cells::add_cells() {
+  // @@protoc_insertion_point(field_add:pbmld.Cells.cells)
+  return cells_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::pbmld::CellData >*
+Cells::mutable_cells() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Cells.cells)
+  return &cells_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::pbmld::CellData >&
+Cells::cells() const {
+  // @@protoc_insertion_point(field_list:pbmld.Cells.cells)
+  return cells_;
+}
+
+// repeated uint64 level_offset = 4;
+inline int Cells::level_offset_size() const {
+  return level_offset_.size();
+}
+inline void Cells::clear_level_offset() {
+  level_offset_.Clear();
+}
+inline ::google::protobuf::uint64 Cells::level_offset(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.Cells.level_offset)
+  return level_offset_.Get(index);
+}
+inline void Cells::set_level_offset(int index, ::google::protobuf::uint64 value) {
+  level_offset_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.Cells.level_offset)
+}
+inline void Cells::add_level_offset(::google::protobuf::uint64 value) {
+  level_offset_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.Cells.level_offset)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+Cells::level_offset() const {
+  // @@protoc_insertion_point(field_list:pbmld.Cells.level_offset)
+  return level_offset_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+Cells::mutable_level_offset() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.Cells.level_offset)
+  return &level_offset_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 

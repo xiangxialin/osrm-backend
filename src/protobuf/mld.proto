@@ -9,3 +9,18 @@ message Metric {
 message Metrics {
     repeated Metric metrics = 1;
 }
+
+message CellData {
+    uint32 value_offset = 1;
+    uint32 source_boundary_offset = 2;
+    uint32 destination_boundary_offset = 3;
+    uint32 source_node_number = 4;
+    uint32 destination_node_number = 5;
+}
+
+message Cells {
+    repeated uint32 source_boundary = 1;
+    repeated uint32 destination_boundary = 2;
+    repeated CellData cells = 3;
+    repeated uint64 level_offset = 4;
+}

@@ -12,6 +12,9 @@
 #include "storage/shared_memory_ownership.hpp"
 #include "storage/tar.hpp"
 
+#include "../../../src/protobuf/mld.pb.h"
+
+
 namespace osrm
 {
 namespace partitioner
@@ -64,6 +67,34 @@ inline void write(storage::tar::FileWriter &writer,
     storage::serialization::write(writer, name + "/cells", storage.cells);
     storage::serialization::write(
         writer, name + "/level_to_cell_offset", storage.level_to_cell_offset);
+
+    std::cout << "#### cells: source_boundary: " << storage.source_boundary.size()
+        << " destination_boundary: " << storage.destination_boundary.size()
+        << " cells: " << storage.cells.size()
+        << " level_to_cell_offset: " << storage.level_to_cell_offset.size() << std::endl;
+
+    pbmld::Cells pb_cells;
+    for (auto i : storage.source_boundary ){
+        pb_cells.add_source_boundary(i);
+    }
+    for (auto i : storage.destination_boundary ){
+        pb_cells.add_destination_boundary(i);
+    }
+    for (auto i : storage.level_to_cell_offset ){
+        pb_cells.add_level_offset(i);
+    }
+    for (auto i : storage.cells ){
+        auto cell = pb_cells.add_cells();
+        cell->set_value_offset(i.value_offset);
+        cell->set_source_boundary_offset(i.source_boundary_offset);
+        cell->set_destination_boundary_offset(i.destination_boundary_offset);
+        cell->set_source_node_number(i.num_source_nodes);
+        cell->set_destination_node_number(i.num_destination_nodes);
+    }
+    std::fstream pb_out("1.mld.cells.pb", std::ios::out | std::ios::binary);
+    pb_cells.SerializeToOstream(&pb_out);
+
+
 }
 }
 }
