@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package pbmld;
+
+message Metric {
+    repeated int32 weights = 1;
+}
+
+message Metrics {
+    repeated Metric metrics = 1;
+}
