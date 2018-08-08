@@ -11,3 +11,11 @@ message Nodes{
     repeated Coordinate latLon = 1;
     repeated uint64 osmid = 2;
 }
+
+
+message CompressedNbg{
+    repeated uint32 index = 1;
+    repeated uint32 nodes = 2;
+    repeated uint32 forward_weights = 3;
+    repeated uint32 reverse_weights = 4;
+}

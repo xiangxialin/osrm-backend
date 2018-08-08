@@ -136,14 +136,14 @@ configure_file(
   ${CMAKE_CURRENT_SOURCE_DIR}/include/util/version.hpp.in
   ${CMAKE_CURRENT_BINARY_DIR}/include/util/version.hpp
 )
-file(GLOB UtilGlob src/util/*.cpp src/util/*/*.cpp )
+file(GLOB UtilGlob src/util/*.cpp src/util/*/*.cpp  src/protobuf/*.pb.cc)
 file(GLOB ExtractorGlob src/extractor/*.cpp src/extractor/*/*.cpp src/protobuf/*.pb.cc)
 file(GLOB GuidanceGlob src/guidance/*.cpp src/extractor/intersection/*.cpp  )
 file(GLOB PartitionerGlob src/partitioner/*.cpp src/protobuf/*.pb.cc)
 file(GLOB CustomizerGlob src/customize/*.cpp src/protobuf/*.pb.cc)
 file(GLOB ContractorGlob src/contractor/*.cpp )
-file(GLOB UpdaterGlob src/updater/*.cpp )
-file(GLOB StorageGlob src/storage/*.cpp )
+file(GLOB UpdaterGlob src/updater/*.cpp  src/protobuf/*.pb.cc)
+file(GLOB StorageGlob src/storage/*.cpp  src/protobuf/*.pb.cc)
 file(GLOB ServerGlob src/server/*.cpp src/server/**/*.cpp )
 file(GLOB EngineGlob src/engine/*.cpp src/engine/**/*.cpp )
 file(GLOB ErrorcodesGlob src/osrm/errorcodes.cpp )
@@ -635,7 +635,7 @@ target_link_libraries(osrm-extract osrm_extract ${Boost_PROGRAM_OPTIONS_LIBRARY}
 target_link_libraries(osrm-partition osrm_partition ${Boost_PROGRAM_OPTIONS_LIBRARY} ${PROTOBUF_LIBRARIES})
 target_link_libraries(osrm-customize osrm_customize ${Boost_PROGRAM_OPTIONS_LIBRARY} ${PROTOBUF_LIBRARIES})
 target_link_libraries(osrm-contract osrm_contract ${Boost_PROGRAM_OPTIONS_LIBRARY} ${PROTOBUF_LIBRARIES})
-target_link_libraries(osrm-routed osrm ${Boost_PROGRAM_OPTIONS_LIBRARY} ${OPTIONAL_SOCKET_LIBS} ${ZLIB_LIBRARY})
+target_link_libraries(osrm-routed osrm ${Boost_PROGRAM_OPTIONS_LIBRARY} ${OPTIONAL_SOCKET_LIBS} ${ZLIB_LIBRARY} ${PROTOBUF_LIBRARIES})
 
 set(EXTRACTOR_LIBRARIES
     ${BZIP2_LIBRARIES}
@@ -706,12 +706,12 @@ set(UTIL_LIBRARIES
 
 # Libraries
 target_link_libraries(osrm ${ENGINE_LIBRARIES})
-target_link_libraries(osrm_update ${UPDATER_LIBRARIES})
-target_link_libraries(osrm_contract ${CONTRACTOR_LIBRARIES} osrm_update osrm_store)
+target_link_libraries(osrm_update ${UPDATER_LIBRARIES} ${PROTOBUF_LIBRARIES})
+target_link_libraries(osrm_contract ${CONTRACTOR_LIBRARIES} osrm_update osrm_store ${PROTOBUF_LIBRARIES})
 target_link_libraries(osrm_extract osrm_guidance ${EXTRACTOR_LIBRARIES} ${PROTOBUF_LIBRARIES})
 target_link_libraries(osrm_partition ${PARTITIONER_LIBRARIES} ${PROTOBUF_LIBRARIES})
 target_link_libraries(osrm_customize ${CUSTOMIZER_LIBRARIES} osrm_update osrm_store ${PROTOBUF_LIBRARIES})
-target_link_libraries(osrm_store ${STORAGE_LIBRARIES})
+target_link_libraries(osrm_store ${STORAGE_LIBRARIES} ${PROTOBUF_LIBRARIES})
 
 # BUILD_COMPONENTS
 add_executable(osrm-components src/tools/components.cpp $<TARGET_OBJECTS:MICROTAR> $<TARGET_OBJECTS:UTIL>)

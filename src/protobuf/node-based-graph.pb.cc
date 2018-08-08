@@ -28,13 +28,18 @@ public:
  ::google::protobuf::internal::ExplicitlyConstructed<Nodes>
      _instance;
 } _Nodes_default_instance_;
+class CompressedNbgDefaultTypeInternal {
+public:
+ ::google::protobuf::internal::ExplicitlyConstructed<CompressedNbg>
+     _instance;
+} _CompressedNbg_default_instance_;
 
 namespace protobuf_node_2dbased_2dgraph_2eproto {
 
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[2];
+::google::protobuf::Metadata file_level_metadata[3];
 
 }  // namespace
 
@@ -49,6 +54,7 @@ PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::AuxillaryParseTableField
 };
 PROTOBUF_CONSTEXPR_VAR ::google::protobuf::internal::ParseTable const
     TableStruct::schema[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
+  { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
   { NULL, NULL, 0, -1, -1, -1, -1, NULL, false },
 };
@@ -68,15 +74,26 @@ const ::google::protobuf::uint32 TableStruct::offsets[] GOOGLE_ATTRIBUTE_SECTION
   ~0u,  // no _weak_field_map_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Nodes, latlon_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(Nodes, osmid_),
+  ~0u,  // no _has_bits_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, _internal_metadata_),
+  ~0u,  // no _extensions_
+  ~0u,  // no _oneof_case_
+  ~0u,  // no _weak_field_map_
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, index_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, nodes_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, forward_weights_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CompressedNbg, reverse_weights_),
 };
 static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
   { 0, -1, sizeof(Coordinate)},
   { 7, -1, sizeof(Nodes)},
+  { 14, -1, sizeof(CompressedNbg)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_Coordinate_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_Nodes_default_instance_),
+  reinterpret_cast<const ::google::protobuf::Message*>(&_CompressedNbg_default_instance_),
 };
 
 namespace {
@@ -97,7 +114,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 2);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 3);
 }
 
 }  // namespace
@@ -109,7 +126,9 @@ void TableStruct::InitDefaultsImpl() {
   ::google::protobuf::internal::OnShutdownDestroyMessage(
       &_Coordinate_default_instance_);_Nodes_default_instance_._instance.DefaultConstruct();
   ::google::protobuf::internal::OnShutdownDestroyMessage(
-      &_Nodes_default_instance_);}
+      &_Nodes_default_instance_);_CompressedNbg_default_instance_._instance.DefaultConstruct();
+  ::google::protobuf::internal::OnShutdownDestroyMessage(
+      &_CompressedNbg_default_instance_);}
 
 void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
@@ -122,10 +141,12 @@ void AddDescriptorsImpl() {
       "\n\026node-based-graph.proto\022\005pbnbg\"&\n\nCoord"
       "inate\022\013\n\003lon\030\001 \001(\005\022\013\n\003lat\030\002 \001(\005\"9\n\005Nodes"
       "\022!\n\006latLon\030\001 \003(\0132\021.pbnbg.Coordinate\022\r\n\005o"
-      "smid\030\002 \003(\004b\006proto3"
+      "smid\030\002 \003(\004\"_\n\rCompressedNbg\022\r\n\005index\030\001 \003"
+      "(\r\022\r\n\005nodes\030\002 \003(\r\022\027\n\017forward_weights\030\003 \003"
+      "(\r\022\027\n\017reverse_weights\030\004 \003(\rb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 138);
+      descriptor, 235);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "node-based-graph.proto", &protobuf_RegisterTypes);
 }
@@ -819,6 +840,583 @@ Nodes::osmid() const {
 Nodes::mutable_osmid() {
   // @@protoc_insertion_point(field_mutable_list:pbnbg.Nodes.osmid)
   return &osmid_;
+}
+
+#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
+
+// ===================================================================
+
+#if !defined(_MSC_VER) || _MSC_VER >= 1900
+const int CompressedNbg::kIndexFieldNumber;
+const int CompressedNbg::kNodesFieldNumber;
+const int CompressedNbg::kForwardWeightsFieldNumber;
+const int CompressedNbg::kReverseWeightsFieldNumber;
+#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
+
+CompressedNbg::CompressedNbg()
+  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
+  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
+    protobuf_node_2dbased_2dgraph_2eproto::InitDefaults();
+  }
+  SharedCtor();
+  // @@protoc_insertion_point(constructor:pbnbg.CompressedNbg)
+}
+CompressedNbg::CompressedNbg(const CompressedNbg& from)
+  : ::google::protobuf::Message(),
+      _internal_metadata_(NULL),
+      index_(from.index_),
+      nodes_(from.nodes_),
+      forward_weights_(from.forward_weights_),
+      reverse_weights_(from.reverse_weights_),
+      _cached_size_(0) {
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  // @@protoc_insertion_point(copy_constructor:pbnbg.CompressedNbg)
+}
+
+void CompressedNbg::SharedCtor() {
+  _cached_size_ = 0;
+}
+
+CompressedNbg::~CompressedNbg() {
+  // @@protoc_insertion_point(destructor:pbnbg.CompressedNbg)
+  SharedDtor();
+}
+
+void CompressedNbg::SharedDtor() {
+}
+
+void CompressedNbg::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CompressedNbg::descriptor() {
+  protobuf_node_2dbased_2dgraph_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_node_2dbased_2dgraph_2eproto::file_level_metadata[kIndexInFileMessages].descriptor;
+}
+
+const CompressedNbg& CompressedNbg::default_instance() {
+  protobuf_node_2dbased_2dgraph_2eproto::InitDefaults();
+  return *internal_default_instance();
+}
+
+CompressedNbg* CompressedNbg::New(::google::protobuf::Arena* arena) const {
+  CompressedNbg* n = new CompressedNbg;
+  if (arena != NULL) {
+    arena->Own(n);
+  }
+  return n;
+}
+
+void CompressedNbg::Clear() {
+// @@protoc_insertion_point(message_clear_start:pbnbg.CompressedNbg)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  // Prevent compiler warnings about cached_has_bits being unused
+  (void) cached_has_bits;
+
+  index_.Clear();
+  nodes_.Clear();
+  forward_weights_.Clear();
+  reverse_weights_.Clear();
+  _internal_metadata_.Clear();
+}
+
+bool CompressedNbg::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
+  ::google::protobuf::uint32 tag;
+  // @@protoc_insertion_point(parse_start:pbnbg.CompressedNbg)
+  for (;;) {
+    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
+    tag = p.first;
+    if (!p.second) goto handle_unusual;
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // repeated uint32 index = 1;
+      case 1: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(10u /* 10 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_index())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(8u /* 8 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 10u, input, this->mutable_index())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated uint32 nodes = 2;
+      case 2: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(18u /* 18 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_nodes())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(16u /* 16 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 18u, input, this->mutable_nodes())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated uint32 forward_weights = 3;
+      case 3: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_forward_weights())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 26u, input, this->mutable_forward_weights())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // repeated uint32 reverse_weights = 4;
+      case 4: {
+        if (static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 input, this->mutable_reverse_weights())));
+        } else if (
+            static_cast< ::google::protobuf::uint8>(tag) ==
+            static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
+                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                 1, 34u, input, this->mutable_reverse_weights())));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      default: {
+      handle_unusual:
+        if (tag == 0) {
+          goto success;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, _internal_metadata_.mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+success:
+  // @@protoc_insertion_point(parse_success:pbnbg.CompressedNbg)
+  return true;
+failure:
+  // @@protoc_insertion_point(parse_failure:pbnbg.CompressedNbg)
+  return false;
+#undef DO_
+}
+
+void CompressedNbg::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // @@protoc_insertion_point(serialize_start:pbnbg.CompressedNbg)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated uint32 index = 1;
+  if (this->index_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(1, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _index_cached_byte_size_));
+  }
+  for (int i = 0, n = this->index_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->index(i), output);
+  }
+
+  // repeated uint32 nodes = 2;
+  if (this->nodes_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(2, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _nodes_cached_byte_size_));
+  }
+  for (int i = 0, n = this->nodes_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->nodes(i), output);
+  }
+
+  // repeated uint32 forward_weights = 3;
+  if (this->forward_weights_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(3, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _forward_weights_cached_byte_size_));
+  }
+  for (int i = 0, n = this->forward_weights_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->forward_weights(i), output);
+  }
+
+  // repeated uint32 reverse_weights = 4;
+  if (this->reverse_weights_size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteTag(4, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
+    output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
+        _reverse_weights_cached_byte_size_));
+  }
+  for (int i = 0, n = this->reverse_weights_size(); i < n; i++) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+      this->reverse_weights(i), output);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), output);
+  }
+  // @@protoc_insertion_point(serialize_end:pbnbg.CompressedNbg)
+}
+
+::google::protobuf::uint8* CompressedNbg::InternalSerializeWithCachedSizesToArray(
+    bool deterministic, ::google::protobuf::uint8* target) const {
+  (void)deterministic; // Unused
+  // @@protoc_insertion_point(serialize_to_array_start:pbnbg.CompressedNbg)
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  // repeated uint32 index = 1;
+  if (this->index_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      1,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::uint32>(
+            _index_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32NoTagToArray(this->index_, target);
+  }
+
+  // repeated uint32 nodes = 2;
+  if (this->nodes_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      2,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::uint32>(
+            _nodes_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32NoTagToArray(this->nodes_, target);
+  }
+
+  // repeated uint32 forward_weights = 3;
+  if (this->forward_weights_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      3,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::uint32>(
+            _forward_weights_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32NoTagToArray(this->forward_weights_, target);
+  }
+
+  // repeated uint32 reverse_weights = 4;
+  if (this->reverse_weights_size() > 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
+      4,
+      ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED,
+      target);
+    target = ::google::protobuf::io::CodedOutputStream::WriteVarint32ToArray(
+        static_cast< ::google::protobuf::uint32>(
+            _reverse_weights_cached_byte_size_), target);
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteUInt32NoTagToArray(this->reverse_weights_, target);
+  }
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()), target);
+  }
+  // @@protoc_insertion_point(serialize_to_array_end:pbnbg.CompressedNbg)
+  return target;
+}
+
+size_t CompressedNbg::ByteSizeLong() const {
+// @@protoc_insertion_point(message_byte_size_start:pbnbg.CompressedNbg)
+  size_t total_size = 0;
+
+  if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        (::google::protobuf::internal::GetProto3PreserveUnknownsDefault()   ? _internal_metadata_.unknown_fields()   : _internal_metadata_.default_instance()));
+  }
+  // repeated uint32 index = 1;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      UInt32Size(this->index_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _index_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated uint32 nodes = 2;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      UInt32Size(this->nodes_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _nodes_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated uint32 forward_weights = 3;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      UInt32Size(this->forward_weights_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _forward_weights_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  // repeated uint32 reverse_weights = 4;
+  {
+    size_t data_size = ::google::protobuf::internal::WireFormatLite::
+      UInt32Size(this->reverse_weights_);
+    if (data_size > 0) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+            static_cast< ::google::protobuf::int32>(data_size));
+    }
+    int cached_size = ::google::protobuf::internal::ToCachedSize(data_size);
+    GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+    _reverse_weights_cached_byte_size_ = cached_size;
+    GOOGLE_SAFE_CONCURRENT_WRITES_END();
+    total_size += data_size;
+  }
+
+  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = cached_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CompressedNbg::MergeFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_merge_from_start:pbnbg.CompressedNbg)
+  GOOGLE_DCHECK_NE(&from, this);
+  const CompressedNbg* source =
+      ::google::protobuf::internal::DynamicCastToGenerated<const CompressedNbg>(
+          &from);
+  if (source == NULL) {
+  // @@protoc_insertion_point(generalized_merge_from_cast_fail:pbnbg.CompressedNbg)
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+  // @@protoc_insertion_point(generalized_merge_from_cast_success:pbnbg.CompressedNbg)
+    MergeFrom(*source);
+  }
+}
+
+void CompressedNbg::MergeFrom(const CompressedNbg& from) {
+// @@protoc_insertion_point(class_specific_merge_from_start:pbnbg.CompressedNbg)
+  GOOGLE_DCHECK_NE(&from, this);
+  _internal_metadata_.MergeFrom(from._internal_metadata_);
+  ::google::protobuf::uint32 cached_has_bits = 0;
+  (void) cached_has_bits;
+
+  index_.MergeFrom(from.index_);
+  nodes_.MergeFrom(from.nodes_);
+  forward_weights_.MergeFrom(from.forward_weights_);
+  reverse_weights_.MergeFrom(from.reverse_weights_);
+}
+
+void CompressedNbg::CopyFrom(const ::google::protobuf::Message& from) {
+// @@protoc_insertion_point(generalized_copy_from_start:pbnbg.CompressedNbg)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CompressedNbg::CopyFrom(const CompressedNbg& from) {
+// @@protoc_insertion_point(class_specific_copy_from_start:pbnbg.CompressedNbg)
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CompressedNbg::IsInitialized() const {
+  return true;
+}
+
+void CompressedNbg::Swap(CompressedNbg* other) {
+  if (other == this) return;
+  InternalSwap(other);
+}
+void CompressedNbg::InternalSwap(CompressedNbg* other) {
+  using std::swap;
+  index_.InternalSwap(&other->index_);
+  nodes_.InternalSwap(&other->nodes_);
+  forward_weights_.InternalSwap(&other->forward_weights_);
+  reverse_weights_.InternalSwap(&other->reverse_weights_);
+  _internal_metadata_.Swap(&other->_internal_metadata_);
+  swap(_cached_size_, other->_cached_size_);
+}
+
+::google::protobuf::Metadata CompressedNbg::GetMetadata() const {
+  protobuf_node_2dbased_2dgraph_2eproto::protobuf_AssignDescriptorsOnce();
+  return protobuf_node_2dbased_2dgraph_2eproto::file_level_metadata[kIndexInFileMessages];
+}
+
+#if PROTOBUF_INLINE_NOT_IN_HEADERS
+// CompressedNbg
+
+// repeated uint32 index = 1;
+int CompressedNbg::index_size() const {
+  return index_.size();
+}
+void CompressedNbg::clear_index() {
+  index_.Clear();
+}
+::google::protobuf::uint32 CompressedNbg::index(int index) const {
+  // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.index)
+  return index_.Get(index);
+}
+void CompressedNbg::set_index(int index, ::google::protobuf::uint32 value) {
+  index_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.index)
+}
+void CompressedNbg::add_index(::google::protobuf::uint32 value) {
+  index_.Add(value);
+  // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.index)
+}
+const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+CompressedNbg::index() const {
+  // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.index)
+  return index_;
+}
+::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+CompressedNbg::mutable_index() {
+  // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.index)
+  return &index_;
+}
+
+// repeated uint32 nodes = 2;
+int CompressedNbg::nodes_size() const {
+  return nodes_.size();
+}
+void CompressedNbg::clear_nodes() {
+  nodes_.Clear();
+}
+::google::protobuf::uint32 CompressedNbg::nodes(int index) const {
+  // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.nodes)
+  return nodes_.Get(index);
+}
+void CompressedNbg::set_nodes(int index, ::google::protobuf::uint32 value) {
+  nodes_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.nodes)
+}
+void CompressedNbg::add_nodes(::google::protobuf::uint32 value) {
+  nodes_.Add(value);
+  // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.nodes)
+}
+const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+CompressedNbg::nodes() const {
+  // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.nodes)
+  return nodes_;
+}
+::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+CompressedNbg::mutable_nodes() {
+  // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.nodes)
+  return &nodes_;
+}
+
+// repeated uint32 forward_weights = 3;
+int CompressedNbg::forward_weights_size() const {
+  return forward_weights_.size();
+}
+void CompressedNbg::clear_forward_weights() {
+  forward_weights_.Clear();
+}
+::google::protobuf::uint32 CompressedNbg::forward_weights(int index) const {
+  // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.forward_weights)
+  return forward_weights_.Get(index);
+}
+void CompressedNbg::set_forward_weights(int index, ::google::protobuf::uint32 value) {
+  forward_weights_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.forward_weights)
+}
+void CompressedNbg::add_forward_weights(::google::protobuf::uint32 value) {
+  forward_weights_.Add(value);
+  // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.forward_weights)
+}
+const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+CompressedNbg::forward_weights() const {
+  // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.forward_weights)
+  return forward_weights_;
+}
+::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+CompressedNbg::mutable_forward_weights() {
+  // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.forward_weights)
+  return &forward_weights_;
+}
+
+// repeated uint32 reverse_weights = 4;
+int CompressedNbg::reverse_weights_size() const {
+  return reverse_weights_.size();
+}
+void CompressedNbg::clear_reverse_weights() {
+  reverse_weights_.Clear();
+}
+::google::protobuf::uint32 CompressedNbg::reverse_weights(int index) const {
+  // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.reverse_weights)
+  return reverse_weights_.Get(index);
+}
+void CompressedNbg::set_reverse_weights(int index, ::google::protobuf::uint32 value) {
+  reverse_weights_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.reverse_weights)
+}
+void CompressedNbg::add_reverse_weights(::google::protobuf::uint32 value) {
+  reverse_weights_.Add(value);
+  // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.reverse_weights)
+}
+const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+CompressedNbg::reverse_weights() const {
+  // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.reverse_weights)
+  return reverse_weights_;
+}
+::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+CompressedNbg::mutable_reverse_weights() {
+  // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.reverse_weights)
+  return &reverse_weights_;
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

@@ -15,6 +15,9 @@
 #include "storage/io.hpp"
 #include "storage/serialization.hpp"
 
+#include "../../../src/protobuf/node-based-graph.pb.h"
+
+
 #include <boost/assert.hpp>
 
 namespace osrm
@@ -109,6 +112,28 @@ inline void write(storage::tar::FileWriter &writer,
         writer, name + "/forward_data_sources", segment_data.fwd_datasources);
     storage::serialization::write(
         writer, name + "/reverse_data_sources", segment_data.rev_datasources);
+
+
+    std::cout << "#### cnbg: " << segment_data.index.size() << ", "<< segment_data.nodes.size()
+    << ", "<< segment_data.fwd_weights.size()<< ", "<< segment_data.rev_weights.size() << std::endl;
+
+    pbnbg::CompressedNbg pb_cnbg;
+    for (auto i : segment_data.index){
+        pb_cnbg.add_index(i);
+    }
+    for (auto i : segment_data.nodes){
+        pb_cnbg.add_nodes(i);
+    }
+    for (auto i : segment_data.fwd_weights){
+        pb_cnbg.add_forward_weights(i);
+    }
+    for (auto i : segment_data.rev_weights){
+        pb_cnbg.add_reverse_weights(i);
+    }
+
+    std::fstream pb_out("1.nbg.compressed.pb", std::ios::out | std::ios::binary);
+    pb_cnbg.SerializeToOstream(&pb_out);
+
 }
 
 template <storage::Ownership Ownership>
