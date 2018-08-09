@@ -160,7 +160,7 @@ void AddDescriptorsImpl() {
       "\022!\n\006latLon\030\001 \003(\0132\021.pbnbg.Coordinate\022\r\n\005o"
       "smid\030\002 \003(\004\"_\n\rCompressedNbg\022\r\n\005index\030\001 \003"
       "(\r\022\r\n\005nodes\030\002 \003(\r\022\027\n\017forward_weights\030\003 \003"
-      "(\r\022\027\n\017reverse_weights\030\004 \003(\r\"9\n\013StreetNam"
+      "(\005\022\027\n\017reverse_weights\030\004 \003(\005\"9\n\013StreetNam"
       "es\022\024\n\014names_packed\030\001 \001(\t\022\024\n\014name_offsets"
       "\030\002 \003(\rb\006proto3"
   };
@@ -988,18 +988,18 @@ bool CompressedNbg::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated uint32 forward_weights = 3;
+      // repeated int32 forward_weights = 3;
       case 3: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(26u /* 26 & 0xFF */)) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_forward_weights())));
         } else if (
             static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(24u /* 24 & 0xFF */)) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  1, 26u, input, this->mutable_forward_weights())));
         } else {
           goto handle_unusual;
@@ -1007,18 +1007,18 @@ bool CompressedNbg::MergePartialFromCodedStream(
         break;
       }
 
-      // repeated uint32 reverse_weights = 4;
+      // repeated int32 reverse_weights = 4;
       case 4: {
         if (static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(34u /* 34 & 0xFF */)) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadPackedPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, this->mutable_reverse_weights())));
         } else if (
             static_cast< ::google::protobuf::uint8>(tag) ==
             static_cast< ::google::protobuf::uint8>(32u /* 32 & 0xFF */)) {
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitiveNoInline<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  1, 34u, input, this->mutable_reverse_weights())));
         } else {
           goto handle_unusual;
@@ -1074,25 +1074,25 @@ void CompressedNbg::SerializeWithCachedSizes(
       this->nodes(i), output);
   }
 
-  // repeated uint32 forward_weights = 3;
+  // repeated int32 forward_weights = 3;
   if (this->forward_weights_size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteTag(3, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
     output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
         _forward_weights_cached_byte_size_));
   }
   for (int i = 0, n = this->forward_weights_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+    ::google::protobuf::internal::WireFormatLite::WriteInt32NoTag(
       this->forward_weights(i), output);
   }
 
-  // repeated uint32 reverse_weights = 4;
+  // repeated int32 reverse_weights = 4;
   if (this->reverse_weights_size() > 0) {
     ::google::protobuf::internal::WireFormatLite::WriteTag(4, ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED, output);
     output->WriteVarint32(static_cast< ::google::protobuf::uint32>(
         _reverse_weights_cached_byte_size_));
   }
   for (int i = 0, n = this->reverse_weights_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32NoTag(
+    ::google::protobuf::internal::WireFormatLite::WriteInt32NoTag(
       this->reverse_weights(i), output);
   }
 
@@ -1136,7 +1136,7 @@ void CompressedNbg::SerializeWithCachedSizes(
       WriteUInt32NoTagToArray(this->nodes_, target);
   }
 
-  // repeated uint32 forward_weights = 3;
+  // repeated int32 forward_weights = 3;
   if (this->forward_weights_size() > 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
       3,
@@ -1146,10 +1146,10 @@ void CompressedNbg::SerializeWithCachedSizes(
         static_cast< ::google::protobuf::uint32>(
             _forward_weights_cached_byte_size_), target);
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteUInt32NoTagToArray(this->forward_weights_, target);
+      WriteInt32NoTagToArray(this->forward_weights_, target);
   }
 
-  // repeated uint32 reverse_weights = 4;
+  // repeated int32 reverse_weights = 4;
   if (this->reverse_weights_size() > 0) {
     target = ::google::protobuf::internal::WireFormatLite::WriteTagToArray(
       4,
@@ -1159,7 +1159,7 @@ void CompressedNbg::SerializeWithCachedSizes(
         static_cast< ::google::protobuf::uint32>(
             _reverse_weights_cached_byte_size_), target);
     target = ::google::protobuf::internal::WireFormatLite::
-      WriteUInt32NoTagToArray(this->reverse_weights_, target);
+      WriteInt32NoTagToArray(this->reverse_weights_, target);
   }
 
   if ((_internal_metadata_.have_unknown_fields() &&  ::google::protobuf::internal::GetProto3PreserveUnknownsDefault())) {
@@ -1211,10 +1211,10 @@ size_t CompressedNbg::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated uint32 forward_weights = 3;
+  // repeated int32 forward_weights = 3;
   {
     size_t data_size = ::google::protobuf::internal::WireFormatLite::
-      UInt32Size(this->forward_weights_);
+      Int32Size(this->forward_weights_);
     if (data_size > 0) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -1227,10 +1227,10 @@ size_t CompressedNbg::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated uint32 reverse_weights = 4;
+  // repeated int32 reverse_weights = 4;
   {
     size_t data_size = ::google::protobuf::internal::WireFormatLite::
-      UInt32Size(this->reverse_weights_);
+      Int32Size(this->reverse_weights_);
     if (data_size > 0) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -1378,61 +1378,61 @@ CompressedNbg::mutable_nodes() {
   return &nodes_;
 }
 
-// repeated uint32 forward_weights = 3;
+// repeated int32 forward_weights = 3;
 int CompressedNbg::forward_weights_size() const {
   return forward_weights_.size();
 }
 void CompressedNbg::clear_forward_weights() {
   forward_weights_.Clear();
 }
-::google::protobuf::uint32 CompressedNbg::forward_weights(int index) const {
+::google::protobuf::int32 CompressedNbg::forward_weights(int index) const {
   // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.forward_weights)
   return forward_weights_.Get(index);
 }
-void CompressedNbg::set_forward_weights(int index, ::google::protobuf::uint32 value) {
+void CompressedNbg::set_forward_weights(int index, ::google::protobuf::int32 value) {
   forward_weights_.Set(index, value);
   // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.forward_weights)
 }
-void CompressedNbg::add_forward_weights(::google::protobuf::uint32 value) {
+void CompressedNbg::add_forward_weights(::google::protobuf::int32 value) {
   forward_weights_.Add(value);
   // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.forward_weights)
 }
-const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
 CompressedNbg::forward_weights() const {
   // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.forward_weights)
   return forward_weights_;
 }
-::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
 CompressedNbg::mutable_forward_weights() {
   // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.forward_weights)
   return &forward_weights_;
 }
 
-// repeated uint32 reverse_weights = 4;
+// repeated int32 reverse_weights = 4;
 int CompressedNbg::reverse_weights_size() const {
   return reverse_weights_.size();
 }
 void CompressedNbg::clear_reverse_weights() {
   reverse_weights_.Clear();
 }
-::google::protobuf::uint32 CompressedNbg::reverse_weights(int index) const {
+::google::protobuf::int32 CompressedNbg::reverse_weights(int index) const {
   // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.reverse_weights)
   return reverse_weights_.Get(index);
 }
-void CompressedNbg::set_reverse_weights(int index, ::google::protobuf::uint32 value) {
+void CompressedNbg::set_reverse_weights(int index, ::google::protobuf::int32 value) {
   reverse_weights_.Set(index, value);
   // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.reverse_weights)
 }
-void CompressedNbg::add_reverse_weights(::google::protobuf::uint32 value) {
+void CompressedNbg::add_reverse_weights(::google::protobuf::int32 value) {
   reverse_weights_.Add(value);
   // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.reverse_weights)
 }
-const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
 CompressedNbg::reverse_weights() const {
   // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.reverse_weights)
   return reverse_weights_;
 }
-::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
 CompressedNbg::mutable_reverse_weights() {
   // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.reverse_weights)
   return &reverse_weights_;

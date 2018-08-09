@@ -68,7 +68,7 @@ inline void write(storage::tar::FileWriter &writer,
         pb_level_data->add_bit_to_level(i);
     }
     pb_partitions.set_allocated_level_data(pb_level_data);
-    std::fstream pb_out("1.mld.cells.pb", std::ios::out | std::ios::binary);
+    std::fstream pb_out("1.mld.partitions.pb", std::ios::out | std::ios::binary);
     pb_partitions.SerializeToOstream(&pb_out);
 }
 

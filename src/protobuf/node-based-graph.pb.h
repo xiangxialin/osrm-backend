@@ -390,28 +390,28 @@ class CompressedNbg : public ::google::protobuf::Message /* @@protoc_insertion_p
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
       mutable_nodes();
 
-  // repeated uint32 forward_weights = 3;
+  // repeated int32 forward_weights = 3;
   int forward_weights_size() const;
   void clear_forward_weights();
   static const int kForwardWeightsFieldNumber = 3;
-  ::google::protobuf::uint32 forward_weights(int index) const;
-  void set_forward_weights(int index, ::google::protobuf::uint32 value);
-  void add_forward_weights(::google::protobuf::uint32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+  ::google::protobuf::int32 forward_weights(int index) const;
+  void set_forward_weights(int index, ::google::protobuf::int32 value);
+  void add_forward_weights(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
       forward_weights() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_forward_weights();
 
-  // repeated uint32 reverse_weights = 4;
+  // repeated int32 reverse_weights = 4;
   int reverse_weights_size() const;
   void clear_reverse_weights();
   static const int kReverseWeightsFieldNumber = 4;
-  ::google::protobuf::uint32 reverse_weights(int index) const;
-  void set_reverse_weights(int index, ::google::protobuf::uint32 value);
-  void add_reverse_weights(::google::protobuf::uint32 value);
-  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+  ::google::protobuf::int32 reverse_weights(int index) const;
+  void set_reverse_weights(int index, ::google::protobuf::int32 value);
+  void add_reverse_weights(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
       reverse_weights() const;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
       mutable_reverse_weights();
 
   // @@protoc_insertion_point(class_scope:pbnbg.CompressedNbg)
@@ -422,9 +422,9 @@ class CompressedNbg : public ::google::protobuf::Message /* @@protoc_insertion_p
   mutable int _index_cached_byte_size_;
   ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > nodes_;
   mutable int _nodes_cached_byte_size_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > forward_weights_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > forward_weights_;
   mutable int _forward_weights_cached_byte_size_;
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > reverse_weights_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > reverse_weights_;
   mutable int _reverse_weights_cached_byte_size_;
   mutable int _cached_size_;
   friend struct protobuf_node_2dbased_2dgraph_2eproto::TableStruct;
@@ -716,61 +716,61 @@ CompressedNbg::mutable_nodes() {
   return &nodes_;
 }
 
-// repeated uint32 forward_weights = 3;
+// repeated int32 forward_weights = 3;
 inline int CompressedNbg::forward_weights_size() const {
   return forward_weights_.size();
 }
 inline void CompressedNbg::clear_forward_weights() {
   forward_weights_.Clear();
 }
-inline ::google::protobuf::uint32 CompressedNbg::forward_weights(int index) const {
+inline ::google::protobuf::int32 CompressedNbg::forward_weights(int index) const {
   // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.forward_weights)
   return forward_weights_.Get(index);
 }
-inline void CompressedNbg::set_forward_weights(int index, ::google::protobuf::uint32 value) {
+inline void CompressedNbg::set_forward_weights(int index, ::google::protobuf::int32 value) {
   forward_weights_.Set(index, value);
   // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.forward_weights)
 }
-inline void CompressedNbg::add_forward_weights(::google::protobuf::uint32 value) {
+inline void CompressedNbg::add_forward_weights(::google::protobuf::int32 value) {
   forward_weights_.Add(value);
   // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.forward_weights)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
 CompressedNbg::forward_weights() const {
   // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.forward_weights)
   return forward_weights_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
 CompressedNbg::mutable_forward_weights() {
   // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.forward_weights)
   return &forward_weights_;
 }
 
-// repeated uint32 reverse_weights = 4;
+// repeated int32 reverse_weights = 4;
 inline int CompressedNbg::reverse_weights_size() const {
   return reverse_weights_.size();
 }
 inline void CompressedNbg::clear_reverse_weights() {
   reverse_weights_.Clear();
 }
-inline ::google::protobuf::uint32 CompressedNbg::reverse_weights(int index) const {
+inline ::google::protobuf::int32 CompressedNbg::reverse_weights(int index) const {
   // @@protoc_insertion_point(field_get:pbnbg.CompressedNbg.reverse_weights)
   return reverse_weights_.Get(index);
 }
-inline void CompressedNbg::set_reverse_weights(int index, ::google::protobuf::uint32 value) {
+inline void CompressedNbg::set_reverse_weights(int index, ::google::protobuf::int32 value) {
   reverse_weights_.Set(index, value);
   // @@protoc_insertion_point(field_set:pbnbg.CompressedNbg.reverse_weights)
 }
-inline void CompressedNbg::add_reverse_weights(::google::protobuf::uint32 value) {
+inline void CompressedNbg::add_reverse_weights(::google::protobuf::int32 value) {
   reverse_weights_.Add(value);
   // @@protoc_insertion_point(field_add:pbnbg.CompressedNbg.reverse_weights)
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
 CompressedNbg::reverse_weights() const {
   // @@protoc_insertion_point(field_list:pbnbg.CompressedNbg.reverse_weights)
   return reverse_weights_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
 CompressedNbg::mutable_reverse_weights() {
   // @@protoc_insertion_point(field_mutable_list:pbnbg.CompressedNbg.reverse_weights)
   return &reverse_weights_;
