@@ -9,6 +9,9 @@
 #include "storage/shared_memory_ownership.hpp"
 #include "storage/tar.hpp"
 
+#include "../../../src/protobuf/mld.pb.h"
+
+
 namespace osrm
 {
 namespace customizer
@@ -60,6 +63,40 @@ inline void write(storage::tar::FileWriter &writer,
     storage::serialization::write(writer, name + "/is_forward_edge", graph.is_forward_edge);
     storage::serialization::write(writer, name + "/is_backward_edge", graph.is_backward_edge);
     storage::serialization::write(writer, name + "/node_to_edge_offset", graph.node_to_edge_offset);
+
+     std::cout << "#### query graph: node array: " << graph.node_array.size()
+            << " node_weights: " << graph.node_weights.size()
+            << " edge_array: " << graph.edge_array.size()
+            << " is_forward_edge: " << graph.is_forward_edge.size()
+            << " is_backward_edge: " << graph.is_backward_edge.size()
+            << " node_to_edge_offset: " << graph.node_to_edge_offset.size()
+            << " num levels: " << (int)graph.node_to_edge_offset.back()
+            << std::endl;
+     pbmld::QueryGraph pb_graph;
+
+     for (auto i : graph.node_array){
+        pb_graph.add_nodes(i.first_edge);
+     }
+
+     int index  = 0;
+     for (auto i : graph.edge_array){
+        auto pb_edge = pb_graph.add_edges();
+        pb_edge->set_target(i.target);
+        pb_edge->set_turn_id(i.data.turn_id);
+        pb_edge->set_is_forward(graph.is_forward_edge[index]);
+        pb_edge->set_is_backward(graph.is_backward_edge[index]);
+     }
+
+     for (auto i : graph.node_to_edge_offset){
+        pb_graph.add_node_level_offset((unsigned int)i);
+     }
+
+     for (auto i : graph.node_weights){
+        pb_graph.add_node_weights(i);
+     }
+
+     std::fstream pb_out("1.mld.graph.pb", std::ios::out | std::ios::binary);
+     pb_graph.SerializeToOstream(&pb_out);
 }
 }
 }

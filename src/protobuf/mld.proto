@@ -39,3 +39,18 @@ message Metric {
 message Metrics {
     repeated Metric metrics = 1;
 }
+
+
+message EdgeData {
+    uint32 target = 1;
+    uint32 turn_id = 2;
+    bool is_forward = 3;
+    bool is_backward = 4;
+}
+
+message QueryGraph {
+    repeated uint32 nodes = 1;
+    repeated EdgeData edges = 2;
+    repeated uint32 node_level_offset = 3;
+    repeated int32 node_weights = 4;
+}

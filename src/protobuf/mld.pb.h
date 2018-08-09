@@ -37,6 +37,9 @@ extern CellDataDefaultTypeInternal _CellData_default_instance_;
 class Cells;
 class CellsDefaultTypeInternal;
 extern CellsDefaultTypeInternal _Cells_default_instance_;
+class EdgeData;
+class EdgeDataDefaultTypeInternal;
+extern EdgeDataDefaultTypeInternal _EdgeData_default_instance_;
 class LevelData;
 class LevelDataDefaultTypeInternal;
 extern LevelDataDefaultTypeInternal _LevelData_default_instance_;
@@ -49,6 +52,9 @@ extern MetricsDefaultTypeInternal _Metrics_default_instance_;
 class Partitions;
 class PartitionsDefaultTypeInternal;
 extern PartitionsDefaultTypeInternal _Partitions_default_instance_;
+class QueryGraph;
+class QueryGraphDefaultTypeInternal;
+extern QueryGraphDefaultTypeInternal _QueryGraph_default_instance_;
 }  // namespace pbmld
 
 namespace pbmld {
@@ -798,6 +804,269 @@ class Metrics : public ::google::protobuf::Message /* @@protoc_insertion_point(c
   mutable int _cached_size_;
   friend struct protobuf_mld_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class EdgeData : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.EdgeData) */ {
+ public:
+  EdgeData();
+  virtual ~EdgeData();
+
+  EdgeData(const EdgeData& from);
+
+  inline EdgeData& operator=(const EdgeData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  EdgeData(EdgeData&& from) noexcept
+    : EdgeData() {
+    *this = ::std::move(from);
+  }
+
+  inline EdgeData& operator=(EdgeData&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const EdgeData& default_instance();
+
+  static inline const EdgeData* internal_default_instance() {
+    return reinterpret_cast<const EdgeData*>(
+               &_EdgeData_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    6;
+
+  void Swap(EdgeData* other);
+  friend void swap(EdgeData& a, EdgeData& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline EdgeData* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  EdgeData* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const EdgeData& from);
+  void MergeFrom(const EdgeData& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(EdgeData* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // uint32 target = 1;
+  void clear_target();
+  static const int kTargetFieldNumber = 1;
+  ::google::protobuf::uint32 target() const;
+  void set_target(::google::protobuf::uint32 value);
+
+  // uint32 turn_id = 2;
+  void clear_turn_id();
+  static const int kTurnIdFieldNumber = 2;
+  ::google::protobuf::uint32 turn_id() const;
+  void set_turn_id(::google::protobuf::uint32 value);
+
+  // bool is_forward = 3;
+  void clear_is_forward();
+  static const int kIsForwardFieldNumber = 3;
+  bool is_forward() const;
+  void set_is_forward(bool value);
+
+  // bool is_backward = 4;
+  void clear_is_backward();
+  static const int kIsBackwardFieldNumber = 4;
+  bool is_backward() const;
+  void set_is_backward(bool value);
+
+  // @@protoc_insertion_point(class_scope:pbmld.EdgeData)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::uint32 target_;
+  ::google::protobuf::uint32 turn_id_;
+  bool is_forward_;
+  bool is_backward_;
+  mutable int _cached_size_;
+  friend struct protobuf_mld_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class QueryGraph : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbmld.QueryGraph) */ {
+ public:
+  QueryGraph();
+  virtual ~QueryGraph();
+
+  QueryGraph(const QueryGraph& from);
+
+  inline QueryGraph& operator=(const QueryGraph& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  QueryGraph(QueryGraph&& from) noexcept
+    : QueryGraph() {
+    *this = ::std::move(from);
+  }
+
+  inline QueryGraph& operator=(QueryGraph&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const QueryGraph& default_instance();
+
+  static inline const QueryGraph* internal_default_instance() {
+    return reinterpret_cast<const QueryGraph*>(
+               &_QueryGraph_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    7;
+
+  void Swap(QueryGraph* other);
+  friend void swap(QueryGraph& a, QueryGraph& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline QueryGraph* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  QueryGraph* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const QueryGraph& from);
+  void MergeFrom(const QueryGraph& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(QueryGraph* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated uint32 nodes = 1;
+  int nodes_size() const;
+  void clear_nodes();
+  static const int kNodesFieldNumber = 1;
+  ::google::protobuf::uint32 nodes(int index) const;
+  void set_nodes(int index, ::google::protobuf::uint32 value);
+  void add_nodes(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      nodes() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_nodes();
+
+  // repeated .pbmld.EdgeData edges = 2;
+  int edges_size() const;
+  void clear_edges();
+  static const int kEdgesFieldNumber = 2;
+  const ::pbmld::EdgeData& edges(int index) const;
+  ::pbmld::EdgeData* mutable_edges(int index);
+  ::pbmld::EdgeData* add_edges();
+  ::google::protobuf::RepeatedPtrField< ::pbmld::EdgeData >*
+      mutable_edges();
+  const ::google::protobuf::RepeatedPtrField< ::pbmld::EdgeData >&
+      edges() const;
+
+  // repeated uint32 node_level_offset = 3;
+  int node_level_offset_size() const;
+  void clear_node_level_offset();
+  static const int kNodeLevelOffsetFieldNumber = 3;
+  ::google::protobuf::uint32 node_level_offset(int index) const;
+  void set_node_level_offset(int index, ::google::protobuf::uint32 value);
+  void add_node_level_offset(::google::protobuf::uint32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+      node_level_offset() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+      mutable_node_level_offset();
+
+  // repeated int32 node_weights = 4;
+  int node_weights_size() const;
+  void clear_node_weights();
+  static const int kNodeWeightsFieldNumber = 4;
+  ::google::protobuf::int32 node_weights(int index) const;
+  void set_node_weights(int index, ::google::protobuf::int32 value);
+  void add_node_weights(::google::protobuf::int32 value);
+  const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      node_weights() const;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_node_weights();
+
+  // @@protoc_insertion_point(class_scope:pbmld.QueryGraph)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > nodes_;
+  mutable int _nodes_cached_byte_size_;
+  ::google::protobuf::RepeatedPtrField< ::pbmld::EdgeData > edges_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::uint32 > node_level_offset_;
+  mutable int _node_level_offset_cached_byte_size_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > node_weights_;
+  mutable int _node_weights_cached_byte_size_;
+  mutable int _cached_size_;
+  friend struct protobuf_mld_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -1254,10 +1523,198 @@ Metrics::metrics() const {
   return metrics_;
 }
 
+// -------------------------------------------------------------------
+
+// EdgeData
+
+// uint32 target = 1;
+inline void EdgeData::clear_target() {
+  target_ = 0u;
+}
+inline ::google::protobuf::uint32 EdgeData::target() const {
+  // @@protoc_insertion_point(field_get:pbmld.EdgeData.target)
+  return target_;
+}
+inline void EdgeData::set_target(::google::protobuf::uint32 value) {
+  
+  target_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.EdgeData.target)
+}
+
+// uint32 turn_id = 2;
+inline void EdgeData::clear_turn_id() {
+  turn_id_ = 0u;
+}
+inline ::google::protobuf::uint32 EdgeData::turn_id() const {
+  // @@protoc_insertion_point(field_get:pbmld.EdgeData.turn_id)
+  return turn_id_;
+}
+inline void EdgeData::set_turn_id(::google::protobuf::uint32 value) {
+  
+  turn_id_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.EdgeData.turn_id)
+}
+
+// bool is_forward = 3;
+inline void EdgeData::clear_is_forward() {
+  is_forward_ = false;
+}
+inline bool EdgeData::is_forward() const {
+  // @@protoc_insertion_point(field_get:pbmld.EdgeData.is_forward)
+  return is_forward_;
+}
+inline void EdgeData::set_is_forward(bool value) {
+  
+  is_forward_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.EdgeData.is_forward)
+}
+
+// bool is_backward = 4;
+inline void EdgeData::clear_is_backward() {
+  is_backward_ = false;
+}
+inline bool EdgeData::is_backward() const {
+  // @@protoc_insertion_point(field_get:pbmld.EdgeData.is_backward)
+  return is_backward_;
+}
+inline void EdgeData::set_is_backward(bool value) {
+  
+  is_backward_ = value;
+  // @@protoc_insertion_point(field_set:pbmld.EdgeData.is_backward)
+}
+
+// -------------------------------------------------------------------
+
+// QueryGraph
+
+// repeated uint32 nodes = 1;
+inline int QueryGraph::nodes_size() const {
+  return nodes_.size();
+}
+inline void QueryGraph::clear_nodes() {
+  nodes_.Clear();
+}
+inline ::google::protobuf::uint32 QueryGraph::nodes(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.QueryGraph.nodes)
+  return nodes_.Get(index);
+}
+inline void QueryGraph::set_nodes(int index, ::google::protobuf::uint32 value) {
+  nodes_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.QueryGraph.nodes)
+}
+inline void QueryGraph::add_nodes(::google::protobuf::uint32 value) {
+  nodes_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.QueryGraph.nodes)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+QueryGraph::nodes() const {
+  // @@protoc_insertion_point(field_list:pbmld.QueryGraph.nodes)
+  return nodes_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+QueryGraph::mutable_nodes() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.QueryGraph.nodes)
+  return &nodes_;
+}
+
+// repeated .pbmld.EdgeData edges = 2;
+inline int QueryGraph::edges_size() const {
+  return edges_.size();
+}
+inline void QueryGraph::clear_edges() {
+  edges_.Clear();
+}
+inline const ::pbmld::EdgeData& QueryGraph::edges(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.QueryGraph.edges)
+  return edges_.Get(index);
+}
+inline ::pbmld::EdgeData* QueryGraph::mutable_edges(int index) {
+  // @@protoc_insertion_point(field_mutable:pbmld.QueryGraph.edges)
+  return edges_.Mutable(index);
+}
+inline ::pbmld::EdgeData* QueryGraph::add_edges() {
+  // @@protoc_insertion_point(field_add:pbmld.QueryGraph.edges)
+  return edges_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::pbmld::EdgeData >*
+QueryGraph::mutable_edges() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.QueryGraph.edges)
+  return &edges_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::pbmld::EdgeData >&
+QueryGraph::edges() const {
+  // @@protoc_insertion_point(field_list:pbmld.QueryGraph.edges)
+  return edges_;
+}
+
+// repeated uint32 node_level_offset = 3;
+inline int QueryGraph::node_level_offset_size() const {
+  return node_level_offset_.size();
+}
+inline void QueryGraph::clear_node_level_offset() {
+  node_level_offset_.Clear();
+}
+inline ::google::protobuf::uint32 QueryGraph::node_level_offset(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.QueryGraph.node_level_offset)
+  return node_level_offset_.Get(index);
+}
+inline void QueryGraph::set_node_level_offset(int index, ::google::protobuf::uint32 value) {
+  node_level_offset_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.QueryGraph.node_level_offset)
+}
+inline void QueryGraph::add_node_level_offset(::google::protobuf::uint32 value) {
+  node_level_offset_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.QueryGraph.node_level_offset)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >&
+QueryGraph::node_level_offset() const {
+  // @@protoc_insertion_point(field_list:pbmld.QueryGraph.node_level_offset)
+  return node_level_offset_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::uint32 >*
+QueryGraph::mutable_node_level_offset() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.QueryGraph.node_level_offset)
+  return &node_level_offset_;
+}
+
+// repeated int32 node_weights = 4;
+inline int QueryGraph::node_weights_size() const {
+  return node_weights_.size();
+}
+inline void QueryGraph::clear_node_weights() {
+  node_weights_.Clear();
+}
+inline ::google::protobuf::int32 QueryGraph::node_weights(int index) const {
+  // @@protoc_insertion_point(field_get:pbmld.QueryGraph.node_weights)
+  return node_weights_.Get(index);
+}
+inline void QueryGraph::set_node_weights(int index, ::google::protobuf::int32 value) {
+  node_weights_.Set(index, value);
+  // @@protoc_insertion_point(field_set:pbmld.QueryGraph.node_weights)
+}
+inline void QueryGraph::add_node_weights(::google::protobuf::int32 value) {
+  node_weights_.Add(value);
+  // @@protoc_insertion_point(field_add:pbmld.QueryGraph.node_weights)
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+QueryGraph::node_weights() const {
+  // @@protoc_insertion_point(field_list:pbmld.QueryGraph.node_weights)
+  return node_weights_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+QueryGraph::mutable_node_weights() {
+  // @@protoc_insertion_point(field_mutable_list:pbmld.QueryGraph.node_weights)
+  return &node_weights_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
