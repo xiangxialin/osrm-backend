@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+package pbscc;
+
+message Edges {
+    repeated int32 targets = 3;
+}
+
+message SCCGraph {
+    int32 V = 1;
+    repeated Edges adj = 4;
+}

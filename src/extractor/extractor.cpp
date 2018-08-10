@@ -8,6 +8,7 @@
 #include "extractor/extraction_way.hpp"
 #include "extractor/extractor_callbacks.hpp"
 #include "extractor/files.hpp"
+#include "extractor/serialization.hpp"
 #include "extractor/maneuver_override_relation_parser.hpp"
 #include "extractor/name_table.hpp"
 #include "extractor/node_based_graph_factory.hpp"
@@ -361,6 +362,8 @@ int Extractor::run(ScriptingEnvironment &scripting_environment)
     BuildRTree(std::move(edge_based_node_segments), std::move(node_is_startpoint), coordinates);
 
     TIMER_STOP(rtree);
+
+    serialization::writeScc(edge_based_nodes_container, edge_based_edge_list);
 
     files::writeNodeData(config.GetPath(".osrm.ebg_nodes"), edge_based_nodes_container);
 
