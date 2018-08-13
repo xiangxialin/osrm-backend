@@ -20,11 +20,15 @@ message Rectangle {
 }
 
 message LeafNode {
-    uint64 itemCount = 1;
-    Rectangle minimum_bounding_rectangle = 2;
-    repeated Segment items = 3;
+    Rectangle minimum_bounding_rectangle = 1;
+    uint32 indexStart = 2;
+    uint32 indexEnd = 3;
 }
 
 message Leaves {
     repeated LeafNode items = 1;
+}
+
+message Segments {
+    repeated Segment items = 1;
 }

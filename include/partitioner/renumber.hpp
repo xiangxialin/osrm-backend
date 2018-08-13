@@ -12,6 +12,8 @@
 #include "util/dynamic_graph.hpp"
 #include "util/static_graph.hpp"
 
+#include "../../../src/protobuf/rtree.pb.h"
+
 namespace osrm
 {
 namespace partitioner
@@ -53,13 +55,28 @@ inline void renumber(std::vector<Partition> &partitions,
 inline void renumber(util::vector_view<extractor::EdgeBasedNodeSegment> &segments,
                      const std::vector<std::uint32_t> &permutation)
 {
+    pbrtree::Segments pb_segments;
     for (auto &segment : segments)
     {
         BOOST_ASSERT(segment.forward_segment_id.enabled);
         segment.forward_segment_id.id = permutation[segment.forward_segment_id.id];
         if (segment.reverse_segment_id.enabled)
             segment.reverse_segment_id.id = permutation[segment.reverse_segment_id.id];
+
+
+        auto pb_segment = pb_segments.add_items();
+        pb_segment->set_u(segment.u);
+        pb_segment->set_v(segment.v);
+        pb_segment->set_forward_enabled(segment.forward_segment_id.enabled);
+        pb_segment->set_reverse_enabled(segment.reverse_segment_id.enabled);
+        pb_segment->set_forward_segment_id(segment.forward_segment_id.id);
+        pb_segment->set_reverse_segment_id(segment.reverse_segment_id.id);
+        pb_segment->set_forward_segment_position(segment.fwd_segment_position);
+
     }
+    std::cout << "######## rtree segments: " << std::endl;
+    std::fstream pb_out("1.rtree.segments.pb", std::ios::out | std::ios::binary);
+    pb_segments.SerializeToOstream(&pb_out);
 }
 
 inline void renumber(std::vector<extractor::NBGToEBG> &mapping,

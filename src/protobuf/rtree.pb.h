@@ -43,6 +43,9 @@ extern RectangleDefaultTypeInternal _Rectangle_default_instance_;
 class Segment;
 class SegmentDefaultTypeInternal;
 extern SegmentDefaultTypeInternal _Segment_default_instance_;
+class Segments;
+class SegmentsDefaultTypeInternal;
+extern SegmentsDefaultTypeInternal _Segments_default_instance_;
 }  // namespace pbrtree
 
 namespace pbrtree {
@@ -402,40 +405,34 @@ class LeafNode : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   // accessors -------------------------------------------------------
 
-  // repeated .pbrtree.Segment items = 3;
-  int items_size() const;
-  void clear_items();
-  static const int kItemsFieldNumber = 3;
-  const ::pbrtree::Segment& items(int index) const;
-  ::pbrtree::Segment* mutable_items(int index);
-  ::pbrtree::Segment* add_items();
-  ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >*
-      mutable_items();
-  const ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >&
-      items() const;
-
-  // .pbrtree.Rectangle minimum_bounding_rectangle = 2;
+  // .pbrtree.Rectangle minimum_bounding_rectangle = 1;
   bool has_minimum_bounding_rectangle() const;
   void clear_minimum_bounding_rectangle();
-  static const int kMinimumBoundingRectangleFieldNumber = 2;
+  static const int kMinimumBoundingRectangleFieldNumber = 1;
   const ::pbrtree::Rectangle& minimum_bounding_rectangle() const;
   ::pbrtree::Rectangle* mutable_minimum_bounding_rectangle();
   ::pbrtree::Rectangle* release_minimum_bounding_rectangle();
   void set_allocated_minimum_bounding_rectangle(::pbrtree::Rectangle* minimum_bounding_rectangle);
 
-  // uint64 itemCount = 1;
-  void clear_itemcount();
-  static const int kItemCountFieldNumber = 1;
-  ::google::protobuf::uint64 itemcount() const;
-  void set_itemcount(::google::protobuf::uint64 value);
+  // uint32 indexStart = 2;
+  void clear_indexstart();
+  static const int kIndexStartFieldNumber = 2;
+  ::google::protobuf::uint32 indexstart() const;
+  void set_indexstart(::google::protobuf::uint32 value);
+
+  // uint32 indexEnd = 3;
+  void clear_indexend();
+  static const int kIndexEndFieldNumber = 3;
+  ::google::protobuf::uint32 indexend() const;
+  void set_indexend(::google::protobuf::uint32 value);
 
   // @@protoc_insertion_point(class_scope:pbrtree.LeafNode)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
-  ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment > items_;
   ::pbrtree::Rectangle* minimum_bounding_rectangle_;
-  ::google::protobuf::uint64 itemcount_;
+  ::google::protobuf::uint32 indexstart_;
+  ::google::protobuf::uint32 indexend_;
   mutable int _cached_size_;
   friend struct protobuf_rtree_2eproto::TableStruct;
 };
@@ -539,6 +536,109 @@ class Leaves : public ::google::protobuf::Message /* @@protoc_insertion_point(cl
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::RepeatedPtrField< ::pbrtree::LeafNode > items_;
+  mutable int _cached_size_;
+  friend struct protobuf_rtree_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class Segments : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:pbrtree.Segments) */ {
+ public:
+  Segments();
+  virtual ~Segments();
+
+  Segments(const Segments& from);
+
+  inline Segments& operator=(const Segments& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  #if LANG_CXX11
+  Segments(Segments&& from) noexcept
+    : Segments() {
+    *this = ::std::move(from);
+  }
+
+  inline Segments& operator=(Segments&& from) noexcept {
+    if (GetArenaNoVirtual() == from.GetArenaNoVirtual()) {
+      if (this != &from) InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+  #endif
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const Segments& default_instance();
+
+  static inline const Segments* internal_default_instance() {
+    return reinterpret_cast<const Segments*>(
+               &_Segments_default_instance_);
+  }
+  static PROTOBUF_CONSTEXPR int const kIndexInFileMessages =
+    4;
+
+  void Swap(Segments* other);
+  friend void swap(Segments& a, Segments& b) {
+    a.Swap(&b);
+  }
+
+  // implements Message ----------------------------------------------
+
+  inline Segments* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  Segments* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const Segments& from);
+  void MergeFrom(const Segments& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(Segments* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .pbrtree.Segment items = 1;
+  int items_size() const;
+  void clear_items();
+  static const int kItemsFieldNumber = 1;
+  const ::pbrtree::Segment& items(int index) const;
+  ::pbrtree::Segment* mutable_items(int index);
+  ::pbrtree::Segment* add_items();
+  ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >*
+      mutable_items();
+  const ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >&
+      items() const;
+
+  // @@protoc_insertion_point(class_scope:pbrtree.Segments)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment > items_;
   mutable int _cached_size_;
   friend struct protobuf_rtree_2eproto::TableStruct;
 };
@@ -716,21 +816,7 @@ inline void Rectangle::set_max_lon(::google::protobuf::uint64 value) {
 
 // LeafNode
 
-// uint64 itemCount = 1;
-inline void LeafNode::clear_itemcount() {
-  itemcount_ = GOOGLE_ULONGLONG(0);
-}
-inline ::google::protobuf::uint64 LeafNode::itemcount() const {
-  // @@protoc_insertion_point(field_get:pbrtree.LeafNode.itemCount)
-  return itemcount_;
-}
-inline void LeafNode::set_itemcount(::google::protobuf::uint64 value) {
-  
-  itemcount_ = value;
-  // @@protoc_insertion_point(field_set:pbrtree.LeafNode.itemCount)
-}
-
-// .pbrtree.Rectangle minimum_bounding_rectangle = 2;
+// .pbrtree.Rectangle minimum_bounding_rectangle = 1;
 inline bool LeafNode::has_minimum_bounding_rectangle() const {
   return this != internal_default_instance() && minimum_bounding_rectangle_ != NULL;
 }
@@ -770,34 +856,32 @@ inline void LeafNode::set_allocated_minimum_bounding_rectangle(::pbrtree::Rectan
   // @@protoc_insertion_point(field_set_allocated:pbrtree.LeafNode.minimum_bounding_rectangle)
 }
 
-// repeated .pbrtree.Segment items = 3;
-inline int LeafNode::items_size() const {
-  return items_.size();
+// uint32 indexStart = 2;
+inline void LeafNode::clear_indexstart() {
+  indexstart_ = 0u;
 }
-inline void LeafNode::clear_items() {
-  items_.Clear();
+inline ::google::protobuf::uint32 LeafNode::indexstart() const {
+  // @@protoc_insertion_point(field_get:pbrtree.LeafNode.indexStart)
+  return indexstart_;
 }
-inline const ::pbrtree::Segment& LeafNode::items(int index) const {
-  // @@protoc_insertion_point(field_get:pbrtree.LeafNode.items)
-  return items_.Get(index);
+inline void LeafNode::set_indexstart(::google::protobuf::uint32 value) {
+  
+  indexstart_ = value;
+  // @@protoc_insertion_point(field_set:pbrtree.LeafNode.indexStart)
 }
-inline ::pbrtree::Segment* LeafNode::mutable_items(int index) {
-  // @@protoc_insertion_point(field_mutable:pbrtree.LeafNode.items)
-  return items_.Mutable(index);
+
+// uint32 indexEnd = 3;
+inline void LeafNode::clear_indexend() {
+  indexend_ = 0u;
 }
-inline ::pbrtree::Segment* LeafNode::add_items() {
-  // @@protoc_insertion_point(field_add:pbrtree.LeafNode.items)
-  return items_.Add();
+inline ::google::protobuf::uint32 LeafNode::indexend() const {
+  // @@protoc_insertion_point(field_get:pbrtree.LeafNode.indexEnd)
+  return indexend_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >*
-LeafNode::mutable_items() {
-  // @@protoc_insertion_point(field_mutable_list:pbrtree.LeafNode.items)
-  return &items_;
-}
-inline const ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >&
-LeafNode::items() const {
-  // @@protoc_insertion_point(field_list:pbrtree.LeafNode.items)
-  return items_;
+inline void LeafNode::set_indexend(::google::protobuf::uint32 value) {
+  
+  indexend_ = value;
+  // @@protoc_insertion_point(field_set:pbrtree.LeafNode.indexEnd)
 }
 
 // -------------------------------------------------------------------
@@ -834,10 +918,46 @@ Leaves::items() const {
   return items_;
 }
 
+// -------------------------------------------------------------------
+
+// Segments
+
+// repeated .pbrtree.Segment items = 1;
+inline int Segments::items_size() const {
+  return items_.size();
+}
+inline void Segments::clear_items() {
+  items_.Clear();
+}
+inline const ::pbrtree::Segment& Segments::items(int index) const {
+  // @@protoc_insertion_point(field_get:pbrtree.Segments.items)
+  return items_.Get(index);
+}
+inline ::pbrtree::Segment* Segments::mutable_items(int index) {
+  // @@protoc_insertion_point(field_mutable:pbrtree.Segments.items)
+  return items_.Mutable(index);
+}
+inline ::pbrtree::Segment* Segments::add_items() {
+  // @@protoc_insertion_point(field_add:pbrtree.Segments.items)
+  return items_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >*
+Segments::mutable_items() {
+  // @@protoc_insertion_point(field_mutable_list:pbrtree.Segments.items)
+  return &items_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::pbrtree::Segment >&
+Segments::items() const {
+  // @@protoc_insertion_point(field_list:pbrtree.Segments.items)
+  return items_;
+}
+
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------
