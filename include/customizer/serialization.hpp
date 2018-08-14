@@ -85,6 +85,7 @@ inline void write(storage::tar::FileWriter &writer,
         pb_edge->set_turn_id(i.data.turn_id);
         pb_edge->set_is_forward(graph.is_forward_edge[index]);
         pb_edge->set_is_backward(graph.is_backward_edge[index]);
+        index++;
      }
 
      for (auto i : graph.node_to_edge_offset){
