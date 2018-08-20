@@ -227,6 +227,7 @@ inline void writeScc(const detail::EdgeBasedNodeDataContainerImpl<Ownership> &no
 
     int isolated_component_num = 0;
     pbscc::SCCGraph pb_scc;
+    pb_scc.set_v(max_component_id+1);
     for (auto i : scc_info){
         auto c = pb_scc.add_adj();
         for(auto j: i){
